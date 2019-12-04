@@ -3,7 +3,7 @@
  *
  * Project created by Frazor Sharp : 2019 Dec 4th
  *
- *      AmberNet - Qt C++
+ *      AmberCore - Qt C++
  *
  * Contact email  : amberskies@virginmail.com
  * Website        : www.amberskies.org.uk
@@ -16,10 +16,8 @@
  * given by Qt    : doc.qt.io/qt-5/opensourcelicence.html
  *
  * ---------------------------------------------------*/
-#pragma once
+#include "AmberCore_SL.h"
 
-class AmberNet_SL
+AmberCore_SL::AmberCore_SL()
 {
-public:
-    AmberNet_SL();
-};
+}

@@ -3,7 +3,7 @@
 #
 # Project created by Frazor Sharp : 2019 Dec 4th
 #
-#      AmberNet - Qt C++
+#      AmberCore - Qt C++
 #
 # Contact email  : amberskies@virginmail.com
 # Website        : www.amberskies.org.uk
@@ -36,10 +36,10 @@ DEFINES += QT_DEPRECATED_WARNINGS
 #DEFINES += QT_DISABLE_DEPRECATED_BEFORE=0x060000    # disables all the APIs deprecated before Qt 6.0.0
 
 SOURCES += \
-    AmberNet_SL.cpp
+    AmberCore_SL.cpp
 
 HEADERS += \
-    AmberNet_SL.h
+    AmberCore_SL.h
 
 # Default rules for deployment.
 unix {
