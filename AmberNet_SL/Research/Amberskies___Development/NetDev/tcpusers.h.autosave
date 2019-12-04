@@ -1,0 +1,27 @@
+#ifndef TCPUSERS_H
+#define TCPUSERS_H
+
+#include <QObject>
+
+#include "tcpmessage.h"
+
+namespace NetDev
+{
+    class TcpUsers : public QObject
+    {
+        Q_OBJECT
+    public:
+        explicit TcpUsers(QObject *parent = nullptr);
+
+    signals:
+        void quitting();
+        void finished();
+
+    public slots:
+        void start();
+        void quit();
+        void accept(qintptr handle, TcpMessage *message);
+
+    };
+}
+#endif // TCPUSERS_H
