@@ -4,7 +4,7 @@
  *
  * Project created by Frazor Sharp : 2019 Nov 14th
  *
- *      Amber 3D - Qt C++
+ *      AmberNet - Qt C++
  *
  * Contact email  : amberskies@virginmail.com
  * Website        : www.amberskies.org.uk

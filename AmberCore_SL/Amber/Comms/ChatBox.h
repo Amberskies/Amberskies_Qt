@@ -3,7 +3,7 @@
  *
  * Project created by Frazor Sharp : 2019 Nov 14th
  *
- *      Amber Core - Qt C++
+ *      Amber - Qt C++
  *
  * Contact email  : amberskies@virginmail.com
  * Website        : www.amberskies.org.uk
