@@ -17,6 +17,7 @@
 #
 # ---------------------------------------------------*/
 
+QT += core network
 QT -= gui
 
 TEMPLATE = lib
@@ -36,10 +37,16 @@ DEFINES += QT_DEPRECATED_WARNINGS
 #DEFINES += QT_DISABLE_DEPRECATED_BEFORE=0x060000    # disables all the APIs deprecated before Qt 6.0.0
 
 SOURCES += \
-    AmberNet_SL.cpp
+    AmberNet/TCP/AmberTcpServer.cpp \
+    AmberNet/TCP/TcpMessenger.cpp \
+    AmberNet/TCP/TcpUsers.cpp \
+    AmberNet_SL.cpp \
 
 HEADERS += \
-    AmberNet_SL.h
+    AmberNet/TCP/AmberTcpServer.h \
+    AmberNet/TCP/TcpMessenger.h \
+    AmberNet/TCP/TcpUsers.h \
+    AmberNet_SL.h \
 
 # Default rules for deployment.
 unix {
