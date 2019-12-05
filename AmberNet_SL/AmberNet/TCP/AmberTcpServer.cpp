@@ -21,102 +21,104 @@
 
 namespace NetDev
 {
-
-    AmberTcpServer::AmberTcpServer(QObject *parent) noexcept
-        : QTcpServer(parent)
+    namespace TCP
     {
-        // Empty
-        qDebug() << this << "Constructed on thread :" << QThread::currentThreadId();
-    }
-
-    bool AmberTcpServer::startServer(const QHostAddress &ip, quint16 port)
-    {
-        if (!this->listen(ip, port))
-            return false;
-
-        m_thread = new QThread(this);
-        m_users = new TcpUsers();
-
-        // connect signals and slots across the thread boundary
-
-        connect(m_thread, &QThread::started,            // emitter
-                m_users, &TcpUsers::start,              // receiver
-                Qt::QueuedConnection);
-
-        connect(this, &AmberTcpServer::accepting,       // emitter
-                m_users, &TcpUsers::accept,             // receiver
-                Qt::QueuedConnection);
-
-        connect(this, &AmberTcpServer::finished,        // emitter
-                m_users, &TcpUsers::quit,               // receiver
-                Qt::QueuedConnection);
-
-        connect(m_users, &TcpUsers::finished,           // emitter
-                this, &AmberTcpServer::complete,        // receiver
-                Qt::QueuedConnection);
-
-        // connections complete. ******
-
-
-        m_users->moveToThread(m_thread);
-        m_thread->start();
-
-        return true;
-    }
-
-    void AmberTcpServer::close()
-    {
-        qDebug() << this << "Closing the Server.";
-        emit finished();
-        QTcpServer::close();
-    }
-
-    /* ***** Public Slots ***** */
-
-    void AmberTcpServer::complete()
-    {
-        if (!m_thread)
+        AmberTcpServer::AmberTcpServer(QObject *parent) noexcept
+            : QTcpServer(parent)
         {
-            qWarning() << this << "Exiting complete as there was no thread.";
-            return;
+            // Empty
+            qDebug() << this << "Constructed on thread :" << QThread::currentThreadId();
         }
 
-        qDebug() << this << "Deleting Connections.";
-        delete m_users;
+        bool AmberTcpServer::startServer(const QHostAddress &ip, quint16 port)
+        {
+            if (!this->listen(ip, port))
+                return false;
 
-        qDebug() << this << "Closing the Thread.";
-        m_thread->quit();
-        m_thread->wait();
+            m_thread = new QThread(this);
+            m_users = new TcpUsers();
 
-        delete m_thread;
-        qDebug() << this << "Thread deleted.";
+            // connect signals and slots across the thread boundary
 
-        // for Testing
-        exit(0);
-    }
+            connect(m_thread, &QThread::started,            // emitter
+                    m_users, &TcpUsers::start,              // receiver
+                    Qt::QueuedConnection);
 
-    void AmberTcpServer::newConnection()
-    {
-        qDebug() << this << "Checking New Connection."
-                 << nextPendingConnection();
-    }
+            connect(this, &AmberTcpServer::accepting,       // emitter
+                    m_users, &TcpUsers::accept,             // receiver
+                    Qt::QueuedConnection);
 
-    /* ***** Protected ***** */
+            connect(this, &AmberTcpServer::finished,        // emitter
+                    m_users, &TcpUsers::quit,               // receiver
+                    Qt::QueuedConnection);
 
-    void AmberTcpServer::incomingConnection(qintptr descriptor)
-    {
-        qDebug() << this << "Checking New Connection." << descriptor;
-        TcpMessenger *messenger = new TcpMessenger();
+            connect(m_users, &TcpUsers::finished,           // emitter
+                    this, &AmberTcpServer::complete,        // receiver
+                    Qt::QueuedConnection);
 
-        // this is where we can check log in details etc ...
+            // connections complete. ******
 
-        accept(descriptor, messenger);
-    }
 
-    void AmberTcpServer::accept(qintptr descriptor, TcpMessenger *messenger)
-    {
-        qDebug() << this << "accepting the connection." << descriptor;
-        messenger->moveToThread(m_thread);
-        emit accepting(descriptor, messenger);
+            m_users->moveToThread(m_thread);
+            m_thread->start();
+
+            return true;
+        }
+
+        void AmberTcpServer::close()
+        {
+            qDebug() << this << "Closing the Server.";
+            emit finished();
+            QTcpServer::close();
+        }
+
+        /* ***** Public Slots ***** */
+
+        void AmberTcpServer::complete()
+        {
+            if (!m_thread)
+            {
+                qWarning() << this << "Exiting complete as there was no thread.";
+                return;
+            }
+
+            qDebug() << this << "Deleting Connections.";
+            delete m_users;
+
+            qDebug() << this << "Closing the Thread.";
+            m_thread->quit();
+            m_thread->wait();
+
+            delete m_thread;
+            qDebug() << this << "Thread deleted.";
+
+            // for Testing
+            exit(0);
+        }
+
+        void AmberTcpServer::newConnection()
+        {
+            qDebug() << this << "Checking New Connection."
+                     << nextPendingConnection();
+        }
+
+        /* ***** Protected ***** */
+
+        void AmberTcpServer::incomingConnection(qintptr descriptor)
+        {
+            qDebug() << this << "Checking New Connection." << descriptor;
+            TcpMessenger *messenger = new TcpMessenger();
+
+            // this is where we can check log in details etc ...
+
+            accept(descriptor, messenger);
+        }
+
+        void AmberTcpServer::accept(qintptr descriptor, TcpMessenger *messenger)
+        {
+            qDebug() << this << "accepting the connection." << descriptor;
+            messenger->moveToThread(m_thread);
+            emit accepting(descriptor, messenger);
+        }
     }
 }

@@ -18,6 +18,7 @@
 # ---------------------------------------------------*/
 
 QT -= gui
+QT += core widgets
 
 TEMPLATE = lib
 CONFIG += staticlib
@@ -36,9 +37,11 @@ DEFINES += QT_DEPRECATED_WARNINGS
 #DEFINES += QT_DISABLE_DEPRECATED_BEFORE=0x060000    # disables all the APIs deprecated before Qt 6.0.0
 
 SOURCES += \
+    Amber3D/Shaders/Shaders.cpp \
     Amber3D_SL.cpp
 
 HEADERS += \
+    Amber3D/Shaders/Shaders.h \
     Amber3D_SL.h
 
 # Default rules for deployment.
@@ -46,3 +49,9 @@ unix {
     target.path = $$[QT_INSTALL_PLUGINS]/generic
 }
 !isEmpty(target.path): INSTALLS += target
+
+DISTFILES += \
+    Amber3D/Shaders/BasicColor.fsh \
+    Amber3D/Shaders/BasicColor.vsh \
+    Amber3D/Shaders/Simplified.fsh \
+    Amber3D/Shaders/Simplified.vsh

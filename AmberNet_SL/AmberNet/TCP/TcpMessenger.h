@@ -25,30 +25,33 @@
 
 namespace NetDev
 {
-    class TcpMessenger : public QObject
+    namespace TCP
     {
-        Q_OBJECT
+        class TcpMessenger : public QObject
+        {
+            Q_OBJECT
 
-    public:
-        explicit TcpMessenger(QObject *parent = nullptr) Q_DECL_NOTHROW;
+        public:
+            explicit TcpMessenger(QObject *parent = nullptr) Q_DECL_NOTHROW;
 
-        void setSocket(QTcpSocket *m_socket);
+            void setSocket(QTcpSocket *m_socket);
 
-    signals:
+        signals:
 
 
-    public slots:
-        virtual void connected();
-        virtual void disconnected();
-        virtual void readyRead();
-        virtual void bytesWritten(qint64 bytes);
-        virtual void stateChanged(QAbstractSocket::SocketState socketState);
-        virtual void error(QAbstractSocket::SocketError socketError);
+        public slots:
+            virtual void connected();
+            virtual void disconnected();
+            virtual void readyRead();
+            virtual void bytesWritten(qint64 bytes);
+            virtual void stateChanged(QAbstractSocket::SocketState socketState);
+            virtual void error(QAbstractSocket::SocketError socketError);
 
-    protected:
-        QTcpSocket *m_socket;
+        protected:
+            QTcpSocket *m_socket;
 
-        QTcpSocket* getSocket();
+            QTcpSocket* getSocket();
 
-    };
+        };
+    }
 }

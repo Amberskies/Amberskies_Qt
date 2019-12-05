@@ -1,4 +1,3 @@
-#pragma once
 
 /* ----------------------------------------------------/
  *
@@ -16,6 +15,7 @@
  * given by Qt    : doc.qt.io/qt-5/opensourcelicence.html
  *
  * ---------------------------------------------------*/
+#pragma once
 
 #include <QObject>
 #include <QTcpServer>
@@ -31,29 +31,32 @@
 
 namespace NetDev
 {
-    class AmberTcpServer : public QTcpServer
+    namespace TCP
     {
-        Q_OBJECT
+        class AmberTcpServer : public QTcpServer
+        {
+            Q_OBJECT
 
-    public:
-        explicit AmberTcpServer(QObject *parent = nullptr) Q_DECL_NOTHROW;
+        public:
+            explicit AmberTcpServer(QObject *parent = nullptr) Q_DECL_NOTHROW;
 
-        virtual bool startServer(const QHostAddress &ip, quint16 port);
-        void close();
+            virtual bool startServer(const QHostAddress &ip, quint16 port);
+            void close();
 
-    signals:
-        void accepting(qintptr socketDescriptor, TcpMessenger *messenger);
-        void finished();
+        signals:
+            void accepting(qintptr socketDescriptor, TcpMessenger *messenger);
+            void finished();
 
-    public slots:
-        void complete();
-        void newConnection();
+        public slots:
+            void complete();
+            void newConnection();
 
-    protected:
-        QThread *m_thread;
-        TcpUsers *m_users;
-        // answer : check the spelling ie incoming + override +qintptr
-        void incomingConnection(qintptr descriptor);
-        virtual void accept(qintptr descriptor, TcpMessenger *messenger);
-    };
+        protected:
+            QThread *m_thread;
+            TcpUsers *m_users;
+            // answer : check the spelling ie incoming + override +qintptr
+            void incomingConnection(qintptr descriptor);
+            virtual void accept(qintptr descriptor, TcpMessenger *messenger);
+        };
+    }
 }

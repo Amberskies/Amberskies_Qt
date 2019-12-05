@@ -17,7 +17,7 @@
 #
 # ---------------------------------------------------*/
 
-QT -= gui
+QT += core gui widgets
 
 TEMPLATE = lib
 CONFIG += staticlib
@@ -36,9 +36,13 @@ DEFINES += QT_DEPRECATED_WARNINGS
 #DEFINES += QT_DISABLE_DEPRECATED_BEFORE=0x060000    # disables all the APIs deprecated before Qt 6.0.0
 
 SOURCES += \
+    Amber/Comms/Chat.cpp \
+    Amber/Comms/ChatBox.cpp \
     AmberCore_SL.cpp
 
 HEADERS += \
+    Amber/Comms/Chat.h \
+    Amber/Comms/ChatBox.h \
     AmberCore_SL.h
 
 # Default rules for deployment.

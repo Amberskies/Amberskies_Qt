@@ -29,32 +29,35 @@
 
 namespace NetDev
 {
-    class TcpUsers : public QObject
+    namespace TCP
     {
-        Q_OBJECT
-    public:
-        explicit TcpUsers(QObject *parent = nullptr);
-        virtual int count();
+        class TcpUsers : public QObject
+        {
+            Q_OBJECT
+        public:
+            explicit TcpUsers(QObject *parent = nullptr);
+            virtual int count();
 
-    signals:
-        void quitting();
-        void finished();
+        signals:
+            void quitting();
+            void finished();
 
-    public slots:
-        void start();
-        void quit();
-        void accept(qintptr handle, TcpMessenger *messenger);
+        public slots:
+            void start();
+            void quit();
+            void accept(qintptr handle, TcpMessenger *messenger);
 
-    protected:
-        QMap<QTcpSocket*, TcpMessenger*> m_users;
+        protected:
+            QMap<QTcpSocket*, TcpMessenger*> m_users;
 
-        void removeSocket(QTcpSocket *socket);
+            void removeSocket(QTcpSocket *socket);
 
-    protected slots:
-        void disconnected();
-        void error(QAbstractSocket::SocketError socketError);
+        protected slots:
+            void disconnected();
+            void error(QAbstractSocket::SocketError socketError);
 
-    private:
-        void dropSocket();
-    };
+        private:
+            void dropSocket();
+        };
+    }
 }
