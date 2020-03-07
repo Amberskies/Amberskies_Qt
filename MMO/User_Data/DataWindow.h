@@ -32,6 +32,15 @@ public:
     DataWindow(QWidget *parent = nullptr);
     ~DataWindow();
 
+private slots:
+    void on_SaveButton_clicked();
+
+    void on_LoadButton_clicked();
+
+    void on_RefreshButton_clicked();
+
+    void on_ExitButton_clicked();
+
 private:
     Ui::DataWindow *ui;
 };

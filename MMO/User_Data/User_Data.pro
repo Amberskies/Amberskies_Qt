@@ -18,11 +18,11 @@ DEFINES += QT_DEPRECATED_WARNINGS
 SOURCES += \
     main.cpp \
     DataWindow.cpp \
-    Source/Data.cpp
+    Source/CurrentData/Data.cpp
 
 HEADERS += \
     DataWindow.h \
-    Source/Data.h
+    Source/CurrentData/Data.h
 
 FORMS += \
     DataWindow.ui

@@ -32,3 +32,25 @@ DataWindow::~DataWindow()
     delete ui;
 }
 
+
+void DataWindow::on_SaveButton_clicked()
+{
+    this->ui->Speadsheet->SaveData();
+}
+
+
+
+void DataWindow::on_LoadButton_clicked()
+{
+    this->ui->Speadsheet->LoadData();
+}
+
+void DataWindow::on_RefreshButton_clicked()
+{
+    this->ui->Speadsheet->RefreshData();
+}
+
+void DataWindow::on_ExitButton_clicked()
+{
+    this->close();
+}

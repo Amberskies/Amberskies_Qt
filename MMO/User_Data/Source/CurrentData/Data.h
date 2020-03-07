@@ -17,6 +17,26 @@
  * ---------------------------------------------------*/
 
 
+#include <QTableWidget>
+#include <QString>
+#include <QFile>
+#include <QTextStream>
+
+namespace AmberData
+{
+    class UserData : public QTableWidget
+    {
+        QString cellValues[50][10] = {0};
+
+        public:
+            UserData(QWidget *parent = nullptr);
+            ~UserData();
+
+            void SaveData();
+            void LoadData();
+            void RefreshData();
+    };
+}
 
 /**
  * 
