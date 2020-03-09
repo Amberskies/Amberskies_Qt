@@ -18,6 +18,7 @@
 
 
 #include <QTableWidget>
+#include <QStringList>
 #include <QString>
 #include <QFile>
 #include <QTextStream>
@@ -26,8 +27,6 @@ namespace AmberData
 {
     class UserData : public QTableWidget
     {
-        QString cellValues[50][10] = {0};
-
         public:
             UserData(QWidget *parent = nullptr);
             ~UserData();
@@ -37,7 +36,7 @@ namespace AmberData
             void RefreshData();
     };
 }
-
+ 
 /**
  * 
  * Character Name
@@ -48,7 +47,7 @@ namespace AmberData
  * Ambernet Address : build your own 3D homepage
  * 
  * ********************************
- * Physical Strength    * Physical Attack Damage
+ * Physical Strength    * Physical Attack Damage    * Fatigue
  * Mental Strength      * Magic Points              * Mental Fatigue
  * Physical Dexterity   * To Hit chance  
  * Physical Health      * Hit Points

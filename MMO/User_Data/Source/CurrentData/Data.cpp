@@ -68,7 +68,44 @@ namespace AmberData
     {
         qDebug("Load Started...");
 
-        qDebug("Load file from Source/CurrentData/BaseData file.");
+        QFile data("Source/CurrentData/BaseData.dat");
+        if (data.open(QFile::ReadOnly))
+        {
+            qDebug("File Open");
+
+            QTextStream in(&data);
+            QString str = in.readAll();
+            QStringList rows = str.split('\n');
+    
+            int numRows = rows.count();
+            int numColumns = rows.first().count('\t') + 1;
+            //setRowCount(numRows);
+            //setColumnCount(numColumns);
+
+            qDebug() << "rows = " << numRows;
+            qDebug() << "columns = " << numColumns;
+
+            for (int i = 0; i < numRows; ++i) 
+            {
+                QStringList columns = rows[i].split('\t');
+                for (int j = 0; j < numColumns; ++j) 
+                {                   
+                    if (columns[j] != "")
+                    {
+                        //QTableWidgetItem *cell = this->item(i, j);
+                        //cell->setText(columns[j]);
+
+                        QTableWidgetItem *cellContents = new QTableWidgetItem();
+                        cellContents->setText(columns[j]);
+                        this->setItem(i,j,cellContents);
+
+                        qDebug() << j << " : " << columns[j];
+                    }                       
+                }
+            }
+        }
+        data.close();
+        qDebug("Loaded file from Source/CurrentData/BaseData file.");
     }
 
     void UserData::RefreshData()
@@ -78,40 +115,3 @@ namespace AmberData
         qDebug("Refreshed.");
     }
 }
-
-/*
-***********************************************************
-
-QTextStream out(&file);
-for (int i = 0; i < rowCount(); ++i) {
-    if (i > 0)
-    out << '\n';
-    for (int j = 0; j < columnCount(); ++j) {
-       if (j > 0)
-          out << '\t';
-       QTableWidgetItem *cell = item(i, j);
-       out << cell->text();
-    }
-}
-
-*********************************************************
-
-QTextStream in(&file);
-QString str = in.readAll();
-QStringList rows = str.split('\n');
- 
-int numRows = rows.count();
-int numColumns = rows.first().count('\t') + 1;
-setRowCount(numRows);
-setColumnCount(numColumns);
- 
-for (int i = 0; i < numRows; ++i) {
-    QStringList columns = rows[i].split('\t');
-    for (int j = 0; j < numColumns; ++j) {
-       QTableWidgetItem *cell = item(i, j);
-       cell->setText(columns[j]);
-    }
-}
-
-*******************************************************
-*/
