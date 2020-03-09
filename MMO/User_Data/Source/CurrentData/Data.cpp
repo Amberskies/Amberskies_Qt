@@ -112,6 +112,218 @@ namespace AmberData
     {
         qDebug("Refresh Started...");
 
+        // Fatigue : read value at 4,1 : place in 4,3
+        {
+            QTableWidgetItem *cell = this->item(4, 1);
+            if (cell != nullptr)
+            {
+                QTableWidgetItem *cellContents = new QTableWidgetItem();
+                *cellContents = *cell;
+                this->setItem(4,3,cellContents);
+            }
+        }
+        // Thrust Damage : read value to int at 4,1 : table result to 4,5
+        {
+            QTableWidgetItem *cell = this->item(4, 1);
+            int strength = cell->text().toInt();
+            QString thrust = "";
+
+            if (strength == 9)   thrust = "1d-2";
+            if (thrust != "")
+            {
+                QTableWidgetItem *cellContents = new QTableWidgetItem();
+                cellContents->setText(thrust);
+                this->setItem(4,5,cellContents);
+            }
+        }
+
+        // Swing Damage
+                {
+            QTableWidgetItem *cell = this->item(4, 1);
+            int strength = cell->text().toInt();
+            QString swing = "";
+
+            if (strength == 9)   swing = "1d-1";
+            if (swing != "")
+            {
+                QTableWidgetItem *cellContents = new QTableWidgetItem();
+                cellContents->setText(swing);
+                this->setItem(4,7,cellContents);
+            }
+        }
+
+
+        // Psi Points
+        {
+            QTableWidgetItem *cell = this->item(5, 1);
+            if (cell != nullptr)
+            {
+                QTableWidgetItem *cellContents = new QTableWidgetItem();
+                *cellContents = *cell;
+                this->setItem(5,3,cellContents);
+            }
+        }
+
+
+        // Hits Taken
+        {
+            QString hitsTaken = "0";
+            QTableWidgetItem *cellContents = new QTableWidgetItem();
+            cellContents->setText(hitsTaken);
+            this->setItem(7,3,cellContents);
+        }
+
+        //Base Move : (health + Dex) / 4 = 4.5
+        {
+            float move = 0;
+            QTableWidgetItem *cell1 = this->item(7, 1);
+            float health = cell1->text().toFloat();
+            QTableWidgetItem *cell2 = this->item(6, 1);
+            float dexterity = cell2->text().toFloat();
+
+            move = (health + dexterity) / 4;
+            QString baseMove = QString::number(move);
+
+            QTableWidgetItem *cellContents = new QTableWidgetItem();
+            cellContents->setText(baseMove);
+            this->setItem(7,5,cellContents);
+
+        }
+
+        // Encumberance
+        {
+            QString encumberance = "0";
+            QTableWidgetItem *cellContents = new QTableWidgetItem();
+            cellContents->setText(encumberance);
+            this->setItem(8,1,cellContents);
+        }
+
+
+        // Armour Defence
+        {
+            QString ad = "0";
+            QTableWidgetItem *cellContents = new QTableWidgetItem();
+            cellContents->setText(ad);
+            this->setItem(8,3,cellContents);
+        }
+
+
+        // Shield Defence
+        {
+            QString sd = "0";
+            QTableWidgetItem *cellContents = new QTableWidgetItem();
+            cellContents->setText(sd);
+            this->setItem(8,5,cellContents);
+        }
+
+
+        //Passive Defence
+        {
+            QString pd = "0";
+            QTableWidgetItem *cellContents = new QTableWidgetItem();
+            cellContents->setText(pd);
+            this->setItem(8,7,cellContents);
+        }
+
+        // Dodge
+        {
+            QTableWidgetItem *cell = this->item(7, 5);
+            if (cell != nullptr)
+            {
+                QTableWidgetItem *cellContents = new QTableWidgetItem();
+                *cellContents = *cell;
+                this->setItem(9,1,cellContents);
+            }
+        }
+
+        // Parry
+        {
+            QString parry = "0";
+            QTableWidgetItem *cellContents = new QTableWidgetItem();
+            cellContents->setText(parry);
+            this->setItem(9,3,cellContents);
+        }
+
+        // Block
+        {
+            QString block = "0";
+            QTableWidgetItem *cellContents = new QTableWidgetItem();
+            cellContents->setText(block);
+            this->setItem(9,5,cellContents);
+        }
+
+        // Abilities
+        {
+            QString abilities = "0";
+            QTableWidgetItem *cellContents = new QTableWidgetItem();
+            cellContents->setText(abilities);
+            this->setItem(10,1,cellContents);
+        }
+
+        // Skills
+        {
+            QString skills = "0";
+            QTableWidgetItem *cellContents = new QTableWidgetItem();
+            cellContents->setText(skills);
+            this->setItem(10,3,cellContents);
+        }
+
+        // Combat Skills
+        {
+            QString combatSkills = "0";
+            QTableWidgetItem *cellContents = new QTableWidgetItem();
+            cellContents->setText(combatSkills);
+            this->setItem(10,5,cellContents);
+        }
+
+        // Psi Skills
+        {
+            QString psi = "0";
+            QTableWidgetItem *cellContents = new QTableWidgetItem();
+            cellContents->setText(psi);
+            this->setItem(10,7,cellContents);
+        }
+
+        // Equipment
+        {
+            QString equipment = "0";
+            QTableWidgetItem *cellContents = new QTableWidgetItem();
+            cellContents->setText(equipment);
+            this->setItem(11,1,cellContents);
+        }
+
+        // Cash
+        {
+            QString cash = "0";
+            QTableWidgetItem *cellContents = new QTableWidgetItem();
+            cellContents->setText(cash);
+            this->setItem(11,3,cellContents);
+        }
+
+        // Bank
+        {
+            QString bank = "0";
+            QTableWidgetItem *cellContents = new QTableWidgetItem();
+            cellContents->setText(bank);
+            this->setItem(11,5,cellContents);
+        }
+
+        // Storage
+        {
+            QString storage = "0";
+            QTableWidgetItem *cellContents = new QTableWidgetItem();
+            cellContents->setText(storage);
+            this->setItem(11,7,cellContents);
+        }
+
+        // Properties
+        {
+            QString properties = "0";
+            QTableWidgetItem *cellContents = new QTableWidgetItem();
+            cellContents->setText(properties);
+            this->setItem(12,1,cellContents);
+        }
+
         qDebug("Refreshed.");
     }
 }
