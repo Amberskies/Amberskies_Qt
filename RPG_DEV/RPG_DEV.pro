@@ -1,31 +1,46 @@
-QT       += core gui
 
-greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
+# ----------------------------------------------------/
+#
+# Project created by Frazor Sharp : 2020 Mar 12th
+#
+#      Amber 3D - Qt C++ Version Test 0.2
+#
+# Contact email  : amberskies@virginmail.com
+# Website        : www.amberskies.org.uk
+# Twitch         : FrazorBladezSharp
+# Youtube        : Amberskies
+#
+# All code is free to use as you please
+# Please be aware of the Open Source Licence
+# given by Qt    : doc.qt.io/qt-5/opensourcelicence.html
+#
+# ---------------------------------------------------*/
 
-CONFIG += c++11
+QT       += core gui opengl widgets
 
-# The following define makes your compiler emit warnings if you use
-# any Qt feature that has been marked deprecated (the exact warnings
-# depend on your compiler). Please consult the documentation of the
-# deprecated API in order to know how to port your code away from it.
-DEFINES += QT_DEPRECATED_WARNINGS
 
-# You can also make your code fail to compile if it uses deprecated APIs.
-# In order to do so, uncomment the following line.
-# You can also select to disable deprecated APIs only up to a certain version of Qt.
-#DEFINES += QT_DISABLE_DEPRECATED_BEFORE=0x060000    # disables all the APIs deprecated before Qt 6.0.0
-
+CONFIG += c11 c++17
+#######################
+CONFIG += debug
+#CONFIG += release
+#######################
 SOURCES += \
     main.cpp \
-    TestWindow3D.cpp
+    Test/TestWindow3D.cpp \
+    Source/Platform/OpenGL/OpenGL.cpp
+
+
 
 HEADERS += \
-    TestWindow3D.h
+    Test/TestWindow3D.h \
+    Source/Platform/OpenGL/OpenGL.h
 
 FORMS += \
-    TestWindow3D.ui
+    Test/TestWindow3D.ui
 
-# Default rules for deployment.
-qnx: target.path = /tmp/$${TARGET}/bin
-else: unix:!android: target.path = /opt/$${TARGET}/bin
-!isEmpty(target.path): INSTALLS += target
+unix:!macx: LIBS += -L$$PWD/../Amber3D_SL/build/ -lAmber3D_SL
+
+INCLUDEPATH += $$PWD/../Amber3D_SL/Amber3D
+DEPENDPATH += $$PWD/../Amber3D_SL/Amber3D
+
+unix:!macx: PRE_TARGETDEPS += $$PWD/../Amber3D_SL/build/libAmber3D_SL.a
