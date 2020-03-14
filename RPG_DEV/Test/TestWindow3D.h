@@ -1,6 +1,8 @@
 #pragma once
 
 #include <QMainWindow>
+#include <QTimer>
+#include "../Source/Common.h"
 
 
 QT_BEGIN_NAMESPACE
@@ -22,6 +24,12 @@ private slots:
     void on_F3pushButton_clicked();
     void on_ExitButton_clicked();
 
+    void Loop();
+    void FPS();
+
 private:
     Ui::TestWindow3D *ui;
+    QTimer *m_loop;
+    QTimer *m_FPS;
+    uint m_frameCounter;
 };

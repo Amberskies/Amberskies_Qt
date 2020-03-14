@@ -15,12 +15,14 @@
  * given by Qt    : doc.qt.io/qt-5/opensourcelicence.html
  *
  * ---------------------------------------------------*/
-
+#pragma once
 
 #include <QOpenGLWidget>
 #include <QOpenGLFunctions_3_3_Core>
 #include <QOpenGLContext>
 #include <QSurfaceFormat>
+
+#include "../../Core/FunctionKeys.h"
 
 
 class OpenGL : public QOpenGLWidget, protected QOpenGLFunctions_3_3_Core
@@ -31,7 +33,10 @@ class OpenGL : public QOpenGLWidget, protected QOpenGLFunctions_3_3_Core
         explicit OpenGL(QWidget *parent = nullptr);
         ~OpenGL() override;
 
+        // getters
 
+        // setters
+        void setFunctionKey(int x) { m_function = x; }
     signals:
 
     public slots:
@@ -45,4 +50,9 @@ class OpenGL : public QOpenGLWidget, protected QOpenGLFunctions_3_3_Core
         int m_function;
         QSurfaceFormat m_format;
         QOpenGLContext m_context;
+
+        FunctionKey1 *m_F1;
+        FunctionKey2 *m_F2;
+        FunctionKey3 *m_F3;
+
 };

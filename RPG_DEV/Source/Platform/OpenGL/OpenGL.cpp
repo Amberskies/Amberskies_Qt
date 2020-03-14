@@ -19,8 +19,9 @@
 
 #include "OpenGL.h"
 
-OpenGL::OpenGL(QWidget *parent) : QOpenGLWidget(parent),
-    m_function(0)
+OpenGL::OpenGL(QWidget *parent) : QOpenGLWidget(parent)
+    , m_function(0)
+    , m_F1(new FunctionKey1())
 {
     // ** format used as I have no GFX card in this machine ** //
     m_format.setRedBufferSize(8);
@@ -52,18 +53,25 @@ void OpenGL::initializeGL()
         printf("Unable to Initialize OpenGL 3.3 Core.\n");
         exit(99);
     }
-    glClearColor(1.00f, 0.05f, 0.01f, 1.00f);
+    //glClearColor(1.00f, 0.05f, 0.01f, 1.00f);
 
     printf("OpenGL : %s\n",
            glGetString(GL_VERSION)
     );
 
+    m_F1->F1_Initialize(); // red
+    m_F2->F2_Initialize(); // green
+    m_F3->F3_Initialize(); // blue
 }
 
 void OpenGL::paintGL()
 {
     glClear(GL_COLOR_BUFFER_BIT);
-    //update();
+
+    if (m_function == 1) glClearColor(1.00f, 0.00f, 0.00f, 1.00f);
+    if (m_function == 2) glClearColor(0.00f, 1.00f, 0.00f, 1.00f);
+    if (m_function == 3) glClearColor(0.00f, 0.00f, 1.00f, 1.00f);
+    
 }
 
 void OpenGL::resizeGL(int width, int height)

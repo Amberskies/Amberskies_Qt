@@ -1,7 +1,7 @@
 
 /* ----------------------------------------------------/
  *
- * Project created by Frazor Sharp : 2020 Mar 12th
+ * Project created by Frazor Sharp : 2020 Mar 14th
  *
  *      Amber 3D - Qt C++ Version Test 0.2
  *
@@ -15,16 +15,9 @@
  * given by Qt    : doc.qt.io/qt-5/opensourcelicence.html
  *
  * ---------------------------------------------------*/
+#pragma once
 
+#define LOOP_DELAY 10           // 10ms between opengl draw calls
+#define FPS_TIME_SPAN 3000      // 3000ms = 3sec between FPS calculations
 
-#include "Test/TestWindow3D.h"
-
-#include <QApplication>
-
-int main(int argc, char *argv[])
-{
-    QApplication mainLoop(argc, argv);
-    TestWindow3D w;
-    w.show();
-    return mainLoop.exec();
-}
+#define MS_IN_SEC  1000         // millisecond in a second

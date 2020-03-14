@@ -20,23 +20,31 @@ QT       += core gui opengl widgets
 
 
 CONFIG += c11 c++17
-#######################
+############################################################
 CONFIG += debug
 #CONFIG += release
-#######################
+############################################################
+
 SOURCES += \
     main.cpp \
     Test/TestWindow3D.cpp \
+    Source/Core/FunctionKey1.cpp \
+    Source/Core/FunctionKey2.cpp \
+    Source/Core/FunctionKey3.cpp \
     Source/Platform/OpenGL/OpenGL.cpp
-
-
 
 HEADERS += \
     Test/TestWindow3D.h \
+    Source/Common.h \
+    Source/Core/FunctionKey1.h \
+    Source/Core/FunctionKey2.h \
+    Source/Core/FunctionKey3.h \
     Source/Platform/OpenGL/OpenGL.h
 
 FORMS += \
     Test/TestWindow3D.ui
+
+#############################################################
 
 unix:!macx: LIBS += -L$$PWD/../Amber3D_SL/build/ -lAmber3D_SL
 
@@ -44,3 +52,9 @@ INCLUDEPATH += $$PWD/../Amber3D_SL/Amber3D
 DEPENDPATH += $$PWD/../Amber3D_SL/Amber3D
 
 unix:!macx: PRE_TARGETDEPS += $$PWD/../Amber3D_SL/build/libAmber3D_SL.a
+
+DISTFILES += \
+    Resources/Shaders/BasicColor.fsh \
+    Resources/Shaders/BasicColor.vsh \
+    Resources/Shaders/Simplified.fsh \
+    Resources/Shaders/Simplified.vsh

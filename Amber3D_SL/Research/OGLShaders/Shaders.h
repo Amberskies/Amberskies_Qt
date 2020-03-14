@@ -11,8 +11,8 @@ namespace Shaders
 
     static QString shader[] =
     {
-        "../Simplified", // shader 0
-        "../BasicColor"
+        "Simplified", // shader 0
+        "BasicColor"
     };
 
     QOpenGLShaderProgram* CreateShader(ShaderName name)

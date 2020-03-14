@@ -1,7 +1,7 @@
 
 /* ----------------------------------------------------/
  *
- * Project created by Frazor Sharp : 2020 Mar 12th
+ * Project created by Frazor Sharp : 2020 Mar 14th
  *
  *      Amber 3D - Qt C++ Version Test 0.2
  *
@@ -15,16 +15,19 @@
  * given by Qt    : doc.qt.io/qt-5/opensourcelicence.html
  *
  * ---------------------------------------------------*/
+#include "FunctionKey1.h"
+#include <QDebug>
 
-
-#include "Test/TestWindow3D.h"
-
-#include <QApplication>
-
-int main(int argc, char *argv[])
+FunctionKey1::FunctionKey1()
 {
-    QApplication mainLoop(argc, argv);
-    TestWindow3D w;
-    w.show();
-    return mainLoop.exec();
+    // Empty
 }
+FunctionKey1::~FunctionKey1()
+{
+    // empty
+}
+void FunctionKey1::F1_Initialize()
+{
+    qDebug("F1 initialized");
+}
+

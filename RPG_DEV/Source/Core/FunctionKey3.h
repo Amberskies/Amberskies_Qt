@@ -1,7 +1,7 @@
 
 /* ----------------------------------------------------/
  *
- * Project created by Frazor Sharp : 2020 Mar 12th
+ * Project created by Frazor Sharp : 2020 Mar 14th
  *
  *      Amber 3D - Qt C++ Version Test 0.2
  *
@@ -15,5 +15,17 @@
  * given by Qt    : doc.qt.io/qt-5/opensourcelicence.html
  *
  * ---------------------------------------------------*/
+#pragma once
 
+class FunctionKey3
+{
 
+    public:
+        FunctionKey3();
+        ~FunctionKey3();
+
+        void F3_Initialize();
+
+    private:
+        // copy constructors
+};

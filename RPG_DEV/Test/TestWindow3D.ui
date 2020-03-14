@@ -25,7 +25,44 @@
        </widget>
       </item>
       <item>
-       <widget class="QLCDNumber" name="FPSlcdNumber"/>
+       <widget class="QLCDNumber" name="FPSlcdNumber">
+        <property name="minimumSize">
+         <size>
+          <width>128</width>
+          <height>26</height>
+         </size>
+        </property>
+        <property name="maximumSize">
+         <size>
+          <width>128</width>
+          <height>26</height>
+         </size>
+        </property>
+        <property name="baseSize">
+         <size>
+          <width>128</width>
+          <height>26</height>
+         </size>
+        </property>
+        <property name="autoFillBackground">
+         <bool>true</bool>
+        </property>
+        <property name="lineWidth">
+         <number>2</number>
+        </property>
+        <property name="midLineWidth">
+         <number>1</number>
+        </property>
+        <property name="smallDecimalPoint">
+         <bool>true</bool>
+        </property>
+        <property name="digitCount">
+         <number>8</number>
+        </property>
+        <property name="segmentStyle">
+         <enum>QLCDNumber::Flat</enum>
+        </property>
+       </widget>
       </item>
       <item>
        <spacer name="TopLeftSpacer">
@@ -64,6 +101,9 @@
     </item>
     <item>
      <layout class="QHBoxLayout" name="MainHorizontalLayout">
+      <item>
+       <layout class="QFormLayout" name="formLayout"/>
+      </item>
       <item>
        <layout class="QVBoxLayout" name="LeftVerticalLayout">
         <item>
