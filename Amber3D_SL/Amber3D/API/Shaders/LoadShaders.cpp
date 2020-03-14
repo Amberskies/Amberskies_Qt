@@ -16,13 +16,13 @@
  * given by Qt    : doc.qt.io/qt-5/opensourcelicence.html
  *
  * ---------------------------------------------------*/
-#include "Shaders.h"
+#include "LoadShaders.h"
 
 namespace Amber3D
 {
-    namespace Shaders
+    namespace API
     {
-        QOpenGLShaderProgram* CreateShader(ShaderName name)
+        QOpenGLShaderProgram* LoadShaders(ShaderName name)
         {
             QOpenGLShaderProgram* l_program = new QOpenGLShaderProgram();
 
@@ -30,12 +30,12 @@ namespace Amber3D
 
             l_program->addShaderFromSourceFile(
                         QOpenGLShader::Vertex,
-                        shader[name] + ".vsh"
+                        "Resources/GLSL/" + shader[name] + ".vsh"
             );
 
             l_program->addShaderFromSourceFile(
                         QOpenGLShader::Fragment,
-                        shader[name] + ".fsh"
+                        "Resources/GLSL/" + shader[name] + ".fsh"
             );
 
             l_program->link();

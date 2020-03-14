@@ -23,7 +23,7 @@
 
 namespace Amber3D
 {
-    namespace Shaders
+    namespace API
     {
         enum ShaderName
         {
@@ -37,7 +37,7 @@ namespace Amber3D
             "BasicColor"
         };
 
-        QOpenGLShaderProgram* CreateShader(ShaderName name);
+        QOpenGLShaderProgram* LoadShaders(ShaderName name);
 
     }
 }

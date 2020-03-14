@@ -26,19 +26,17 @@ CONFIG += c11 c++17
 
 TARGET = Amber3D_SL
 
+#####################################################
 
 SOURCES += \
     Amber3D_SL.cpp \
-    Amber3D/Shaders/Shaders.cpp \   
-    Amber3D/Test/TestWindow3D.cpp
+    Amber3D/API/Shaders/LoadShaders.cpp
 
 HEADERS += \
     Amber3D_SL.h \
-    Amber3D/Shaders/Shaders.h \
-    Amber3D/Test/TestWindow3D.html
+    Amber3D/API/Shaders/LoadShaders.h
 
-FORMS += \
-    Amber3D/Test/TestWindow3D.ui
+###################################################
 
 # Default rules for deployment.
 unix {
@@ -47,7 +45,7 @@ unix {
 !isEmpty(target.path): INSTALLS += target
 
 DISTFILES += \
-    Amber3D/Shaders/BasicColor.fsh \
-    Amber3D/Shaders/BasicColor.vsh \
-    Amber3D/Shaders/Simplified.fsh \
-    Amber3D/Shaders/Simplified.vsh
+    Amber3D/Resources/Shaders/BasicColor.fsh \
+    Amber3D/Resources/Shaders/BasicColor.vsh \
+    Amber3D/Resources/Shaders/Simplified.fsh \
+    Amber3D/Resources/Shaders/Simplified.vsh
