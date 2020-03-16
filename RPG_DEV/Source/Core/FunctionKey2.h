@@ -17,6 +17,8 @@
  * ---------------------------------------------------*/
 #pragma once
 
+#include "../Common.h"
+
 class FunctionKey2
 {
 
@@ -27,5 +29,5 @@ class FunctionKey2
         void F2_Initialize();
 
     private:
-        // copy constructors
+        NULL_COPY_AND_ASSIGN(FunctionKey2)
 };

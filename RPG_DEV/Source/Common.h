@@ -21,3 +21,8 @@
 #define FPS_TIME_SPAN 3000      // 3000ms = 3sec between FPS calculations
 
 #define MS_IN_SEC  1000         // millisecond in a second
+
+#define NULL_COPY_AND_ASSIGN(T) \
+	T(const T& other) {(void)other;} \
+	void operator=(const T& other) { (void)other; }
+    
