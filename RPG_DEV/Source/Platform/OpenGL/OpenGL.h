@@ -21,6 +21,7 @@
 #include <QOpenGLFunctions_3_3_Core>
 #include <QOpenGLContext>
 #include <QSurfaceFormat>
+#include <QMatrix4x4>
 
 #include "Source/Core/FunctionKeys.h"
 
@@ -28,6 +29,16 @@
 class OpenGL : public QOpenGLWidget, protected QOpenGLFunctions_3_3_Core
 {
         Q_OBJECT
+
+        int m_function;
+        QSurfaceFormat m_format;
+        QOpenGLContext m_context;
+
+        FunctionKey1 *m_F1;
+        FunctionKey2 *m_F2;
+        FunctionKey3 *m_F3;
+
+        QMatrix4x4 m_projection;
 
     public:
         explicit OpenGL(QWidget *parent = nullptr);
@@ -47,12 +58,6 @@ class OpenGL : public QOpenGLWidget, protected QOpenGLFunctions_3_3_Core
         void resizeGL(int width, int height) override;
 
     private:
-        int m_function;
-        QSurfaceFormat m_format;
-        QOpenGLContext m_context;
-
-        FunctionKey1 *m_F1;
-        FunctionKey2 *m_F2;
-        FunctionKey3 *m_F3;
+        
 
 };

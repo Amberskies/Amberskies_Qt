@@ -1,9 +1,8 @@
 #pragma once
+#include <Amber3D/Common.h>
 
 #include <QMainWindow>
 #include <QTimer>
-#include <Amber3D/Common.h>
-
 
 QT_BEGIN_NAMESPACE
 namespace Ui { class TestWindow3D; }

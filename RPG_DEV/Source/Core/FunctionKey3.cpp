@@ -18,9 +18,14 @@
 #include "FunctionKey3.h"
 #include <QDebug>
 
-FunctionKey3::FunctionKey3()
+FunctionKey3::FunctionKey3(QOpenGLFunctions_3_3_Core *gl)
+    : m_gl(gl)
+    , m_shader(Amber3D::API::LoadShaders(Amber3D::API::Simplified))
+    , m_loader(new Amber3D::API::GfxLoader())
+    , m_renderer(new Amber3D::OpenGL::Renderer(m_gl))
+    , m_model(nullptr)
 {
-    // Empty
+    // Empty 
 }
 FunctionKey3::~FunctionKey3()
 {
@@ -28,6 +33,26 @@ FunctionKey3::~FunctionKey3()
 }
 void FunctionKey3::F3_Initialize()
 {
+    m_loader->SetShader(m_shader);
+    float vertices [] =
+    {
+        // Left Bottom Triangle
+        -0.5f,  0.5f, 0.0f,
+        -0.5f, -0.5f, 0.0f,
+         0.5f, -0.5f, 0.0f,
+        // Right Top Triangle
+         0.5f, -0.5f, 0.0f,
+         0.5f,  0.5f, 0.0f,
+        -0.5f,  0.5f, 0.0f
+    };
+
+    m_model = m_loader->LoadToVAO(vertices, sizeof(vertices) / sizeof(float));
     qDebug("F3 initialized");
 }
 
+void FunctionKey3::Go()
+{
+    m_renderer->prepare();
+    // Game Logic
+    m_renderer->render(m_model, m_shader);
+}

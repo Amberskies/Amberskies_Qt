@@ -1,7 +1,7 @@
 
 /* ----------------------------------------------------/
  *
- * Project created by Frazor Sharp : 2019 Dec 4th
+ * Project created by Frazor Sharp : 2020 Mar 16th
  *
  *      Amber3D - Qt C++
  *
@@ -17,28 +17,32 @@
  *
  * ---------------------------------------------------*/
 #pragma once
+#include "Amber3D/Common.h"
 
 #include <QOpenGLShaderProgram>
-#include <QString>
-#include "Amber3D/Common.h"
+#include <QOpenGLFunctions_3_3_Core>
+
+#include "Amber3D/Models/RawModel.h"
 
 namespace Amber3D
 {
-    namespace API
+    namespace OpenGL
     {
-        enum ShaderName
+        class Renderer
         {
-            Simplified = 0,
-            BasicColor
+            QOpenGLFunctions_3_3_Core *m_gl;
+
+            public:
+                Renderer(QOpenGLFunctions_3_3_Core *gl);
+                ~Renderer();
+
+                void prepare();
+                void render(Models::RawModel *model,
+                            QOpenGLShaderProgram *shader);
+
+            private:
+                NULL_COPY_AND_ASSIGN(Renderer)
+
         };
-
-        static QString shader[] =
-        {
-            "Simplified", // shader 0
-            "BasicColor"
-        };
-
-        QOpenGLShaderProgram* LoadShaders(ShaderName name);
-
     }
 }

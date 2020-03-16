@@ -17,8 +17,7 @@
 #
 # ---------------------------------------------------*/
 
-QT -= gui
-QT += core widgets opengl
+QT += core widgets gui
 
 TEMPLATE = lib
 CONFIG += staticlib
@@ -30,14 +29,18 @@ TARGET = Amber3D_SL
 
 SOURCES += \
     Amber3D_SL.cpp \
+    Amber3D/API/Loaders/GfxLoader.cpp \
     Amber3D/API/Shaders/LoadShaders.cpp \
-    Amber3D/Models/RawModel.cpp
+    Amber3D/Models/RawModel.cpp \
+    Amber3D/OpenGL/Renderer.cpp
 
 HEADERS += \
     Amber3D/Common.h \
     Amber3D_SL.h \
+    Amber3D/API/Loaders/GfxLoader.h \
     Amber3D/API/Shaders/LoadShaders.h \
-    Amber3D/Models/RawModel.h
+    Amber3D/Models/RawModel.h \
+    Amber3D/OpenGL/Renderer.h
 
 ###################################################
 

@@ -23,14 +23,26 @@ namespace Amber3D
     namespace Models
     {
 
-        RawModel::RawModel()
+        RawModel::RawModel(QOpenGLVertexArrayObject *vao, int vertexCount)
+            : m_vao(vao)
+            , m_vertexCount(vertexCount)
         {
-
+            // Empty
         }
 
         RawModel::~RawModel()
         {
+            // Empty
+        }
 
+        QOpenGLVertexArrayObject* RawModel::GetVao()
+        {
+            return m_vao;
+        }
+
+        int RawModel::GetVertexCount()
+        {
+            return m_vertexCount;
         }
     }
 }

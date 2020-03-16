@@ -16,7 +16,7 @@
 #
 # ---------------------------------------------------*/
 
-QT       += core gui opengl widgets
+QT       += core gui widgets
 
 
 CONFIG += c11 c++17

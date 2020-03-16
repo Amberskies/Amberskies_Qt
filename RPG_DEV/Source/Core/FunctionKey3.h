@@ -19,15 +19,28 @@
 
 #include <Amber3D/Common.h>
 
+#include <QOpenGLShaderProgram>
+#include <QOpenGLFunctions_3_3_Core>
+
+#include <Amber3D/API/Shaders/LoadShaders.h>
+#include <Amber3D/API/Loaders/GfxLoader.h>
+#include <Amber3D/OpenGL/Renderer.h>
+
 class FunctionKey3
 {
+    QOpenGLFunctions_3_3_Core *m_gl;
+    QOpenGLShaderProgram *m_shader;
+    Amber3D::API::GfxLoader *m_loader;
+    Amber3D::OpenGL::Renderer *m_renderer;
+    Amber3D::Models::RawModel *m_model;
 
     public:
-        FunctionKey3();
+        FunctionKey3(QOpenGLFunctions_3_3_Core *gl);
         ~FunctionKey3();
 
         void F3_Initialize();
+        void Go();
 
     private:
-        NULL_COPY_AND_ASSIGN(FunctionKey3)
+        //NULL_COPY_AND_ASSIGN(FunctionKey3)
 };
