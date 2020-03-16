@@ -24,15 +24,15 @@ namespace Amber3D
     namespace API
     {
         GfxLoader::GfxLoader()
-            : m_vaos(new QVector<QOpenGLVertexArrayObject*>)
-            , m_currentShader(nullptr)
+            : m_currentShader(nullptr)
         {
             // Empty
         }
         
         GfxLoader::~GfxLoader()
         {
-            
+            for (int index = 0; index <= m_vaos.size(); index ++) m_vaos[index]->destroy();
+            for (int index = 0; index <= m_vbos.size(); index ++) m_vbos[index]->destroy();
         }
 
         void GfxLoader::SetShader(QOpenGLShaderProgram *currentShader)
@@ -59,7 +59,7 @@ namespace Amber3D
             currentVAO->create();
             currentVAO->bind();
 
-            m_vaos->push_back(currentVAO);
+            m_vaos.push_back(currentVAO);
             return currentVAO;
         }
 
@@ -73,6 +73,8 @@ namespace Amber3D
 
             m_currentShader->enableAttributeArray(attribute);
             m_currentShader->setAttributeBuffer(attribute, GL_FLOAT, 0, 3, 0);
+
+            m_vbos.push_back(dataBuffer);
         }
 
     }

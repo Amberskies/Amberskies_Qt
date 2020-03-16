@@ -33,7 +33,9 @@ namespace Amber3D
     {
         class GfxLoader
         {
-            QVector<QOpenGLVertexArrayObject*> *m_vaos;
+            QVector<QOpenGLVertexArrayObject*> m_vaos;
+            QVector<QOpenGLBuffer*> m_vbos;
+            
             QOpenGLShaderProgram *m_currentShader;
 
             public:

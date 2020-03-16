@@ -29,7 +29,7 @@ FunctionKey3::FunctionKey3(QOpenGLFunctions_3_3_Core *gl)
 }
 FunctionKey3::~FunctionKey3()
 {
-    // empty
+    //empty
 }
 void FunctionKey3::F3_Initialize()
 {
