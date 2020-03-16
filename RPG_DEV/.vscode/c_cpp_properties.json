@@ -4,7 +4,7 @@
             "name": "Linux",
             "includePath": [
                 "${workspaceFolder}/**",
-                "${workspaceFolder}/../Amber3D_SL/Amber3D/**",
+                "${workspaceFolder}/../Amber3D_SL/**",
                 "/usr/include/qt/**"
             ],
             "defines": [],

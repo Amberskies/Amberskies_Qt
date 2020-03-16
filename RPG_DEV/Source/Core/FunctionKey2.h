@@ -17,7 +17,7 @@
  * ---------------------------------------------------*/
 #pragma once
 
-#include "../Common.h"
+#include <Amber3D/Common.h>
 
 class FunctionKey2
 {

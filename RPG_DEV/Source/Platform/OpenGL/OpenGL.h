@@ -22,8 +22,7 @@
 #include <QOpenGLContext>
 #include <QSurfaceFormat>
 
-#include "../../Core/FunctionKeys.h"
-#include "../../Common.h"
+#include "Source/Core/FunctionKeys.h"
 
 
 class OpenGL : public QOpenGLWidget, protected QOpenGLFunctions_3_3_Core

@@ -2,7 +2,7 @@
 
 #include <QMainWindow>
 #include <QTimer>
-#include "../Source/Common.h"
+#include <Amber3D/Common.h>
 
 
 QT_BEGIN_NAMESPACE

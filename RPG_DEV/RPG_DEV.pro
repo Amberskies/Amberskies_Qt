@@ -35,7 +35,6 @@ SOURCES += \
 
 HEADERS += \
     Test/TestWindow3D.h \
-    Source/Common.h \
     Source/Core/FunctionKey1.h \
     Source/Core/FunctionKey2.h \
     Source/Core/FunctionKey3.h \
@@ -48,8 +47,8 @@ FORMS += \
 
 unix:!macx: LIBS += -L$$PWD/../Amber3D_SL/build/ -lAmber3D_SL
 
-INCLUDEPATH += $$PWD/../Amber3D_SL/Amber3D
-DEPENDPATH += $$PWD/../Amber3D_SL/Amber3D
+INCLUDEPATH += $$PWD/../Amber3D_SL/
+DEPENDPATH += $$PWD/../Amber3D_SL/
 
 unix:!macx: PRE_TARGETDEPS += $$PWD/../Amber3D_SL/build/libAmber3D_SL.a
 
