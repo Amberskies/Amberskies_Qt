@@ -33,7 +33,7 @@ FunctionKey3::~FunctionKey3()
 }
 void FunctionKey3::F3_Initialize()
 {
-    m_loader->SetShader(m_shader);
+    
     float vertices [] =
     {
         // Left Bottom Triangle
@@ -46,6 +46,7 @@ void FunctionKey3::F3_Initialize()
         -0.5f,  0.5f, 0.0f
     };
 
+    m_loader->SetShader(m_shader);
     m_model = m_loader->LoadToVAO(vertices, sizeof(vertices) / sizeof(float));
     qDebug("F3 initialized");
 }

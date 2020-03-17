@@ -31,3 +31,7 @@ void FunctionKey2::F2_Initialize()
     qDebug("F2 initialized");
 }
 
+void FunctionKey2::Go()
+{
+    
+}

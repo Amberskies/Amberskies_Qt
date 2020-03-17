@@ -27,6 +27,7 @@ class FunctionKey2
         ~FunctionKey2();
 
         void F2_Initialize();
+        void Go();
 
     private:
         NULL_COPY_AND_ASSIGN(FunctionKey2)

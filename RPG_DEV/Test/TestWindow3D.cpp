@@ -38,19 +38,24 @@ void TestWindow3D::on_MenuButton_clicked()
 
 void TestWindow3D::on_F1pushButton_clicked()
 {
-    // Test Program
+    // Log on
+
+    this->ui->stackedWidget->setCurrentIndex(1);
     this->ui->openGL_ViewPort->setFunctionKey(1);
 }
 
 void TestWindow3D::on_F2pushButton_clicked()
 {
-    // Data Organizer
+    // Welcome Screen/Main control menu (Character Generator)(Status)...etc
+    
+    this->ui->stackedWidget->setCurrentIndex(2);
     this->ui->openGL_ViewPort->setFunctionKey(2);
 }
 
 void TestWindow3D::on_F3pushButton_clicked()
 {
     // MMO Development
+    this->ui->stackedWidget->setCurrentIndex(0);
     this->ui->openGL_ViewPort->setFunctionKey(3);
 }
 
