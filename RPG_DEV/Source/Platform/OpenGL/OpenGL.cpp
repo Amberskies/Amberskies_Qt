@@ -55,7 +55,7 @@ void OpenGL::initializeGL()
         printf("Unable to Initialize OpenGL 3.3 Core.\n");
         exit(99);
     }
-    //glClearColor(1.00f, 0.05f, 0.01f, 1.00f);
+    glClearColor(0.12f, 0.05f, 0.01f, 1.00f);
 
     printf("OpenGL : %s\n",
            glGetString(GL_VERSION)
