@@ -25,7 +25,7 @@ namespace AmberData
 {
     UserData::UserData(QWidget *parent) : QTableWidget(parent)
     {
-        this->setRowCount(50);
+        this->setRowCount(60);
         this->setColumnCount(10); 
     }
 
