@@ -25,6 +25,10 @@ private slots:
 
     void Loop();
     void FPS();
+    /////////// F2 Buttons ///////////
+    void on_LoadButton_clicked();
+    void on_SaveButton_clicked();
+    void on_RefreshButton_clicked();
 
 private:
     Ui::TestWindow3D *ui;

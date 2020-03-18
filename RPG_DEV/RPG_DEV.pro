@@ -31,6 +31,7 @@ SOURCES += \
     Source/Core/FunctionKey1.cpp \
     Source/Core/FunctionKey2.cpp \
     Source/Core/FunctionKey3.cpp \
+    Source/Data/Data.cpp \
     Source/Platform/OpenGL/OpenGL.cpp
 
 HEADERS += \
@@ -38,6 +39,7 @@ HEADERS += \
     Source/Core/FunctionKey1.h \
     Source/Core/FunctionKey2.h \
     Source/Core/FunctionKey3.h \
+    Source/Data/Data.h \
     Source/Platform/OpenGL/OpenGL.h
 
 FORMS += \

@@ -207,7 +207,7 @@
          <enum>QFrame::Sunken</enum>
         </property>
         <property name="currentIndex">
-         <number>0</number>
+         <number>2</number>
         </property>
         <widget class="QWidget" name="page">
          <property name="sizePolicy">
@@ -270,11 +270,11 @@ p, li { white-space: pre-wrap; }
            <verstretch>0</verstretch>
           </sizepolicy>
          </property>
-         <widget class="QTextEdit" name="textEdit_2">
+         <widget class="QTextEdit" name="Header">
           <property name="geometry">
            <rect>
-            <x>770</x>
-            <y>210</y>
+            <x>10</x>
+            <y>20</y>
             <width>491</width>
             <height>161</height>
            </rect>
@@ -287,6 +287,55 @@ p, li { white-space: pre-wrap; }
 &lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-size:26pt;&quot;&gt;This Area can be used for &lt;/span&gt;&lt;/p&gt;
 &lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-size:26pt;&quot;&gt;Avatar development&lt;/span&gt;&lt;/p&gt;
 &lt;p style=&quot;-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-size:26pt;&quot;&gt;&lt;br /&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+          </property>
+         </widget>
+         <widget class="UserData" name="SpreadSheet">
+          <property name="geometry">
+           <rect>
+            <x>540</x>
+            <y>20</y>
+            <width>1141</width>
+            <height>941</height>
+           </rect>
+          </property>
+         </widget>
+         <widget class="QPushButton" name="LoadButton">
+          <property name="geometry">
+           <rect>
+            <x>200</x>
+            <y>260</y>
+            <width>80</width>
+            <height>26</height>
+           </rect>
+          </property>
+          <property name="text">
+           <string>Load</string>
+          </property>
+         </widget>
+         <widget class="QPushButton" name="SaveButton">
+          <property name="geometry">
+           <rect>
+            <x>200</x>
+            <y>340</y>
+            <width>80</width>
+            <height>26</height>
+           </rect>
+          </property>
+          <property name="text">
+           <string>Save</string>
+          </property>
+         </widget>
+         <widget class="QPushButton" name="RefreshButton">
+          <property name="geometry">
+           <rect>
+            <x>200</x>
+            <y>420</y>
+            <width>80</width>
+            <height>26</height>
+           </rect>
+          </property>
+          <property name="text">
+           <string>Refresh</string>
           </property>
          </widget>
         </widget>
@@ -376,6 +425,11 @@ p, li { white-space: pre-wrap; }
    <class>OpenGL</class>
    <extends>QOpenGLWidget</extends>
    <header>Source/Platform/OpenGL/OpenGL.h</header>
+  </customwidget>
+  <customwidget>
+   <class>UserData</class>
+   <extends>QTableWidget</extends>
+   <header>Source/Data/Data.h</header>
   </customwidget>
  </customwidgets>
  <resources/>

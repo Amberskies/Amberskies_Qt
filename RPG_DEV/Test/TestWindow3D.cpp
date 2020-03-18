@@ -29,6 +29,31 @@ TestWindow3D::~TestWindow3D()
     delete ui;
 }
 
+void TestWindow3D::Loop()
+{
+    m_loop->stop();
+
+
+
+
+    m_frameCounter++;
+    ui->openGL_ViewPort->update();
+
+    m_loop->start(LOOP_DELAY);
+}
+
+void TestWindow3D::FPS()
+{
+    m_FPS->stop();
+    double l_fps = 0.0;
+
+    l_fps = static_cast<double>(m_frameCounter) / (FPS_TIME_SPAN / MS_IN_SEC);
+    this->ui->FPSlcdNumber->display(l_fps);
+
+    m_frameCounter = 0;
+    m_FPS->start(FPS_TIME_SPAN);
+}
+
 ////////////////// Private Slots ////////////////////////
 
 void TestWindow3D::on_MenuButton_clicked()
@@ -64,27 +89,20 @@ void TestWindow3D::on_ExitButton_clicked()
     this->close();
 }
 
-void TestWindow3D::Loop()
+/////////// F2 Buttons ///////////
+
+void TestWindow3D::on_LoadButton_clicked()
 {
-    m_loop->stop();
-
-
-
-
-    m_frameCounter++;
-    ui->openGL_ViewPort->update();
-
-    m_loop->start(LOOP_DELAY);
+    this->ui->SpreadSheet->LoadData();
 }
 
-void TestWindow3D::FPS()
+void TestWindow3D::on_SaveButton_clicked()
 {
-    m_FPS->stop();
-    double l_fps = 0.0;
-
-    l_fps = static_cast<double>(m_frameCounter) / (FPS_TIME_SPAN / MS_IN_SEC);
-    this->ui->FPSlcdNumber->display(l_fps);
-
-    m_frameCounter = 0;
-    m_FPS->start(FPS_TIME_SPAN);
+    this->ui->SpreadSheet->SaveData();
 }
+
+void TestWindow3D::on_RefreshButton_clicked()
+{
+    this->ui->SpreadSheet->RefreshData();
+}
+/////////////////////////////////////////////////////
