@@ -20,16 +20,18 @@
 
 FunctionKey3::FunctionKey3(QOpenGLFunctions_3_3_Core *gl)
     : m_gl(gl)
+    , m_model(nullptr)
     , m_shader(new Amber3D::API::StaticShader())
     , m_loader(new Amber3D::API::GfxLoader())
     , m_renderer(new Amber3D::OpenGL::Renderer(m_gl))
-    , m_model(nullptr)
+    
 {
     // Empty 
 }
 FunctionKey3::~FunctionKey3()
-{
-    //empty
+{   
+    delete m_renderer;
+    delete m_model;
 }
 void FunctionKey3::F3_Initialize()
 {

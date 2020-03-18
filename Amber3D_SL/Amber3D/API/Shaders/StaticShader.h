@@ -30,14 +30,10 @@ namespace Amber3D
 
             public:
                 StaticShader(/* args */);
-                ~StaticShader();
 
             protected:
                 void BindAttributes() override;
-
-            private:
-
-                
+              
         };        
     }
 }

@@ -28,10 +28,6 @@ namespace Amber3D
         {
         }
         
-        StaticShader::~StaticShader()
-        {
-        }
-
         //////////////// Protected /////////////
 
         void StaticShader::BindAttributes()

@@ -36,7 +36,7 @@ OpenGL::OpenGL(QWidget *parent) : QOpenGLWidget(parent)
 
 OpenGL::~OpenGL()
 {
-    // empty
+    delete m_F3;
 }
 
 // **************** Protected *****************

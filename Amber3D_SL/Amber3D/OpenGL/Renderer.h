@@ -34,14 +34,12 @@ namespace Amber3D
 
             public:
                 Renderer(QOpenGLFunctions_3_3_Core *gl);
-                ~Renderer();
 
                 void prepare();
                 void render(Models::RawModel *model,
                             API::StaticShader *shader);
 
             private:
-                NULL_COPY_AND_ASSIGN(Renderer)
 
         };
     }

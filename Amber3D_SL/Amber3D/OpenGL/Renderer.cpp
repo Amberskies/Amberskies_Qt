@@ -29,11 +29,6 @@ namespace Amber3D
             // empty
         }
         
-        Renderer::~Renderer()
-        {
-            // empty
-        } 
-
         void Renderer::prepare()
         {
             m_gl->glClearColor(0.1f, 0.2f, 0.5f, 1.0f);

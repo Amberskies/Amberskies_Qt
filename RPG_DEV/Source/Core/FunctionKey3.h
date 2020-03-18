@@ -29,10 +29,11 @@
 class FunctionKey3
 {
     QOpenGLFunctions_3_3_Core *m_gl;
+    Amber3D::Models::RawModel *m_model;
     Amber3D::API::StaticShader *m_shader;
     Amber3D::API::GfxLoader *m_loader;
     Amber3D::OpenGL::Renderer *m_renderer;
-    Amber3D::Models::RawModel *m_model;
+    
 
     public:
         FunctionKey3(QOpenGLFunctions_3_3_Core *gl);
