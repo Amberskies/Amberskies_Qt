@@ -23,7 +23,7 @@
 #include <QSurfaceFormat>
 #include <QMatrix4x4>
 
-#include "Source/Core/FunctionKeys.h"
+#include "Source/Core/FunctionKey3.h"
 
 
 class OpenGL : public QOpenGLWidget, protected QOpenGLFunctions_3_3_Core
@@ -34,8 +34,6 @@ class OpenGL : public QOpenGLWidget, protected QOpenGLFunctions_3_3_Core
         QSurfaceFormat m_format;
         QOpenGLContext m_context;
 
-        FunctionKey1 *m_F1;
-        FunctionKey2 *m_F2;
         FunctionKey3 *m_F3;
 
         QMatrix4x4 m_projection;
