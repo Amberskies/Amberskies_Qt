@@ -64,7 +64,7 @@ void OpenGL::initializeGL()
     m_F1->F1_Initialize(); // red
     m_F2->F2_Initialize(); // green
     m_F3 = new FunctionKey3(this);
-    m_F3->F3_Initialize(); // blue
+    m_F3->F3_Initialize(); // Amber3D
 }
 
 void OpenGL::paintGL()
