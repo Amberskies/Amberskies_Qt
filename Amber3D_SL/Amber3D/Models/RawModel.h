@@ -28,16 +28,13 @@ namespace Amber3D
         class RawModel
         {
                 QOpenGLVertexArrayObject *m_vao;
-                int m_vertexCount;
+                GLuint m_indexCount;
 
             public:
-                RawModel(QOpenGLVertexArrayObject *vao, int vertexCount);
-                ~RawModel();
+                RawModel(QOpenGLVertexArrayObject *vao, GLuint indexCount);
 
                 QOpenGLVertexArrayObject* GetVao();
-                int GetVertexCount();
-
-                //NULL_COPY_AND_ASSIGN(RawModel)
+                GLuint GetIndexCount();
         };
     }
 }

@@ -19,10 +19,10 @@
 #pragma once
 #include "Amber3D/Common.h"
 
-#include <QOpenGLShaderProgram>
 #include <QOpenGLFunctions_3_3_Core>
 
 #include "Amber3D/Models/RawModel.h"
+#include "Amber3D/API/Shaders/StaticShader.h"
 
 namespace Amber3D
 {
@@ -38,7 +38,7 @@ namespace Amber3D
 
                 void prepare();
                 void render(Models::RawModel *model,
-                            QOpenGLShaderProgram *shader);
+                            API::StaticShader *shader);
 
             private:
                 NULL_COPY_AND_ASSIGN(Renderer)

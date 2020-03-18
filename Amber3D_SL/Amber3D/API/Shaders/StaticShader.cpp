@@ -1,7 +1,7 @@
 
 /* ----------------------------------------------------/
  *
- * Project created by Frazor Sharp : 2020 Mar 16th
+ * Project created by Frazor Sharp : 2020 Mar 18th
  *
  *      Amber3D - Qt C++
  *
@@ -16,28 +16,27 @@
  * given by Qt    : doc.qt.io/qt-5/opensourcelicence.html
  *
  * ---------------------------------------------------*/
-#include "RawModel.h"
+
+#include "StaticShader.h"
 
 namespace Amber3D
 {
-    namespace Models
+    namespace API
     {
-
-        RawModel::RawModel(QOpenGLVertexArrayObject *vao, GLuint indexCount)
-            : m_vao(vao)
-            , m_indexCount(indexCount)
+        StaticShader::StaticShader(/* args */)
+            : ShaderProgram("Simplified")
         {
-            // Empty
+        }
+        
+        StaticShader::~StaticShader()
+        {
         }
 
-        QOpenGLVertexArrayObject* RawModel::GetVao()
-        {
-            return m_vao;
-        }
+        //////////////// Protected /////////////
 
-        GLuint RawModel::GetIndexCount()
+        void StaticShader::BindAttributes()
         {
-            return m_indexCount;
+            this->BindAttrib(0, "position");
         }
     }
 }

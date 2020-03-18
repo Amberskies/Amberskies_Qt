@@ -31,51 +31,137 @@ namespace Amber3D
         
         GfxLoader::~GfxLoader()
         {
-            for (int index = 0; index <= m_vaos.size(); index ++) m_vaos[index]->destroy();
-            for (int index = 0; index <= m_vbos.size(); index ++) m_vbos[index]->destroy();
+            for (
+                int index = 0;
+                index <= m_vaos.size();
+                index ++
+            ) 
+                m_vaos[index]->destroy();
+
+            DestroyBuffer(
+                m_vbos
+            );
+
+            DestroyBuffer(
+                m_indexBuffers
+            );
         }
 
-        void GfxLoader::SetShader(QOpenGLShaderProgram *currentShader)
+        void GfxLoader::SetShader(
+            API::StaticShader *currentShader)
         {
             m_currentShader = currentShader;
         }
 
-        Models::RawModel* GfxLoader::LoadToVAO(float *positions, int numPositions)
+        Models::RawModel* GfxLoader::LoadToVAO(
+            uint *indices, int numIndices,
+            float *positions, int numPositions)
         {
             QOpenGLVertexArrayObject *vao = CreateVAO();
 
-            StoreDataToAttribList(0, positions, numPositions * sizeof(float));
+            StoreIndicesBuffer(
+                indices,
+                numIndices * sizeof(uint)
+            );
 
+            StoreDataToAttribList(
+                0,
+                positions,
+                numPositions * sizeof(float)
+            );
+            
             vao->release();
             
-            Models::RawModel *rawModel = new Models::RawModel(vao, (numPositions / 3));
+            Models::RawModel *rawModel = 
+                new Models::RawModel(
+                    vao,
+                    numIndices
+            );
+            
             return rawModel;
         }
 
         //////////////////// Private /////////////////////////
         QOpenGLVertexArrayObject* GfxLoader::CreateVAO()
         {
-            QOpenGLVertexArrayObject *currentVAO = new QOpenGLVertexArrayObject();
+            QOpenGLVertexArrayObject *currentVAO = 
+                new QOpenGLVertexArrayObject();
+            
             currentVAO->create();
             currentVAO->bind();
 
-            m_vaos.push_back(currentVAO);
+            m_vaos.push_back(
+                currentVAO
+            );
+
             return currentVAO;
         }
 
-        void GfxLoader::StoreDataToAttribList(int attribute, float *data, int dataSize)
+        void GfxLoader::StoreDataToAttribList(
+            int attribute,
+            float *data,
+            int dataSize)
         {
-            QOpenGLBuffer *dataBuffer = new QOpenGLBuffer(QOpenGLBuffer::VertexBuffer);
+            QOpenGLBuffer *dataBuffer = 
+                new QOpenGLBuffer(
+                    QOpenGLBuffer::VertexBuffer
+            );
             
             dataBuffer->create();
             dataBuffer->bind();
-            dataBuffer->allocate(data, dataSize);
+            
+            dataBuffer->allocate(
+                data,
+                dataSize
+            );
 
-            m_currentShader->enableAttributeArray(attribute);
-            m_currentShader->setAttributeBuffer(attribute, GL_FLOAT, 0, 3, 0);
+            m_currentShader->GetProgramID()->enableAttributeArray(
+                attribute
+            );
 
-            m_vbos.push_back(dataBuffer);
+            m_currentShader->GetProgramID()->setAttributeBuffer(
+                attribute,
+                GL_FLOAT,
+                0,
+                3,
+                0
+            );
+
+            m_vbos.push_back(
+                dataBuffer
+            );
         }
 
+        void GfxLoader::StoreIndicesBuffer(
+            uint *data, int dataSize)
+        {
+            QOpenGLBuffer *indexBuffer = 
+                new QOpenGLBuffer(
+                    QOpenGLBuffer::IndexBuffer
+            );
+
+            indexBuffer->create();
+            indexBuffer->bind();
+            
+            indexBuffer->allocate(
+                data,
+                dataSize
+            );
+
+            m_indexBuffers.push_back(
+                indexBuffer
+            );
+        }
+
+        void GfxLoader::DestroyBuffer(
+            QVector<QOpenGLBuffer*> buffer)
+        {
+            for (
+                int index = 0;
+                index <= buffer.size();
+                index ++
+            ) 
+                buffer[index]->destroy();
+        }
     }
 }

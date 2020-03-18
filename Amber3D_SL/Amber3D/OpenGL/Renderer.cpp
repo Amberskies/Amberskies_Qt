@@ -40,15 +40,15 @@ namespace Amber3D
         }
 
         void Renderer::render(Models::RawModel *model,
-                              QOpenGLShaderProgram *shader)
+                              API::StaticShader *shader)
         {
-            shader->bind();
+            shader->Start();
             model->GetVao()->bind();
 
-            m_gl->glDrawArrays(GL_TRIANGLES, 0, model->GetVertexCount());
+            m_gl->glDrawElements(GL_TRIANGLES, model->GetIndexCount(), GL_UNSIGNED_INT, 0);
 
             model->GetVao()->release();
-            shader->release();
+            shader->Stop();
             
         }
     }

@@ -21,11 +21,10 @@
 
 #include <QVector>
 #include <QOpenGLVertexArrayObject>
-#include <QOpenGLShaderProgram>
 #include <QOpenGLBuffer>
 
 #include "Amber3D/Models/RawModel.h"
-
+#include "Amber3D/API/Shaders/StaticShader.h"
 
 namespace Amber3D
 {
@@ -35,20 +34,32 @@ namespace Amber3D
         {
             QVector<QOpenGLVertexArrayObject*> m_vaos;
             QVector<QOpenGLBuffer*> m_vbos;
-            
-            QOpenGLShaderProgram *m_currentShader;
+            QVector<QOpenGLBuffer*> m_indexBuffers;
+
+            API::StaticShader *m_currentShader;
 
             public:
                 GfxLoader();
                 ~GfxLoader();
 
-                void SetShader(QOpenGLShaderProgram *currentShader);
-                Models::RawModel* LoadToVAO(float *positions, int numPositions);
-            
+                void SetShader(
+                    API::StaticShader *currentShader);
+
+                Models::RawModel* LoadToVAO(
+                    uint *indices, int numIndices,
+                    float *positions, int numPositions);
+                                            
             private:
                 QOpenGLVertexArrayObject* CreateVAO();
-                void StoreDataToAttribList(int attribute, float *data, int dataSize);
-                void UnbindVAO();
+
+                void StoreDataToAttribList(
+                    int attribute, float *data, int dataSize);
+
+                void StoreIndicesBuffer(
+                    uint *data, int dataSize);
+
+                void DestroyBuffer(
+                    QVector<QOpenGLBuffer*> buffer);
 
                 NULL_COPY_AND_ASSIGN(GfxLoader)
         };        
