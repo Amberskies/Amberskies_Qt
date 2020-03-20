@@ -22,14 +22,20 @@
 #include <QOpenGLShaderProgram>
 #include <QOpenGLFunctions_3_3_Core>
 
-#include <Amber3D/API/Shaders/StaticShader.h>
 #include <Amber3D/API/Loaders/GfxLoader.h>
+#include <Amber3D/API/Shaders/StaticShader.h>
+#include <Amber3D/Models/RawModel.h>
+#include <Amber3D/Models/TexturedModel.h>
 #include <Amber3D/OpenGL/Renderer.h>
+#include <Amber3D/Textures/ModelTexture.h>
+
 
 class FunctionKey3
 {
     QOpenGLFunctions_3_3_Core *m_gl;
     Amber3D::Models::RawModel *m_model;
+    Amber3D::Models::TexturedModel *m_texturedModel;
+    Amber3D::Textures::ModelTexture *m_texture1;
     Amber3D::API::StaticShader *m_shader;
     Amber3D::API::GfxLoader *m_loader;
     Amber3D::OpenGL::Renderer *m_renderer;

@@ -22,6 +22,7 @@
 #include <QVector>
 #include <QOpenGLVertexArrayObject>
 #include <QOpenGLBuffer>
+#include <QOpenGLTexture>
 
 #include "Amber3D/Models/RawModel.h"
 #include "Amber3D/API/Shaders/StaticShader.h"
@@ -35,6 +36,7 @@ namespace Amber3D
             QVector<QOpenGLVertexArrayObject*> m_vaos;
             QVector<QOpenGLBuffer*> m_vbos;
             QVector<QOpenGLBuffer*> m_indexBuffers;
+            QVector<QOpenGLTexture*> m_textures;
 
             API::StaticShader *m_currentShader;
 
@@ -48,6 +50,9 @@ namespace Amber3D
                 Models::RawModel* LoadToVAO(
                     uint *indices, int numIndices,
                     float *positions, int numPositions);
+                
+                QOpenGLTexture* loadTexture(
+                    QString fileName);
                                             
             private:
                 QOpenGLVertexArrayObject* CreateVAO();

@@ -1,7 +1,7 @@
 
 /* ----------------------------------------------------/
  *
- * Project created by Frazor Sharp : 2020 Mar 18th
+ * Project created by Frazor Sharp : 2020 Mar 20th
  *
  *      Amber3D - Qt C++
  *
@@ -17,21 +17,25 @@
  *
  * ---------------------------------------------------*/
 #pragma once
+
 #include "Amber3D/Common.h"
-#include "ShaderProgram.h"
+
+#include <QOpenGLTexture>
 
 namespace Amber3D
 {
-    namespace API
+    namespace Textures
     {
-        class StaticShader : public ShaderProgram 
+        class ModelTexture
         {
-            public:
-                StaticShader(/* args */);
+            QOpenGLTexture *m_texture;
 
-            protected:
-                void BindAttributes() override;
-              
-        };        
+        public:
+            ModelTexture(QOpenGLTexture *texture);
+            
+            QOpenGLTexture* GetTexture();
+        };
+        
+        
     }
 }

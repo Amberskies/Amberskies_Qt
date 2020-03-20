@@ -22,7 +22,7 @@
                     "ignoreFailures": true
                 }
             ],
-            "preLaunchTask": "Linux Build",
+            "preLaunchTask": "RPG_DEV Build",
             "miDebuggerPath": "/usr/bin/gdb"
         }
     ]

@@ -1,7 +1,7 @@
 
 /* ----------------------------------------------------/
  *
- * Project created by Frazor Sharp : 2020 Mar 18th
+ * Project created by Frazor Sharp : 2020 Mar 20th
  *
  *      Amber3D - Qt C++
  *
@@ -16,22 +16,24 @@
  * given by Qt    : doc.qt.io/qt-5/opensourcelicence.html
  *
  * ---------------------------------------------------*/
-#pragma once
-#include "Amber3D/Common.h"
-#include "ShaderProgram.h"
+
+#include "ModelTexture.h"
 
 namespace Amber3D
 {
-    namespace API
+    namespace Textures
     {
-        class StaticShader : public ShaderProgram 
+        ModelTexture::ModelTexture(
+            QOpenGLTexture *texture)
+            : m_texture(texture)
         {
-            public:
-                StaticShader(/* args */);
+            // empty
+        }
 
-            protected:
-                void BindAttributes() override;
-              
-        };        
+        QOpenGLTexture* ModelTexture::GetTexture()
+        {
+            return m_texture;
+        }
+        
     }
 }

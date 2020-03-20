@@ -34,7 +34,7 @@ namespace Amber3D
             for (
                 int index = 0;
                 index <= m_vaos.size();
-                index ++
+                index++
             ) 
                 m_vaos[index]->destroy();
 
@@ -45,6 +45,13 @@ namespace Amber3D
             DestroyBuffer(
                 m_indexBuffers
             );
+
+            for (
+                int index = 0;
+                index <= m_textures.size();
+                index++
+            )
+                m_textures[index]->destroy();
         }
 
         void GfxLoader::SetShader(
@@ -79,6 +86,30 @@ namespace Amber3D
             );
             
             return rawModel;
+        }
+
+        QOpenGLTexture* GfxLoader::loadTexture(
+            QString fileName)
+        {
+            QOpenGLTexture *texture = new QOpenGLTexture(
+                QImage(
+                    "Resources/Textures/" + fileName + ".png"
+                ).mirrored()
+            );
+
+            texture->setMinificationFilter(
+                QOpenGLTexture::LinearMipMapLinear
+            );
+
+            texture->setMagnificationFilter(
+                QOpenGLTexture::Linear
+            );
+
+            m_textures.push_back(
+                texture
+            );
+
+            return texture;
         }
 
         //////////////////// Private /////////////////////////

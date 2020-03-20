@@ -21,6 +21,7 @@
 FunctionKey3::FunctionKey3(QOpenGLFunctions_3_3_Core *gl)
     : m_gl(gl)
     , m_model(nullptr)
+    , m_texture1(nullptr)
     , m_shader(new Amber3D::API::StaticShader())
     , m_loader(new Amber3D::API::GfxLoader())
     , m_renderer(new Amber3D::OpenGL::Renderer(m_gl))
@@ -42,13 +43,21 @@ void FunctionKey3::F3_Initialize()
         -0.5f,  0.5f, 0.0f, // 0
         -0.5f, -0.5f, 0.0f, // 1
          0.5f, -0.5f, 0.0f, // 2
-         0.5f,  0.5f, 0.0f, //3
+         0.5f,  0.5f, 0.0f, // 3
+    };
+
+    float textureCoords [] =
+    {
+        0.0f, 0.0f,     // 0
+        0.0f, 1.0f,     // 1
+        1.1f, 1.1f,     // 2
+        1.0f, 0.0f      // 3
     };
 
     uint indices [] =
     {
-        0, 1, 2,
-        2, 3, 0 
+        0, 1, 3,
+        3, 1, 2 
     };
 
     m_loader->SetShader(m_shader);
@@ -61,6 +70,17 @@ void FunctionKey3::F3_Initialize()
             sizeof(vertices) / sizeof(float)
     );
     
+    m_texture1 = new Amber3D::Textures::ModelTexture(
+        m_loader->loadTexture(
+            "thing"
+        )
+    );
+
+    m_texturedModel = new Amber3D::Models::TexturedModel(
+        m_model,
+        m_texture1
+    );
+
     qDebug("F3 initialized");
 }
 
@@ -71,7 +91,7 @@ void FunctionKey3::Go()
     // Game Logic
     
     m_renderer->render(
-        m_model,
+        m_texturedModel,
         m_shader
     );
 }

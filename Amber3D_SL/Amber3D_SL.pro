@@ -33,7 +33,9 @@ SOURCES += \
     Amber3D/API/Shaders/ShaderProgram.cpp \
     Amber3D/API/Shaders/StaticShader.cpp \
     Amber3D/Models/RawModel.cpp \
-    Amber3D/OpenGL/Renderer.cpp
+    Amber3D/Models/TexturedModel.cpp \
+    Amber3D/OpenGL/Renderer.cpp \
+    Amber3D/Textures/ModelTexture.cpp
 
 HEADERS += \
     Amber3D/Common.h \
@@ -42,8 +44,10 @@ HEADERS += \
     Amber3D/API/Shaders/ShaderProgram.h \
     Amber3D/API/Shaders/StaticShader.h \
     Amber3D/Models/RawModel.h \
-    Amber3D/OpenGL/Renderer.h
-
+    Amber3D/Models/TexturedModel.h \
+    Amber3D/OpenGL/Renderer.h \
+    Amber3D/Textures/ModelTexture.h
+    
 ###################################################
 
 # Default rules for deployment.

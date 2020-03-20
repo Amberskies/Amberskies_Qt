@@ -32,8 +32,7 @@ namespace Amber3D
         ShaderProgram::~ShaderProgram()
         {
             Stop();
-            m_programID->removeAllShaders();
-            m_programID->deleteLater();
+            delete m_programID;
         }
 
         void ShaderProgram::Start()

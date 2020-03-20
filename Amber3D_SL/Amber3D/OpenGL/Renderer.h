@@ -22,6 +22,7 @@
 #include <QOpenGLFunctions_3_3_Core>
 
 #include "Amber3D/Models/RawModel.h"
+#include "Amber3D/Models/TexturedModel.h"
 #include "Amber3D/API/Shaders/StaticShader.h"
 
 namespace Amber3D
@@ -36,7 +37,7 @@ namespace Amber3D
                 Renderer(QOpenGLFunctions_3_3_Core *gl);
 
                 void prepare();
-                void render(Models::RawModel *model,
+                void render(Models::TexturedModel *texturedModel,
                             API::StaticShader *shader);
 
             private:
