@@ -17,6 +17,7 @@
  * ---------------------------------------------------*/
 #pragma once
 
+#include <QObject>
 #include <QOpenGLWidget>
 #include <QOpenGLFunctions_3_3_Core>
 #include <QOpenGLContext>

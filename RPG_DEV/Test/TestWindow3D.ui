@@ -429,7 +429,7 @@ p, li { white-space: pre-wrap; }
   <customwidget>
    <class>UserData</class>
    <extends>QTableWidget</extends>
-   <header>Source/Data/Data.h</header>
+   <header>Source/Data/UserData.h</header>
   </customwidget>
  </customwidgets>
  <resources/>

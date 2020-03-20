@@ -1,6 +1,7 @@
 #pragma once
 #include <Amber3D/Common.h>
 
+#include <QObject>
 #include <QMainWindow>
 #include <QTimer>
 

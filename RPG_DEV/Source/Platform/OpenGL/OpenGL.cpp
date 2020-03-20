@@ -38,7 +38,7 @@ OpenGL::~OpenGL()
 {
     delete m_F3;
 }
-
+ 
 // **************** Protected *****************
 
 void OpenGL::initializeGL()

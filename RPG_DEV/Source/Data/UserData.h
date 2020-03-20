@@ -17,24 +17,18 @@
  * ---------------------------------------------------*/
 
 
-#include <QTableWidget>
-//#include <QStringList>
-#include <QString>
-#include <QFile>
-#include <QTextStream>
+#include "DataProgram.h"
 
 
-class UserData : public QTableWidget
+class UserData : public DataProgram
 {
     public:
         UserData(QWidget *parent = nullptr);
-
-        void SaveData();
-        void LoadData();
-        void RefreshData();
+    
+    protected:
+        void RefreshData() override;
     
     private:
-        void SetCell(QString value, int row, int column);
 };
  
 /**

@@ -93,16 +93,16 @@ void TestWindow3D::on_ExitButton_clicked()
 
 void TestWindow3D::on_LoadButton_clicked()
 {
-    this->ui->SpreadSheet->LoadData();
+    //this->ui->SpreadSheet->LoadData();
 }
 
 void TestWindow3D::on_SaveButton_clicked()
 {
-    this->ui->SpreadSheet->SaveData();
+    //this->ui->SpreadSheet->SaveData();
 }
 
 void TestWindow3D::on_RefreshButton_clicked()
 {
-    this->ui->SpreadSheet->RefreshData();
+    //this->ui->SpreadSheet->RefreshData();
 }
 /////////////////////////////////////////////////////

@@ -19,7 +19,7 @@
 QT       += core gui widgets
 
 
-CONFIG += c11 c++17
+CONFIG += c11 c++latest
 ############################################################
 CONFIG += debug
 #CONFIG += release
@@ -31,7 +31,8 @@ SOURCES += \
     Source/Core/FunctionKey1.cpp \
     Source/Core/FunctionKey2.cpp \
     Source/Core/FunctionKey3.cpp \
-    Source/Data/Data.cpp \
+    Source/Data/DataProgram.cpp \
+    Source/Data/UserData.cpp \
     Source/Platform/OpenGL/OpenGL.cpp
 
 HEADERS += \
@@ -39,7 +40,8 @@ HEADERS += \
     Source/Core/FunctionKey1.h \
     Source/Core/FunctionKey2.h \
     Source/Core/FunctionKey3.h \
-    Source/Data/Data.h \
+    Source/Data/DataProgram.h \
+    Source/Data/UserData.h \
     Source/Platform/OpenGL/OpenGL.h
 
 FORMS += \
