@@ -40,8 +40,14 @@ namespace Amber3D
             Models::RawModel *model = texturedModel->GetRawModel();
             shader->Start();
             model->GetVao()->bind();
-
-            m_gl->glDrawElements(GL_TRIANGLES, model->GetIndexCount(), GL_UNSIGNED_INT, 0);
+            texturedModel->GetModelTexture()->GetTexture()->bind();
+            
+            m_gl->glDrawElements(
+                GL_TRIANGLES,
+                model->GetIndexCount(),
+                GL_UNSIGNED_INT,
+                0
+            );
 
             model->GetVao()->release();
             shader->Stop();

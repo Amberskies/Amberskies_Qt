@@ -24,10 +24,10 @@ namespace Amber3D
 {
     namespace API
     {
-        class StaticShader : public ShaderProgram 
+        class ColorShader : public ShaderProgram 
         {
             public:
-                StaticShader(/* args */);
+                ColorShader();
 
             protected:
                 void BindAttributes() override;

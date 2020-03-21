@@ -49,7 +49,9 @@ namespace Amber3D
 
                 Models::RawModel* LoadToVAO(
                     uint *indices, int numIndices,
-                    float *positions, int numPositions);
+                    float *positions, int numPositions,
+                    float *color, int numColors,
+                    float *texCoords, int numTexCoords);
                 
                 QOpenGLTexture* loadTexture(
                     QString fileName);
@@ -58,10 +60,14 @@ namespace Amber3D
                 QOpenGLVertexArrayObject* CreateVAO();
 
                 void StoreDataToAttribList(
-                    int attribute, float *data, int dataSize);
+                    int attribute,
+                    int tupleSize, 
+                    float *data, 
+                    int dataSize);
 
                 void StoreIndicesBuffer(
-                    uint *data, int dataSize);
+                    uint *data,
+                    int dataSize);
 
                 void DestroyBuffer(
                     QVector<QOpenGLBuffer*> buffer);

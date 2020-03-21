@@ -22,7 +22,7 @@ FunctionKey3::FunctionKey3(QOpenGLFunctions_3_3_Core *gl)
     : m_gl(gl)
     , m_model(nullptr)
     , m_texture1(nullptr)
-    , m_shader(new Amber3D::API::StaticShader())
+    , m_textureShader(new Amber3D::API::TextureShader())
     , m_loader(new Amber3D::API::GfxLoader())
     , m_renderer(new Amber3D::OpenGL::Renderer(m_gl))
     
@@ -36,7 +36,12 @@ FunctionKey3::~FunctionKey3()
 }
 void FunctionKey3::F3_Initialize()
 {
-    
+    uint indices [] =
+    {
+        0, 1, 3,
+        3, 1, 2 
+    };
+
     float vertices [] =
     {
         // Left Bottom Triangle
@@ -44,6 +49,11 @@ void FunctionKey3::F3_Initialize()
         -0.5f, -0.5f, 0.0f, // 1
          0.5f, -0.5f, 0.0f, // 2
          0.5f,  0.5f, 0.0f, // 3
+    };
+
+    float colors [] =
+    {
+        0
     };
 
     float textureCoords [] =
@@ -54,20 +64,20 @@ void FunctionKey3::F3_Initialize()
         1.0f, 0.0f      // 3
     };
 
-    uint indices [] =
-    {
-        0, 1, 3,
-        3, 1, 2 
-    };
-
-    m_loader->SetShader(m_shader);
+    m_loader->SetShader(
+        m_textureShader
+    );
 
     m_model = 
         m_loader->LoadToVAO(
             indices,
             sizeof(indices) /sizeof(uint),
             vertices,
-            sizeof(vertices) / sizeof(float)
+            sizeof(vertices) / sizeof(float),
+            colors,
+            sizeof(colors) / sizeof(float),
+            textureCoords,
+            sizeof(textureCoords) / sizeof(float)
     );
     
     m_texture1 = new Amber3D::Textures::ModelTexture(
@@ -92,6 +102,6 @@ void FunctionKey3::Go()
     
     m_renderer->render(
         m_texturedModel,
-        m_shader
+        m_textureShader
     );
 }

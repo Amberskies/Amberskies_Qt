@@ -17,22 +17,24 @@
  *
  * ---------------------------------------------------*/
 
-#include "StaticShader.h"
+#include "TextureShader.h"
 
 namespace Amber3D
 {
     namespace API
     {
-        StaticShader::StaticShader(/* args */)
-            : ShaderProgram("Simplified")
+        TextureShader::TextureShader()
+            : ShaderProgram("BasicTexture")
         {
+            // empty
         }
         
         //////////////// Protected /////////////
 
-        void StaticShader::BindAttributes()
+        void TextureShader::BindAttributes()
         {
             this->BindAttrib(0, "position");
+            this->BindAttrib(1, "textureCoords");
         }
     }
 }

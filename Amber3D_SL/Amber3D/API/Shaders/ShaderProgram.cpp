@@ -64,14 +64,16 @@ namespace Amber3D
 
             l_program->addShaderFromSourceFile(
                         QOpenGLShader::Vertex,
-                        "Resources/GLSL/" + shaderName + ".vsh"
+                        "Resources/GLSL/" + shaderName + ".vert"
             );
 
             l_program->addShaderFromSourceFile(
                         QOpenGLShader::Fragment,
-                        "Resources/GLSL/" + shaderName + ".fsh"
+                        "Resources/GLSL/" + shaderName + ".frag"
             );
 
+            BindAttributes();
+            
             l_program->link();
             l_program->bind();
 

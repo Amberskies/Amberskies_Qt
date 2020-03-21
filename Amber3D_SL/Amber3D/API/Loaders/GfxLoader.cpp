@@ -62,7 +62,9 @@ namespace Amber3D
 
         Models::RawModel* GfxLoader::LoadToVAO(
             uint *indices, int numIndices,
-            float *positions, int numPositions)
+            float *positions, int numPositions,
+            float *colors, int numColors,
+            float *texCoords, int numTexCoords)
         {
             QOpenGLVertexArrayObject *vao = CreateVAO();
 
@@ -72,11 +74,29 @@ namespace Amber3D
             );
 
             StoreDataToAttribList(
-                0,
-                positions,
-                numPositions * sizeof(float)
+                0,                              // attrib location
+                3,                              // tuple size
+                positions,                      // data
+                numPositions * sizeof(float)    // size
             );
-            
+
+            // attrib location 1 will be used for either
+            // color or texture coords
+            if (numTexCoords >= 2)
+                StoreDataToAttribList(
+                    1,
+                    2,
+                    texCoords,
+                    numTexCoords * sizeof(float)
+                );
+            else
+                StoreDataToAttribList(
+                    1,
+                    3,
+                    colors,
+                    numColors * sizeof(float)
+                );
+                      
             vao->release();
             
             Models::RawModel *rawModel = 
@@ -94,9 +114,9 @@ namespace Amber3D
             QOpenGLTexture *texture = new QOpenGLTexture(
                 QImage(
                     "Resources/Textures/" + fileName + ".png"
-                ).mirrored()
+                )
             );
-
+            
             texture->setMinificationFilter(
                 QOpenGLTexture::LinearMipMapLinear
             );
@@ -130,6 +150,7 @@ namespace Amber3D
 
         void GfxLoader::StoreDataToAttribList(
             int attribute,
+            int tupleSize,
             float *data,
             int dataSize)
         {
@@ -151,11 +172,11 @@ namespace Amber3D
             );
 
             m_currentShader->GetProgramID()->setAttributeBuffer(
-                attribute,
-                GL_FLOAT,
-                0,
-                3,
-                0
+                attribute,                          // location
+                GL_FLOAT,                           // type
+                0,                                  // offset
+                tupleSize,                          // tuple size
+                0                                   // stride
             );
 
             m_vbos.push_back(
