@@ -31,13 +31,6 @@ namespace Amber3D
         
         GfxLoader::~GfxLoader()
         {
-            for (
-                int index = 0;
-                index <= m_vaos.size();
-                index++
-            ) 
-                m_vaos[index]->destroy();
-
             DestroyBuffer(
                 m_vbos
             );
@@ -48,10 +41,17 @@ namespace Amber3D
 
             for (
                 int index = 0;
-                index <= m_textures.size();
+                index < m_textures.size();
                 index++
             )
                 m_textures[index]->destroy();
+            
+            for (
+                int index = 0;
+                index < m_vaos.size();
+                index++
+            ) 
+                m_vaos[index]->destroy();
         }
 
         void GfxLoader::SetShader(
@@ -210,7 +210,7 @@ namespace Amber3D
         {
             for (
                 int index = 0;
-                index <= buffer.size();
+                index < buffer.size();
                 index ++
             ) 
                 buffer[index]->destroy();

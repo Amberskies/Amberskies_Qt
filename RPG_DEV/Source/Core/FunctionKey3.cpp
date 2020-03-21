@@ -21,6 +21,7 @@
 FunctionKey3::FunctionKey3(QOpenGLFunctions_3_3_Core *gl)
     : m_gl(gl)
     , m_model(nullptr)
+    , m_texturedModel(nullptr)
     , m_texture1(nullptr)
     , m_textureShader(new Amber3D::API::TextureShader())
     , m_loader(new Amber3D::API::GfxLoader())
@@ -32,6 +33,10 @@ FunctionKey3::FunctionKey3(QOpenGLFunctions_3_3_Core *gl)
 FunctionKey3::~FunctionKey3()
 {   
     delete m_renderer;
+    delete m_loader;
+    delete m_textureShader;
+    delete m_texture1;
+    delete m_texturedModel;
     delete m_model;
 }
 void FunctionKey3::F3_Initialize()

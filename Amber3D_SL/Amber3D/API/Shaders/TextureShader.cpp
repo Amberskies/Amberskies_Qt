@@ -28,6 +28,11 @@ namespace Amber3D
         {
             // empty
         }
+
+        TextureShader::~TextureShader()
+        {
+            // empty
+        }
         
         //////////////// Protected /////////////
 

@@ -28,6 +28,7 @@ namespace Amber3D
         {
             public:
                 TextureShader();
+                virtual ~TextureShader();
 
             protected:
                 void BindAttributes() override;

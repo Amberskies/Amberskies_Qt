@@ -34,7 +34,7 @@ namespace Amber3D
 
             public:
                 ShaderProgram(QString shaderName);
-                ~ShaderProgram();
+                virtual ~ShaderProgram();
 
                 void Start();
                 void Stop();

@@ -42,12 +42,11 @@ class FunctionKey3
     
 
     public:
-        FunctionKey3(QOpenGLFunctions_3_3_Core *gl);
+        FunctionKey3(
+            QOpenGLFunctions_3_3_Core *gl);
+
         ~FunctionKey3();
 
         void F3_Initialize();
         void Go();
-
-    private:
-        //NULL_COPY_AND_ASSIGN(FunctionKey3)
 };
