@@ -17,9 +17,7 @@
  *
  * ---------------------------------------------------*/
 #pragma once
-
 #include "Amber3D/Common.h"
-
 #include <QOpenGLTexture>
 
 namespace Amber3D
@@ -31,11 +29,11 @@ namespace Amber3D
             QOpenGLTexture *m_texture;
 
         public:
-            ModelTexture(QOpenGLTexture *texture);
+            ModelTexture(
+                QOpenGLTexture *texture
+            );
             
             QOpenGLTexture* GetTexture();
         };
-        
-        
     }
 }

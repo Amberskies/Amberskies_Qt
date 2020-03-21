@@ -16,7 +16,6 @@
  * given by Qt    : doc.qt.io/qt-5/opensourcelicence.html
  *
  * ---------------------------------------------------*/
-
 #include "GfxLoader.h"
 
 namespace Amber3D
@@ -39,19 +38,19 @@ namespace Amber3D
                 m_indexBuffers
             );
 
-            for (
-                int index = 0;
+            for (int index = 0;
                 index < m_textures.size();
-                index++
-            )
+                index++)
+            {
                 m_textures[index]->destroy();
+            }
             
-            for (
-                int index = 0;
+            for (int index = 0;
                 index < m_vaos.size();
-                index++
-            ) 
+                index++)
+            { 
                 m_vaos[index]->destroy();
+            }
         }
 
         void GfxLoader::SetShader(
@@ -79,12 +78,10 @@ namespace Amber3D
                 positions,                      // data
                 numPositions * sizeof(float)    // size
             );
-
-            // attrib location 1 will be used for either
-            // color or texture coords
-            if (numTexCoords >= 2)
-                StoreDataToAttribList(
-                    1,
+            
+            if (numTexCoords >= 2)              // attrib location 1 will be 
+                StoreDataToAttribList(          // used for either
+                    1,                          // color or texture coords
                     2,
                     texCoords,
                     numTexCoords * sizeof(float)
@@ -133,6 +130,7 @@ namespace Amber3D
         }
 
         //////////////////// Private /////////////////////////
+
         QOpenGLVertexArrayObject* GfxLoader::CreateVAO()
         {
             QOpenGLVertexArrayObject *currentVAO = 
@@ -152,7 +150,7 @@ namespace Amber3D
             int attribute,
             int tupleSize,
             float *data,
-            int dataSize)
+            int dataSize)                       // NB size in bytes
         {
             QOpenGLBuffer *dataBuffer = 
                 new QOpenGLBuffer(
@@ -185,7 +183,8 @@ namespace Amber3D
         }
 
         void GfxLoader::StoreIndicesBuffer(
-            uint *data, int dataSize)
+            uint *data,
+            int dataSize)                           // NB size in bytes
         {
             QOpenGLBuffer *indexBuffer = 
                 new QOpenGLBuffer(
@@ -208,12 +207,12 @@ namespace Amber3D
         void GfxLoader::DestroyBuffer(
             QVector<QOpenGLBuffer*> buffer)
         {
-            for (
-                int index = 0;
+            for (int index = 0;
                 index < buffer.size();
-                index ++
-            ) 
+                index ++)
+            { 
                 buffer[index]->destroy();
+            }
         }
     }
 }

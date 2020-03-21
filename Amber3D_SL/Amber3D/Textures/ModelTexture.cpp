@@ -16,7 +16,6 @@
  * given by Qt    : doc.qt.io/qt-5/opensourcelicence.html
  *
  * ---------------------------------------------------*/
-
 #include "ModelTexture.h"
 
 namespace Amber3D
@@ -34,6 +33,5 @@ namespace Amber3D
         {
             return m_texture;
         }
-        
     }
 }

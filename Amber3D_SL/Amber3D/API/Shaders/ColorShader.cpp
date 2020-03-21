@@ -16,7 +16,6 @@
  * given by Qt    : doc.qt.io/qt-5/opensourcelicence.html
  *
  * ---------------------------------------------------*/
-
 #include "ColorShader.h"
 
 namespace Amber3D
@@ -47,14 +46,23 @@ namespace Amber3D
 
         void ColorShader::BindAttributes()
         {
-            this->BindAttrib(0, "position");
-            this->BindAttrib(1, "color");
+            BindAttrib(
+                0,
+                "position"
+            );
+
+            BindAttrib(
+                1,
+                "color"
+            );
         }
 
         void ColorShader::GetAllUniformLocations()
         {
             m_LocMVPmatrix =
-                GetProgramID()->uniformLocation("u_mvp");
+                GetProgramID()->uniformLocation(
+                    "u_mvp"
+            );
         }
     }
 }

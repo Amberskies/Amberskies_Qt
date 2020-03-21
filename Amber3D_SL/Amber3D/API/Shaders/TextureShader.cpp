@@ -16,7 +16,6 @@
  * given by Qt    : doc.qt.io/qt-5/opensourcelicence.html
  *
  * ---------------------------------------------------*/
-
 #include "TextureShader.h"
 
 namespace Amber3D
@@ -47,14 +46,23 @@ namespace Amber3D
 
         void TextureShader::BindAttributes()
         {
-            this->BindAttrib(0, "position");
-            this->BindAttrib(1, "textureCoords");
+            BindAttrib(
+                0,
+                "position"
+            );
+
+            BindAttrib(
+                1,
+                "textureCoords"
+            );
         }
 
         void TextureShader::GetAllUniformLocations()
         {
             m_LocMVPmatrix =
-                GetProgramID()->uniformLocation("u_mvp");
+                GetProgramID()->uniformLocation(
+                    "u_mvp"
+            );
         }
     }
 }

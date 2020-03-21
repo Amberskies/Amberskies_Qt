@@ -17,7 +17,6 @@
  *
  * ---------------------------------------------------*/
 #pragma once
-
 #include "Amber3D/Common.h"
 #include "RawModel.h"
 #include "Amber3D/Textures/ModelTexture.h"
@@ -34,7 +33,8 @@ namespace Amber3D
         public:
             TexturedModel(
                 RawModel *rawMode,
-                Textures::ModelTexture *modelTexture);
+                Textures::ModelTexture *modelTexture
+            );
             
             RawModel* GetRawModel();
             Textures::ModelTexture* GetModelTexture();

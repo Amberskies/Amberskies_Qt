@@ -22,8 +22,9 @@ namespace Amber3D
 {
     namespace Models
     {
-
-        RawModel::RawModel(QOpenGLVertexArrayObject *vao, GLuint indexCount)
+        RawModel::RawModel(
+            QOpenGLVertexArrayObject *vao,
+            GLuint indexCount)
             : m_vao(vao)
             , m_indexCount(indexCount)
         {

@@ -16,7 +16,6 @@
  * given by Qt    : doc.qt.io/qt-5/opensourcelicence.html
  *
  * ---------------------------------------------------*/
-
 #include "TexturedModel.h"
 
 namespace Amber3D

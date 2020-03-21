@@ -18,12 +18,10 @@
  * ---------------------------------------------------*/
 #pragma once
 #include "Amber3D/Common.h"
-
 #include <QVector>
 #include <QOpenGLVertexArrayObject>
 #include <QOpenGLBuffer>
 #include <QOpenGLTexture>
-
 #include "Amber3D/Models/RawModel.h"
 #include "Amber3D/API/Shaders/TextureShader.h"
 
@@ -40,39 +38,45 @@ namespace Amber3D
 
             API::TextureShader *m_currentShader;
 
-            public:
-                GfxLoader();
-                ~GfxLoader();
+        public:
+            GfxLoader();
+            ~GfxLoader();
 
-                void SetShader(
-                    API::TextureShader *currentShader);
+            void SetShader(
+                API::TextureShader *currentShader
+            );
 
-                Models::RawModel* LoadToVAO(
-                    uint *indices, int numIndices,
-                    float *positions, int numPositions,
-                    float *color, int numColors,
-                    float *texCoords, int numTexCoords);
-                
-                QOpenGLTexture* loadTexture(
-                    QString fileName);
-                                            
-            private:
-                QOpenGLVertexArrayObject* CreateVAO();
+            Models::RawModel* LoadToVAO(
+                uint *indices, int numIndices,
+                float *positions, int numPositions,
+                float *color, int numColors,
+                float *texCoords, int numTexCoords
+            );
+            
+            QOpenGLTexture* loadTexture(
+                QString fileName
+            );
+                                        
+        private:
+            QOpenGLVertexArrayObject* CreateVAO();
 
-                void StoreDataToAttribList(
-                    int attribute,
-                    int tupleSize, 
-                    float *data, 
-                    int dataSize);
+            void StoreDataToAttribList(
+                int attribute,
+                int tupleSize, 
+                float *data, 
+                int dataSize
+            );
 
-                void StoreIndicesBuffer(
-                    uint *data,
-                    int dataSize);
+            void StoreIndicesBuffer(
+                uint *data,
+                int dataSize
+            );
 
-                void DestroyBuffer(
-                    QVector<QOpenGLBuffer*> buffer);
+            void DestroyBuffer(
+                QVector<QOpenGLBuffer*> buffer
+            );
 
-                NULL_COPY_AND_ASSIGN(GfxLoader)
+            NULL_COPY_AND_ASSIGN(GfxLoader)
         };        
     }
 }

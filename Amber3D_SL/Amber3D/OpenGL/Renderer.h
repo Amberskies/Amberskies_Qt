@@ -18,12 +18,9 @@
  * ---------------------------------------------------*/
 #pragma once
 #include "Amber3D/Common.h"
-
 #include <QOpenGLFunctions_3_3_Core>
-
-#include "Amber3D/Models/RawModel.h"
-#include "Amber3D/Models/TexturedModel.h"
 #include "Amber3D/API/Shaders/TextureShader.h"
+#include "Amber3D/Models/TexturedModel.h"
 
 namespace Amber3D
 {
@@ -33,15 +30,16 @@ namespace Amber3D
         {
             QOpenGLFunctions_3_3_Core *m_gl;
 
-            public:
-                Renderer(QOpenGLFunctions_3_3_Core *gl);
+        public:
+            Renderer(
+                QOpenGLFunctions_3_3_Core *gl
+            );
 
-                void prepare();
-                void render(Models::TexturedModel *texturedModel,
-                            API::TextureShader *shader);
-
-            private:
-
+            void prepare();
+            
+            void render(Models::TexturedModel *texturedModel,
+                        API::TextureShader *shader
+            );
         };
     }
 }

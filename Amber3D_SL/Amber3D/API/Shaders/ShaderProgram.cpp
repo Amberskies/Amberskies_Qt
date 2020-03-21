@@ -16,9 +16,7 @@
  * given by Qt    : doc.qt.io/qt-5/opensourcelicence.html
  *
  * ---------------------------------------------------*/
-
 #include "ShaderProgram.h"
-#include <QDebug>
 
 namespace Amber3D
 {
@@ -26,9 +24,11 @@ namespace Amber3D
     {
         ShaderProgram::ShaderProgram(
             QString shaderName)
-                : m_programID(nullptr)
+            : m_programID(nullptr)
         {
-            LoadShaders(shaderName);
+            LoadShaders(
+                shaderName
+            );
         }
         
         ShaderProgram::~ShaderProgram()

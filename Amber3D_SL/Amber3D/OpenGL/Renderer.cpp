@@ -16,7 +16,6 @@
  * given by Qt    : doc.qt.io/qt-5/opensourcelicence.html
  *
  * ---------------------------------------------------*/
-
 #include "Renderer.h"
 #include "Amber3D/Maths/CreateModelMatrix.h"
 
@@ -36,14 +35,17 @@ namespace Amber3D
                 0.1f,
                 0.2f,
                 0.5f,
-                1.0f);
+                1.0f
+            );
         }
 
         void Renderer::render(
             Models::TexturedModel *texturedModel,
             API::TextureShader *shader)
         {
-            Models::RawModel *model = texturedModel->GetRawModel();
+            Models::RawModel *model = 
+                texturedModel->GetRawModel();
+
             shader->Start();
             model->GetVao()->bind();
 
@@ -73,7 +75,6 @@ namespace Amber3D
 
             model->GetVao()->release();
             shader->Stop();
-            
         }
     }
 }

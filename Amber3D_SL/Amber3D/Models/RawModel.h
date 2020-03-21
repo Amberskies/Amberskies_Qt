@@ -18,7 +18,6 @@
  * ---------------------------------------------------*/
 #pragma once
 #include "Amber3D/Common.h"
-
 #include <QOpenGLVertexArrayObject>
 
 namespace Amber3D
@@ -27,14 +26,17 @@ namespace Amber3D
     {
         class RawModel
         {
-                QOpenGLVertexArrayObject *m_vao;
-                GLuint m_indexCount;
+            QOpenGLVertexArrayObject *m_vao;
+            GLuint m_indexCount;
 
-            public:
-                RawModel(QOpenGLVertexArrayObject *vao, GLuint indexCount);
+        public:
+            RawModel(
+                QOpenGLVertexArrayObject *vao,
+                GLuint indexCount
+            );
 
-                QOpenGLVertexArrayObject* GetVao();
-                GLuint GetIndexCount();
+            QOpenGLVertexArrayObject* GetVao();
+            GLuint GetIndexCount();
         };
     }
 }

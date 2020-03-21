@@ -18,7 +18,6 @@
  * ---------------------------------------------------*/
 #pragma once
 #include "Amber3D/Common.h"
-
 #include <QMatrix4x4>
 #include <QVector3D>
 
@@ -28,7 +27,7 @@ namespace Amber3D
     {
         static QMatrix4x4 CreateModelMatrix(
             QVector3D translation,
-            float rotationX,
+            float rotationX,                    // NB use degrees not rads
             float rotationY,
             float rotationZ,
             float scale)

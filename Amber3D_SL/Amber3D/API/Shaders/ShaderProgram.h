@@ -30,38 +30,38 @@ namespace Amber3D
         {
             QOpenGLShaderProgram *m_programID;
             
-            public:
-                ShaderProgram(
-                    QString shaderName
-                );
+        public:
+            ShaderProgram(
+                QString shaderName
+            );
 
-                virtual ~ShaderProgram();
+            virtual ~ShaderProgram();
 
-                void Start();
-                void Stop();
+            void Start();
+            void Stop();
 
-                QOpenGLShaderProgram* GetProgramID();
+            QOpenGLShaderProgram* GetProgramID();
 
-            protected:
-                virtual void BindAttributes(){}
-                
-                void BindAttrib(
-                    int attribNum,
-                    QString name
-                );
+        protected:
+            virtual void BindAttributes(){}
+            
+            void BindAttrib(
+                int attribNum,
+                QString name
+            );
 
-                virtual void GetAllUniformLocations() {}
+            virtual void GetAllUniformLocations() {}
 
-                int GetUniformLocation(
-                    QString UniformName
-                );
+            int GetUniformLocation(
+                QString UniformName
+            );
 
-            private:
-                void LoadShaders(
-                    QString shaderName
-                );
+        private:
+            void LoadShaders(
+                QString shaderName
+            );
 
-                NULL_COPY_AND_ASSIGN(ShaderProgram)
+            NULL_COPY_AND_ASSIGN(ShaderProgram)
         };        
     }
 }
