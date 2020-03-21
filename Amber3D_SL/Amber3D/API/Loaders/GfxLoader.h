@@ -25,7 +25,7 @@
 #include <QOpenGLTexture>
 
 #include "Amber3D/Models/RawModel.h"
-#include "Amber3D/API/Shaders/StaticShader.h"
+#include "Amber3D/API/Shaders/TextureShader.h"
 
 namespace Amber3D
 {
@@ -38,14 +38,14 @@ namespace Amber3D
             QVector<QOpenGLBuffer*> m_indexBuffers;
             QVector<QOpenGLTexture*> m_textures;
 
-            API::StaticShader *m_currentShader;
+            API::TextureShader *m_currentShader;
 
             public:
                 GfxLoader();
                 ~GfxLoader();
 
                 void SetShader(
-                    API::StaticShader *currentShader);
+                    API::TextureShader *currentShader);
 
                 Models::RawModel* LoadToVAO(
                     uint *indices, int numIndices,

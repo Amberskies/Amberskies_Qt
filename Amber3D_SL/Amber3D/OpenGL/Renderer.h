@@ -23,7 +23,7 @@
 
 #include "Amber3D/Models/RawModel.h"
 #include "Amber3D/Models/TexturedModel.h"
-#include "Amber3D/API/Shaders/StaticShader.h"
+#include "Amber3D/API/Shaders/TextureShader.h"
 
 namespace Amber3D
 {
@@ -38,7 +38,7 @@ namespace Amber3D
 
                 void prepare();
                 void render(Models::TexturedModel *texturedModel,
-                            API::StaticShader *shader);
+                            API::TextureShader *shader);
 
             private:
 

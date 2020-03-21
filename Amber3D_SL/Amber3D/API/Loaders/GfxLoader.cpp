@@ -55,7 +55,7 @@ namespace Amber3D
         }
 
         void GfxLoader::SetShader(
-            API::StaticShader *currentShader)
+            API::TextureShader *currentShader)
         {
             m_currentShader = currentShader;
         }

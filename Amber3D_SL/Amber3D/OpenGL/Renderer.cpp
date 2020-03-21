@@ -35,7 +35,7 @@ namespace Amber3D
         }
 
         void Renderer::render(Models::TexturedModel *texturedModel,
-                              API::StaticShader *shader)
+                              API::TextureShader *shader)
         {
             Models::RawModel *model = texturedModel->GetRawModel();
             shader->Start();
