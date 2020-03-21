@@ -18,6 +18,8 @@
  * ---------------------------------------------------*/
 #pragma once
 #include "Amber3D/Common.h"
+
+#include <QMatrix4x4>
 #include "ShaderProgram.h"
 
 namespace Amber3D
@@ -26,12 +28,19 @@ namespace Amber3D
     {
         class ColorShader : public ShaderProgram 
         {
+            int m_LocMVPmatrix;
+
             public:
                 ColorShader();
+                virtual ~ColorShader();
+
+                void loadMVPmatrix(
+                    QMatrix4x4 mvp
+                );
 
             protected:
                 void BindAttributes() override;
-              
+                void GetAllUniformLocations() override;
         };        
     }
 }

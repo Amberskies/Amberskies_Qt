@@ -22,7 +22,6 @@
 #include <QOpenGLShaderProgram>
 #include <QString>
 
-
 namespace Amber3D
 {
     namespace API
@@ -31,22 +30,36 @@ namespace Amber3D
         {
             QOpenGLShaderProgram *m_programID;
             
-
             public:
-                ShaderProgram(QString shaderName);
+                ShaderProgram(
+                    QString shaderName
+                );
+
                 virtual ~ShaderProgram();
 
                 void Start();
                 void Stop();
 
-                QOpenGLShaderProgram* GetProgramID() { return m_programID; }
+                QOpenGLShaderProgram* GetProgramID();
 
             protected:
                 virtual void BindAttributes(){}
-                void BindAttrib(int attribNum, QString name);
+                
+                void BindAttrib(
+                    int attribNum,
+                    QString name
+                );
+
+                virtual void GetAllUniformLocations() {}
+
+                int GetUniformLocation(
+                    QString UniformName
+                );
 
             private:
-                QOpenGLShaderProgram* LoadShaders(QString shaderName);
+                void LoadShaders(
+                    QString shaderName
+                );
 
                 NULL_COPY_AND_ASSIGN(ShaderProgram)
         };        

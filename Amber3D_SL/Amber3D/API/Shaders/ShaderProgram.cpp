@@ -18,15 +18,17 @@
  * ---------------------------------------------------*/
 
 #include "ShaderProgram.h"
+#include <QDebug>
 
 namespace Amber3D
 {
     namespace API
     {
-        ShaderProgram::ShaderProgram(QString shaderName)
-            : m_programID(LoadShaders(shaderName))
+        ShaderProgram::ShaderProgram(
+            QString shaderName)
+                : m_programID(nullptr)
         {
-            // empty
+            LoadShaders(shaderName);
         }
         
         ShaderProgram::~ShaderProgram()
@@ -45,40 +47,57 @@ namespace Amber3D
             m_programID->release();
         }
 
+        QOpenGLShaderProgram* ShaderProgram::GetProgramID()
+        {
+            return m_programID;
+        }
+
         ////////////////// Protected //////////////////
 
-        void ShaderProgram::BindAttrib(int attribNum, QString name)
+        void ShaderProgram::BindAttrib(
+            int attribNum,
+            QString name)
         {
-            m_programID->bindAttributeLocation(name, attribNum);
+            m_programID->bindAttributeLocation(
+                name,
+                attribNum
+            );
+        }
+
+        int ShaderProgram::GetUniformLocation(
+            QString uniformName)
+        {
+            return m_programID->uniformLocation(
+                uniformName
+            );
         }
 
         //////////////////// Private //////////////////
 
-        QOpenGLShaderProgram* ShaderProgram::LoadShaders(
+        void ShaderProgram::LoadShaders(
             QString shaderName)
         {
-            QOpenGLShaderProgram* l_program =
+            m_programID =
                 new QOpenGLShaderProgram();
 
-            l_program->create();
+            m_programID->create();
 
-            l_program->addShaderFromSourceFile(
-                        QOpenGLShader::Vertex,
-                        "Resources/GLSL/" + shaderName + ".vert"
+            m_programID->addShaderFromSourceFile(
+                QOpenGLShader::Vertex,
+                "Resources/GLSL/" + shaderName + ".vert"
             );
 
-            l_program->addShaderFromSourceFile(
-                        QOpenGLShader::Fragment,
-                        "Resources/GLSL/" + shaderName + ".frag"
+            m_programID->addShaderFromSourceFile(
+                QOpenGLShader::Fragment,
+                "Resources/GLSL/" + shaderName + ".frag"
             );
 
             BindAttributes();
             
-            l_program->link();
-            l_program->bind();
+            m_programID->link();
+            m_programID->bind();
 
-            return l_program;
-
+            GetAllUniformLocations();
         }
     }
 }

@@ -33,6 +33,15 @@ namespace Amber3D
         {
             // empty
         }
+
+        void TextureShader::loadMVPmatrix(
+            QMatrix4x4 mvp)
+        {
+            GetProgramID()->setUniformValue(
+                m_LocMVPmatrix,
+                mvp
+            );
+        }
         
         //////////////// Protected /////////////
 
@@ -40,6 +49,12 @@ namespace Amber3D
         {
             this->BindAttrib(0, "position");
             this->BindAttrib(1, "textureCoords");
+        }
+
+        void TextureShader::GetAllUniformLocations()
+        {
+            m_LocMVPmatrix =
+                GetProgramID()->uniformLocation("u_mvp");
         }
     }
 }

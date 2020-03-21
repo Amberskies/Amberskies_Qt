@@ -28,6 +28,20 @@ namespace Amber3D
         {
             // empty
         }
+
+        ColorShader::~ColorShader()
+        {
+            // empty
+        }
+
+        void ColorShader::loadMVPmatrix(
+            QMatrix4x4 mvp)
+        {
+            GetProgramID()->setUniformValue(
+                m_LocMVPmatrix,
+                mvp
+            );
+        }
         
         //////////////// Protected /////////////
 
@@ -35,6 +49,12 @@ namespace Amber3D
         {
             this->BindAttrib(0, "position");
             this->BindAttrib(1, "color");
+        }
+
+        void ColorShader::GetAllUniformLocations()
+        {
+            m_LocMVPmatrix =
+                GetProgramID()->uniformLocation("u_mvp");
         }
     }
 }

@@ -18,6 +18,7 @@
  * ---------------------------------------------------*/
 
 #include "Renderer.h"
+#include "Amber3D/Maths/CreateModelMatrix.h"
 
 namespace Amber3D
 {
@@ -31,15 +32,36 @@ namespace Amber3D
         
         void Renderer::prepare()
         {
-            m_gl->glClearColor(0.1f, 0.2f, 0.5f, 1.0f);
+            m_gl->glClearColor(
+                0.1f,
+                0.2f,
+                0.5f,
+                1.0f);
         }
 
-        void Renderer::render(Models::TexturedModel *texturedModel,
-                              API::TextureShader *shader)
+        void Renderer::render(
+            Models::TexturedModel *texturedModel,
+            API::TextureShader *shader)
         {
             Models::RawModel *model = texturedModel->GetRawModel();
             shader->Start();
             model->GetVao()->bind();
+
+            QMatrix4x4 mvp;
+            mvp.setToIdentity();
+
+            mvp = Maths::CreateModelMatrix(
+                QVector3D(0.0f, 0.0f, 0.0f),
+                0.0f,
+                0.0f,
+                45.0f,
+                1.0f
+            );
+
+            shader->loadMVPmatrix(
+                mvp
+            );
+
             texturedModel->GetModelTexture()->GetTexture()->bind();
             
             m_gl->glDrawElements(

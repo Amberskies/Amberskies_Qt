@@ -6,5 +6,11 @@
 		{
 			"path": "RPG_DEV"
 		}
-	]
+	],
+	"settings": {
+		"files.associations": {
+			"qmatrix": "cpp",
+			"qdebug": "cpp"
+		}
+	}
 }

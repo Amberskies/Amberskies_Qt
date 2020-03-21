@@ -45,6 +45,7 @@ HEADERS += \
     Amber3D/API/Shaders/ColorShader.h \
     Amber3D/API/Shaders/ShaderProgram.h \
     Amber3D/API/Shaders/TextureShader.h \
+    Amber3D/Maths/CreateModelMatrix.h \
     Amber3D/Models/RawModel.h \
     Amber3D/Models/TexturedModel.h \
     Amber3D/OpenGL/Renderer.h \
