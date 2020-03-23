@@ -18,6 +18,7 @@
  * ---------------------------------------------------*/
 #include "Renderer.h"
 #include "Amber3D/Maths/CreateModelMatrix.h"
+#include "Amber3D/Maths/CreateViewMatrix.h"
 
 namespace Amber3D
 {
@@ -40,28 +41,40 @@ namespace Amber3D
         }
 
         void Renderer::render(
-            Models::TexturedModel *texturedModel,
-            API::TextureShader *shader)
+            Entities::Camera *camera,
+            Entities::TexturedEntity *texturedEntity,
+            API::TextureShader *shader,
+            QMatrix4x4 projectionMatrix)
         {
+            Models::TexturedModel *texturedModel = 
+                texturedEntity->GetTexturedModel();
+
             Models::RawModel *model = 
                 texturedModel->GetRawModel();
 
             shader->Start();
             model->GetVao()->bind();
 
-            QMatrix4x4 mvp;
-            mvp.setToIdentity();
+            QMatrix4x4 modelMatrix;
+            modelMatrix.setToIdentity();
 
-            mvp = Maths::CreateModelMatrix(
-                QVector3D(0.0f, 0.0f, 0.0f),
-                0.0f,
-                0.0f,
-                45.0f,
-                1.0f
+            modelMatrix = Maths::CreateModelMatrix(
+                texturedEntity->GetPosition(),
+                texturedEntity->GetRotationX(),
+                texturedEntity->GetRotationY(),
+                texturedEntity->GetRotationZ(),
+                texturedEntity->GetScale()
+            );
+
+            QMatrix4x4 viewMatrix;
+            viewMatrix.setToIdentity();
+
+            viewMatrix = Maths::CreateViewMatrix(
+                camera
             );
 
             shader->loadMVPmatrix(
-                mvp
+                projectionMatrix * viewMatrix * modelMatrix
             );
 
             texturedModel->GetModelTexture()->GetTexture()->bind();

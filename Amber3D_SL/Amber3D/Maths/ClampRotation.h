@@ -1,7 +1,7 @@
 
 /* ----------------------------------------------------/
  *
- * Project created by Frazor Sharp : 2020 Mar 16th
+ * Project created by Frazor Sharp : 2020 Mar 23rd
  *
  *      Amber3D - Qt C++
  *
@@ -17,9 +17,18 @@
  *
  * ---------------------------------------------------*/
 #pragma once
+#include "Amber3D/Common.h"
 
-#define NULL_COPY_AND_ASSIGN(T) \
-	T(const T& other) {(void)other;} \
-	void operator=(const T& other) { (void)other; }
+namespace Amber3D
+{
+    namespace Maths
+    {
+        static float ClampRotation(float rotation)
+        {
+            if (rotation >= 360.0f) rotation -= 360.0f;
+            if (rotation <= -360.0f) rotation += 360.0f;
 
-  
+            return rotation;
+        }
+    }
+}

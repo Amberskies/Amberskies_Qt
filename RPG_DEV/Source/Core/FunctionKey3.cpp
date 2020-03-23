@@ -23,6 +23,8 @@ FunctionKey3::FunctionKey3(QOpenGLFunctions_3_3_Core *gl)
     , m_model(nullptr)
     , m_texturedModel(nullptr)
     , m_texture1(nullptr)
+    , m_texturedEntity(nullptr)
+    , m_camera(nullptr)
     , m_textureShader(new Amber3D::API::TextureShader())
     , m_loader(new Amber3D::API::GfxLoader())
     , m_renderer(new Amber3D::OpenGL::Renderer(m_gl))
@@ -35,6 +37,8 @@ FunctionKey3::~FunctionKey3()
     delete m_renderer;
     delete m_loader;
     delete m_textureShader;
+    delete m_camera;
+    delete m_texturedEntity;
     delete m_texture1;
     delete m_texturedModel;
     delete m_model;
@@ -96,17 +100,37 @@ void FunctionKey3::F3_Initialize()
         m_texture1
     );
 
+    m_texturedEntity = new Amber3D::Entities::TexturedEntity(
+        m_texturedModel,
+        QVector3D(-0.5f, 0.5f, -1.0f),
+        0.0f,
+        0.0f,
+        0.0f,
+        1.0f
+    );
+
+    m_camera = new Amber3D::Entities::Camera(
+        QVector3D(0.0f, 0.0f, 0.0f),
+        0.0f,
+        0.0f,
+        0.0f
+    );
+
     qDebug("F3 initialized");
 }
 
-void FunctionKey3::Go()
+void FunctionKey3::Go(QMatrix4x4 projection)
 {
     m_renderer->prepare();
     
     // Game Logic
     
     m_renderer->render(
-        m_texturedModel,
-        m_textureShader
+        m_camera,
+        m_texturedEntity,
+        m_textureShader,
+        projection
     );
+
+    m_texturedEntity->IncreaseRotation(0.0f, 0.0f, -0.1f);
 }

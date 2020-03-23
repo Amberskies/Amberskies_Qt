@@ -1,4 +1,4 @@
 cd build
+#make clean
 qmake ../
 make
-#make clean

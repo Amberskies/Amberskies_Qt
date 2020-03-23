@@ -28,7 +28,7 @@ OpenGL::OpenGL(QWidget *parent) : QOpenGLWidget(parent)
     m_format.setGreenBufferSize(8);
     m_format.setBlueBufferSize(8);
     m_format.setAlphaBufferSize(8);
-    m_format.setDepthBufferSize(64);
+    m_format.setDepthBufferSize(32);
     m_format.setVersion(3, 3);
     m_format.setProfile(QSurfaceFormat::CoreProfile);
     this->setFormat(m_format);
@@ -54,6 +54,7 @@ void OpenGL::initializeGL()
         exit(99);
     }
     glClearColor(0.12f, 0.05f, 0.01f, 1.00f);
+    glEnable(GL_DEPTH_TEST);
 
     printf("OpenGL : %s\n",
            glGetString(GL_VERSION)
@@ -65,9 +66,12 @@ void OpenGL::initializeGL()
 
 void OpenGL::paintGL()
 {
-    glClear(GL_COLOR_BUFFER_BIT);
+    glClear(
+        GL_COLOR_BUFFER_BIT |
+        GL_DEPTH_BUFFER_BIT
+    );
 
-    if (m_function == 3) m_F3->Go();
+    if (m_function == 3) m_F3->Go(m_projection);
     else return;
 }
 
@@ -76,7 +80,7 @@ void OpenGL::resizeGL(int width, int height)
     float aspectRatio = static_cast<float>(width) / height;
     
     m_projection.setToIdentity();
-    m_projection.perspective(46.0f, aspectRatio, 0.1f, 25.0f);
+    m_projection.perspective(FOV, aspectRatio, NEAR_PLANE, FAR_PLANE);
 }
 
 // ********************************************

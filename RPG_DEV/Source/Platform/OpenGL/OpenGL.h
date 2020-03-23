@@ -16,7 +16,7 @@
  *
  * ---------------------------------------------------*/
 #pragma once
-
+#include "Source/Common.h"
 #include <QObject>
 #include <QOpenGLWidget>
 #include <QOpenGLFunctions_3_3_Core>
