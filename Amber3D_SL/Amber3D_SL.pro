@@ -33,6 +33,9 @@ SOURCES += \
     Amber3D/API/Shaders/ColorShader.cpp \
     Amber3D/API/Shaders/ShaderProgram.cpp \
     Amber3D/API/Shaders/TextureShader.cpp \
+    Amber3D/Entities/Camera.cpp \
+    Amber3D/Entities/ColorEntity.cpp \
+    Amber3D/Entities/TexturedEntity.cpp \
     Amber3D/Models/RawModel.cpp \
     Amber3D/Models/TexturedModel.cpp \
     Amber3D/OpenGL/Renderer.cpp \
@@ -45,6 +48,10 @@ HEADERS += \
     Amber3D/API/Shaders/ColorShader.h \
     Amber3D/API/Shaders/ShaderProgram.h \
     Amber3D/API/Shaders/TextureShader.h \
+    Amber3D/Entities/Camera.h \
+    Amber3D/Entities/ColorEntity.h \
+    Amber3D/Entities/TexturedEntity.h \
+    Amber3D/Maths/ClampRotation.h \
     Amber3D/Maths/CreateModelMatrix.h \
     Amber3D/Models/RawModel.h \
     Amber3D/Models/TexturedModel.h \
