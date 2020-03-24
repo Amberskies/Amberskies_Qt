@@ -53,5 +53,7 @@ class FunctionKey3
         ~FunctionKey3();
 
         void F3_Initialize();
-        void Go(QMatrix4x4 projection);
+        
+        void Go(
+            QMatrix4x4 projection);
 };
