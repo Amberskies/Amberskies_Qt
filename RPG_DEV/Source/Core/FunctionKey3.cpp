@@ -102,18 +102,18 @@ void FunctionKey3::F3_Initialize()
 
     m_texturedEntity = new Amber3D::Entities::TexturedEntity(
         m_texturedModel,
-        QVector3D(-0.5f, 0.5f, -1.0f),
-        0.0f,
-        0.0f,
-        0.0f,
-        1.0f
+        QVector3D(-0.5f, 0.5f, -1.0f), // Position
+        0.0f,       // rotation X
+        0.0f,       // rotation Y
+        0.0f,       // rotation X
+        1.0f        // scale where 1.0f == 100%
     );
 
     m_camera = new Amber3D::Entities::Camera(
         QVector3D(0.0f, 0.0f, 0.0f),
-        0.0f,
-        0.0f,
-        0.0f
+        0.0f,       // pitch (x-axis)
+        0.0f,       // yaw   (y-axis)      
+        0.0f        // roll  (z-axis)
     );
 
     qDebug("F3 initialized");
@@ -124,6 +124,8 @@ void FunctionKey3::Go(QMatrix4x4 projection)
     m_renderer->prepare();
     
     // Game Logic
+
+    m_camera->MoveCamera(0.03f);
     
     m_renderer->render(
         m_camera,
@@ -131,6 +133,6 @@ void FunctionKey3::Go(QMatrix4x4 projection)
         m_textureShader,
         projection
     );
-
+    // this is a test
     m_texturedEntity->IncreaseRotation(0.0f, 0.0f, -0.1f);
 }

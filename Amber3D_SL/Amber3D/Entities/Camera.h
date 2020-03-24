@@ -38,7 +38,7 @@ namespace Amber3D
                 float roll
             );
 
-            void MoveCamera();
+            void MoveCamera(float speed);
 
             void IncreasePosition(
                 float deltaX,

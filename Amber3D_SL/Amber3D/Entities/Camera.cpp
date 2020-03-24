@@ -17,7 +17,8 @@
  *
  * ---------------------------------------------------*/
 #include "Camera.h"
-#include <Amber3D/Maths/ClampRotation.h>
+#include "Amber3D/Maths/ClampRotation.h"
+#include "Amber3D/Extras/Input.h"
 
 namespace Amber3D
 {
@@ -35,9 +36,29 @@ namespace Amber3D
         {
             // empty
         }
-        void Camera::MoveCamera()
+        
+        void Camera::MoveCamera(float speed)
         {
             // keyboard input required.
+            if (Input::keyPressed(Qt::Key_W)) // forward
+            {
+                IncreasePosition(0.0f, 0.0f, -speed);
+            }
+
+            if (Input::keyPressed(Qt::Key_S)) // backward
+            {
+                IncreasePosition(0.0f, 0.0f, speed);
+            }
+
+            if (Input::keyPressed(Qt::Key_A)) // left strafe
+            {
+                IncreasePosition(-speed, 0.0f, 0.0f);
+            }
+
+            if (Input::keyPressed(Qt::Key_D)) // right strafe
+            {
+                IncreasePosition(speed, 0.0f, 0.0f);
+            }
         }
         
         void Camera::IncreasePosition(

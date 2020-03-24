@@ -3,6 +3,8 @@
 #include <QObject>
 #include <QMainWindow>
 #include <QTimer>
+#include <QMouseEvent>
+#include <QKeyEvent>
 
 QT_BEGIN_NAMESPACE
 namespace Ui { class TestWindow3D; }
@@ -15,6 +17,13 @@ class TestWindow3D : public QMainWindow
 public:
     TestWindow3D(QWidget *parent = nullptr);
     ~TestWindow3D();
+
+protected:
+	// inherited from QWindow.
+	void mousePressEvent(QMouseEvent *event) override;
+	void mouseReleaseEvent(QMouseEvent *event) override;
+	void keyPressEvent(QKeyEvent *event) override;
+	void keyReleaseEvent(QKeyEvent *event) override;
 
 private slots:
     void on_MenuButton_clicked();

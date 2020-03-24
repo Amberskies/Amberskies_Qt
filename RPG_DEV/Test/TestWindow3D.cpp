@@ -1,5 +1,7 @@
 #include "TestWindow3D.h"
 #include "ui_TestWindow3D.h"
+#include <Amber3D/Extras/Input.h>
+#include <QDebug>
 
 TestWindow3D::TestWindow3D(QWidget *parent)
     : QMainWindow(parent)
@@ -29,29 +31,40 @@ TestWindow3D::~TestWindow3D()
     delete ui;
 }
 
-void TestWindow3D::Loop()
+// ***** Inherited Protected Events *****
+
+void TestWindow3D::mousePressEvent(QMouseEvent *event)
 {
-    m_loop->stop();
-
-
-
-
-    m_frameCounter++;
-    ui->openGL_ViewPort->update();
-
-    m_loop->start(LOOP_DELAY);
+	Input::registerMousePress(event->button());
 }
 
-void TestWindow3D::FPS()
+void TestWindow3D::mouseReleaseEvent(QMouseEvent *event)
 {
-    m_FPS->stop();
-    double l_fps = 0.0;
+	Input::registerMouseRelease(event->button());
+}
 
-    l_fps = static_cast<double>(m_frameCounter) / (FPS_TIME_SPAN / MS_IN_SEC);
-    this->ui->FPSlcdNumber->display(l_fps);
+void TestWindow3D::keyPressEvent(QKeyEvent * event)
+{
+	if (event->isAutoRepeat())
+	{
+		event->ignore();
+	}
+	else
+	{
+		Input::registerKeyPress(event->key());
+	}
+}
 
-    m_frameCounter = 0;
-    m_FPS->start(FPS_TIME_SPAN);
+void TestWindow3D::keyReleaseEvent(QKeyEvent * event)
+{
+	if (event->isAutoRepeat())
+	{
+		event->ignore();
+	}
+	else
+	{
+		Input::registerKeyRelease(event->key());
+	}
 }
 
 ////////////////// Private Slots ////////////////////////
@@ -88,7 +101,31 @@ void TestWindow3D::on_ExitButton_clicked()
 {
     this->close();
 }
+//////////////////////////// Loops //////////////////////
+void TestWindow3D::Loop()
+{
+    m_loop->stop();
 
+    // Update input
+    Input::update();
+
+    m_frameCounter++;
+    ui->openGL_ViewPort->update();
+
+    m_loop->start(LOOP_DELAY);
+}
+
+void TestWindow3D::FPS()
+{
+    m_FPS->stop();
+    double l_fps = 0.0;
+
+    l_fps = static_cast<double>(m_frameCounter) / (FPS_TIME_SPAN / MS_IN_SEC);
+    this->ui->FPSlcdNumber->display(l_fps);
+
+    m_frameCounter = 0;
+    m_FPS->start(FPS_TIME_SPAN);
+}
 /////////// F2 Buttons ///////////
 
 void TestWindow3D::on_LoadButton_clicked()
