@@ -5,6 +5,9 @@
 		},
 		{
 			"path": "RPG_DEV"
+		},
+		{
+			"path": "Tools"
 		}
 	],
 	"settings": {
