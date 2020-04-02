@@ -43,7 +43,7 @@ namespace Amber3D
         void Renderer::render(
             Entities::Camera *camera,
             Entities::TexturedEntity *texturedEntity,
-            API::TextureShader *shader,
+            QOpenGLShaderProgram *shader,
             QMatrix4x4 projectionMatrix)
         {
             Models::TexturedModel *texturedModel = 
@@ -52,7 +52,7 @@ namespace Amber3D
             Models::RawModel *model = 
                 texturedModel->GetRawModel();
 
-            shader->Start();
+            shader->bind();
             model->GetVao()->bind();
 
             QMatrix4x4 modelMatrix;
@@ -73,7 +73,16 @@ namespace Amber3D
                 camera
             );
 
-            shader->loadMVPmatrix(
+            // shader->loadMVPmatrix(
+            //     projectionMatrix * viewMatrix * modelMatrix
+            // );
+            int locMVPmatrix =
+            shader->uniformLocation(
+                "u_mvp"
+            );
+            
+            shader->setUniformValue(
+                locMVPmatrix,
                 projectionMatrix * viewMatrix * modelMatrix
             );
 
@@ -87,7 +96,7 @@ namespace Amber3D
             );
 
             model->GetVao()->release();
-            shader->Stop();
+            shader->release();
         }
     }
 }

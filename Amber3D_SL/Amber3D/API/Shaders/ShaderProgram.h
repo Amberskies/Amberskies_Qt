@@ -61,7 +61,6 @@ namespace Amber3D
                 QString shaderName
             );
 
-            NULL_COPY_AND_ASSIGN(ShaderProgram)
         };        
     }
 }

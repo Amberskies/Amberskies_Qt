@@ -22,8 +22,10 @@
 #include <QOpenGLVertexArrayObject>
 #include <QOpenGLBuffer>
 #include <QOpenGLTexture>
+#include <QOpenGLShaderProgram>
 #include "Amber3D/Models/RawModel.h"
 #include "Amber3D/API/Shaders/TextureShader.h"
+#include "Amber3D/API/Shaders/ColorShader.h"
 
 namespace Amber3D
 {
@@ -36,14 +38,19 @@ namespace Amber3D
             QVector<QOpenGLBuffer*> m_indexBuffers;
             QVector<QOpenGLTexture*> m_textures;
 
-            API::TextureShader *m_currentShader;
+            //API::TextureShader *m_textureShader;
+            //API::ColorShader *m_colorShader;
+            QOpenGLShaderProgram *m_textureShader;
+            QOpenGLShaderProgram *m_colorShader;
+            QOpenGLShaderProgram *m_currentShader;
 
         public:
             GfxLoader();
             ~GfxLoader();
 
             void SetShader(
-                API::TextureShader *currentShader
+                QOpenGLShaderProgram *colorShader,
+                QOpenGLShaderProgram *textureShader
             );
 
             Models::RawModel* LoadToVAO(

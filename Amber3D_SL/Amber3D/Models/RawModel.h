@@ -28,15 +28,18 @@ namespace Amber3D
         {
             QOpenGLVertexArrayObject *m_vao;
             GLuint m_indexCount;
+            bool m_hasTexture;
 
         public:
             RawModel(
                 QOpenGLVertexArrayObject *vao,
-                GLuint indexCount
+                GLuint indexCount,
+                bool hasTexture
             );
 
             QOpenGLVertexArrayObject* GetVao();
             GLuint GetIndexCount();
+            bool GetHasTexture();
         };
     }
 }

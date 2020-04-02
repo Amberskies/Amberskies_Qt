@@ -23,9 +23,10 @@ FunctionKey3::FunctionKey3(QOpenGLFunctions_3_3_Core *gl)
     , m_model(nullptr)
     , m_texturedModel(nullptr)
     , m_texture1(nullptr)
-    , m_texturedEntity(nullptr)
+    , m_entity(nullptr)
     , m_camera(nullptr)
     , m_textureShader(new Amber3D::API::TextureShader())
+    , m_colorShader(new Amber3D::API::ColorShader())
     , m_loader(new Amber3D::API::GfxLoader())
     , m_renderer(new Amber3D::OpenGL::Renderer(m_gl))
     
@@ -36,9 +37,10 @@ FunctionKey3::~FunctionKey3()
 {   
     delete m_renderer;
     delete m_loader;
+    delete m_colorShader;
     delete m_textureShader;
     delete m_camera;
-    delete m_texturedEntity;
+    delete m_entity;
     delete m_texture1;
     delete m_texturedModel;
     delete m_model;
@@ -63,10 +65,15 @@ void FunctionKey3::F3_Initialize()
     float colors [] =
     {
         0
+        // 1.0f, 0.0f, 0.0f,
+        // 0.0f, 1.0f, 0.0f,
+        // 0.0f, 0.0f, 1.0f,
+        // 1.0f, 1.0f, 1.0f,
     };
 
     float textureCoords [] =
     {
+        //0
         0.0f, 0.0f,     // 0
         0.0f, 1.0f,     // 1
         1.1f, 1.1f,     // 2
@@ -74,7 +81,8 @@ void FunctionKey3::F3_Initialize()
     };
 
     m_loader->SetShader(
-        m_textureShader
+        m_colorShader->GetProgramID(),
+        m_textureShader->GetProgramID()
     );
 
     m_model = 
@@ -89,18 +97,23 @@ void FunctionKey3::F3_Initialize()
             sizeof(textureCoords) / sizeof(float)
     );
     
-    m_texture1 = new Amber3D::Textures::ModelTexture(
-        m_loader->loadTexture(
-            "thing"
-        )
-    );
+    //if (m_model->GetHasTexture())
+        // we cant use the if statement until we
+        // give our model a default texture 
+        // even it this only contains 1 pixel
+        
+        m_texture1 = new Amber3D::Textures::ModelTexture(
+            m_loader->loadTexture(
+                "thing"
+            )
+        );
 
     m_texturedModel = new Amber3D::Models::TexturedModel(
         m_model,
         m_texture1
     );
-
-    m_texturedEntity = new Amber3D::Entities::TexturedEntity(
+    
+    m_entity = new Amber3D::Entities::TexturedEntity(
         m_texturedModel,
         QVector3D(-0.5f, 0.5f, -1.0f),          // Position
         0.0f,                                   // rotation X
@@ -126,15 +139,24 @@ void FunctionKey3::Go(QMatrix4x4 projection)
     // Game Logic
 
     m_camera->MoveCamera(0.03f);
-    
-    m_renderer->render(
+
+    if (m_entity->GetTexturedModel()->GetRawModel()->GetHasTexture())
+        m_renderer->render(
         m_camera,
-        m_texturedEntity,
-        m_textureShader,
+        m_entity,
+        m_textureShader->GetProgramID(),
+        projection
+    );    
+    else 
+        m_renderer->render(
+        m_camera,
+        m_entity,
+        m_colorShader->GetProgramID(),
         projection
     );
+    
     // this is a test
-    m_texturedEntity->IncreaseRotation(
+    m_entity->IncreaseRotation(
         0.0f,                               // delta around X-axis
         0.0f,                               // delta around Y-axis
         -0.1f                               // delta around Z-axis -ve = cw +ve = ccw

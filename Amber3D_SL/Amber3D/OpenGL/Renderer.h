@@ -19,6 +19,7 @@
 #pragma once
 #include "Amber3D/Common.h"
 #include <QOpenGLFunctions_3_3_Core>
+#include <QOpenGLShaderProgram>
 #include <QMatrix4x4>
 #include "Amber3D/API/Shaders/TextureShader.h"
 #include "Amber3D/Models/TexturedModel.h"
@@ -43,7 +44,7 @@ namespace Amber3D
             void render(
                 Entities::Camera *camera,
                 Entities::TexturedEntity *texturedEntity,
-                        API::TextureShader *shader,
+                        QOpenGLShaderProgram *shader,
                         QMatrix4x4 projection
             );
         };

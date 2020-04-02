@@ -24,9 +24,11 @@ namespace Amber3D
     {
         RawModel::RawModel(
             QOpenGLVertexArrayObject *vao,
-            GLuint indexCount)
+            GLuint indexCount,
+            bool hasTexture)
             : m_vao(vao)
             , m_indexCount(indexCount)
+            , m_hasTexture(hasTexture)
         {
             // Empty
         }
@@ -39,6 +41,11 @@ namespace Amber3D
         GLuint RawModel::GetIndexCount()
         {
             return m_indexCount;
+        }
+
+        bool RawModel::GetHasTexture()
+        {
+            return m_hasTexture;
         }
     }
 }

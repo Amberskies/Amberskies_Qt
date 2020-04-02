@@ -54,9 +54,11 @@ namespace Amber3D
         }
 
         void GfxLoader::SetShader(
-            API::TextureShader *currentShader)
+            QOpenGLShaderProgram *colorShader,
+            QOpenGLShaderProgram *textureShader)
         {
-            m_currentShader = currentShader;
+            m_colorShader = colorShader;
+            m_textureShader = textureShader;
         }
 
         Models::RawModel* GfxLoader::LoadToVAO(
@@ -65,7 +67,33 @@ namespace Amber3D
             float *colors, int numColors,
             float *texCoords, int numTexCoords)
         {
+            bool hasTexture = false;
+
             QOpenGLVertexArrayObject *vao = CreateVAO();
+
+            if (numTexCoords >= 2) 
+            {
+                m_currentShader = m_textureShader;
+                hasTexture = true;
+                             // attrib location 1 will be 
+                StoreDataToAttribList(          // used for either
+                    1,                          // color or texture coords
+                    2,
+                    texCoords,
+                    numTexCoords * sizeof(float)
+                );
+            }
+            else
+            {
+                m_currentShader = m_colorShader;
+
+                StoreDataToAttribList(
+                    1,
+                    3,
+                    colors,
+                    numColors * sizeof(float)
+                );
+            }
 
             StoreIndicesBuffer(
                 indices,
@@ -79,27 +107,14 @@ namespace Amber3D
                 numPositions * sizeof(float)    // size
             );
             
-            if (numTexCoords >= 2)              // attrib location 1 will be 
-                StoreDataToAttribList(          // used for either
-                    1,                          // color or texture coords
-                    2,
-                    texCoords,
-                    numTexCoords * sizeof(float)
-                );
-            else
-                StoreDataToAttribList(
-                    1,
-                    3,
-                    colors,
-                    numColors * sizeof(float)
-                );
                       
             vao->release();
             
             Models::RawModel *rawModel = 
                 new Models::RawModel(
                     vao,
-                    numIndices
+                    numIndices,
+                    hasTexture
             );
             
             return rawModel;
@@ -165,11 +180,11 @@ namespace Amber3D
                 dataSize
             );
 
-            m_currentShader->GetProgramID()->enableAttributeArray(
+            m_currentShader->enableAttributeArray(
                 attribute
             );
 
-            m_currentShader->GetProgramID()->setAttributeBuffer(
+            m_currentShader->setAttributeBuffer(
                 attribute,                          // location
                 GL_FLOAT,                           // type
                 0,                                  // offset
