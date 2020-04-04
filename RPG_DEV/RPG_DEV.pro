@@ -19,7 +19,7 @@
 QT       += core gui widgets
 
 
-CONFIG += c11 c++latest
+CONFIG += c11 c++17
 ############################################################
 CONFIG += debug
 #CONFIG += release

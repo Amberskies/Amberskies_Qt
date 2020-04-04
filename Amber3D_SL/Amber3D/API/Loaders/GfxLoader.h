@@ -53,13 +53,13 @@ namespace Amber3D
                 QOpenGLShaderProgram *textureShader
             );
 
-            Models::RawModel* LoadToVAO(
+            Models::RawModel* LoadToVAO(            // Need to add normals
                 uint *indices, int numIndices,
                 float *positions, int numPositions,
                 float *color, int numColors,
                 float *texCoords, int numTexCoords
             );
-            
+                      
             QOpenGLTexture* loadTexture(
                 QString fileName
             );

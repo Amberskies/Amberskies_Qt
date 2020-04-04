@@ -8,7 +8,7 @@
             "name": "(gdb) Launch",
             "type": "cppdbg",
             "request": "launch",
-            "program": "${workspaceFolder}/build/User_Data",
+            "program": "${workspaceFolder}/build/Model3D_Converter",
             "args": [],
             "stopAtEntry": false,
             "cwd": "${workspaceFolder}",
@@ -22,7 +22,7 @@
                     "ignoreFailures": true
                 }
             ],
-            "preLaunchTask": "Linux Build",
+            "preLaunchTask": "Model3D_Converter Build",
             "miDebuggerPath": "/usr/bin/gdb"
         }
     ]
