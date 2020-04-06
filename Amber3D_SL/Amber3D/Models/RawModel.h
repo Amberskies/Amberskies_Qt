@@ -19,6 +19,7 @@
 #pragma once
 #include "Amber3D/Common.h"
 #include <QOpenGLVertexArrayObject>
+#include <QVector>
 
 namespace Amber3D
 {
@@ -29,6 +30,7 @@ namespace Amber3D
             QOpenGLVertexArrayObject *m_vao;
             GLuint m_indexCount;
             bool m_hasTexture;
+            QVector<QString> m_TextureFileName;
 
         public:
             RawModel(
@@ -40,6 +42,10 @@ namespace Amber3D
             QOpenGLVertexArrayObject* GetVao();
             GLuint GetIndexCount();
             bool GetHasTexture();
+
+            QString GetTextureFileName(int textureNumber = 0);
+
+            void SetTextureFileName(QString fileName);
             NULL_COPY_AND_ASSIGN(RawModel)
         };
     }

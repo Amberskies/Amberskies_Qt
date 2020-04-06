@@ -125,7 +125,7 @@ namespace Amber3D
         {
             QOpenGLTexture *texture = new QOpenGLTexture(
                 QImage(
-                    "Resources/Textures/" + fileName + ".png"
+                    "Resources/Textures/" + fileName
                 )
             );
             

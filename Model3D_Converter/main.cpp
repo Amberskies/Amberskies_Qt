@@ -36,6 +36,7 @@ namespace Model
         QVector<UseMaterial*> m_useMaterial;
         QVector<FaceElement*> m_faceElement;
         //////////// MTL /////////////////////////////
+        QVector<DiffuseTextureMap*> m_diffTextureMap;
         QVector<MaterialName*> m_materialName;
         QVector<DiffuseColor*> m_diffuseColor;
         QVector<Transparency*> m_transparency;
@@ -99,6 +100,7 @@ namespace Model
 
         /////////////////////////// MTL file ///////////////////////////
 
+        if (line.startsWith("map_Kd")) m_diffTextureMap.push_back(new DiffuseTextureMap(data.at(1)));
         if (line.startsWith("ne")) m_materialName.push_back(new MaterialName(data.at(1)));
         if (line.startsWith("Kd")) m_diffuseColor.push_back(new DiffuseColor(
                     data.at(1).toFloat(), data.at(2).toFloat(), data.at(3).toFloat()));
@@ -111,6 +113,7 @@ namespace Model
         QVector<float> positionsArray;
         QVector<float> colorArray;
         QVector<float> texArray;
+        QVector<QString> texture_openGL;
 
         unsigned int verticesPerFace = 3;
 
@@ -152,6 +155,9 @@ namespace Model
              
         );
 
+        for (int index = 0; index < m_diffTextureMap.size(); index++) 
+            temp->SetTextureFileName(m_diffTextureMap.at(index)->m_diffuseTextureMap);
+
         cleanStorage();
         return temp;
     }
@@ -164,6 +170,7 @@ namespace Model
         for (int index = 0; index < m_vertexNormals.size(); index++) delete m_vertexNormals[index];
         for (int index = 0; index < m_useMaterial.size(); index++) delete m_useMaterial[index];
         for (int index = 0; index < m_faceElement.size(); index++) delete m_faceElement[index];
+        for (int index = 0; index < m_diffTextureMap.size(); index++) delete m_diffTextureMap[index];
         for (int index = 0; index < m_materialName.size(); index++) delete m_materialName[index];
         for (int index = 0; index < m_diffuseColor.size(); index++) delete m_diffuseColor[index];
         for (int index = 0; index < m_transparency.size(); index++) delete m_transparency[index];
