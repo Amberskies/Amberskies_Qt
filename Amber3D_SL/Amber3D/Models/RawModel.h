@@ -40,6 +40,7 @@ namespace Amber3D
             QOpenGLVertexArrayObject* GetVao();
             GLuint GetIndexCount();
             bool GetHasTexture();
+            NULL_COPY_AND_ASSIGN(RawModel)
         };
     }
 }
