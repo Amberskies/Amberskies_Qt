@@ -1,4 +1,4 @@
-#include "ConverterWindow.h"
+
 
 #include <QApplication>
 #include <Amber3D/API/Loaders/GfxLoader.h>
@@ -281,13 +281,20 @@ namespace Model
     }
 }
 
+/////////////////////   MAIN ////////////////////////////////
 
+#include "ConverterWindow.h"
 
 int main(int argc, char *argv[])
 {
     QApplication a(argc, argv);
+
+    // window MUST be displayed with a valid openGL context
     ConverterWindow w;
     w.show();
+
+    // pass 3D object to ViewPort3D here
+
     return a.exec();
 }
 
