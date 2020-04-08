@@ -49,15 +49,17 @@ FORMS += \
 
 #############################################################
 
-unix:!macx: LIBS += -L$$PWD/../Amber3D_SL/build/ -lAmber3D_SL
-
-INCLUDEPATH += $$PWD/../Amber3D_SL/
-DEPENDPATH += $$PWD/../Amber3D_SL/
-
-unix:!macx: PRE_TARGETDEPS += $$PWD/../Amber3D_SL/build/libAmber3D_SL.a
 
 DISTFILES += \
     Resources/Shaders/BasicColor.fsh \
     Resources/Shaders/BasicColor.vsh \
     Resources/Shaders/Simplified.fsh \
     Resources/Shaders/Simplified.vsh
+
+
+win32:CONFIG(release, debug|release): LIBS += -L$$PWD/../Amber3D_SL/build/release/ -lAmber3D_SL
+else:win32:CONFIG(debug, debug|release): LIBS += -L$$PWD/../Amber3D_SL/build/debug/ -lAmber3D_SL
+else:unix: LIBS += -L$$PWD/../Amber3D_SL/build/ -lAmber3D_SL
+
+INCLUDEPATH += $$PWD/../Amber3D_SL
+DEPENDPATH += $$PWD/../Amber3D_SL

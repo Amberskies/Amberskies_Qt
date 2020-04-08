@@ -6,13 +6,13 @@
         {
             "label": "Amber3D Build",
             "type": "shell",
-            "command": "./build.sh",
+            "command": "build.bat",
             "group": {
                 "kind": "build",
                 "isDefault": true
             },
             "problemMatcher": [
-                "$gcc"
+                "$msCompile"
             ]
         }
     ]
