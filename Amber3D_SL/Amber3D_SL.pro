@@ -63,10 +63,10 @@ HEADERS += \
 ###################################################
 
 # Default rules for deployment.
-unix {
+#unix {
     target.path = $$[QT_INSTALL_PLUGINS]/generic
-}
-!isEmpty(target.path): INSTALLS += target
+#}
+#!isEmpty(target.path): INSTALLS += target
 
 DISTFILES += \
     Amber3D/Resources/Shaders/BasicColor.fsh \

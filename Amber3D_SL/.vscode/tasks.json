@@ -6,7 +6,7 @@
         {
             "label": "Amber3D Build",
             "type": "shell",
-            "command": "build.bat",
+            "command": ".\\build.bat",
             "group": {
                 "kind": "build",
                 "isDefault": true
