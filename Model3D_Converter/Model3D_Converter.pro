@@ -18,7 +18,43 @@ HEADERS += \
 FORMS += \
     ConverterWindow.ui
 
-DISTFILES += \
+DISTFILES += \ \
+    Resources/AmberData/Body.nor \
+    Resources/AmberData/Body.pos \
+    Resources/AmberData/Body.tex \
+    Resources/AmberData/Body.txn \
+    Resources/AmberData/BoxRGB.col \
+    Resources/AmberData/BoxRGB.nor \
+    Resources/AmberData/BoxRGB.pos \
+    Resources/AmberData/BoxRGB.txn \
+    Resources/AmberData/Head.nor \
+    Resources/AmberData/Head.pos \
+    Resources/AmberData/Head.tex \
+    Resources/AmberData/Head.txn \
+    Resources/GLSL/BasicColor.frag \
+    Resources/GLSL/BasicColor.vert \
+    Resources/GLSL/BasicTexture.frag \
+    Resources/GLSL/BasicTexture.vert \
+    Resources/GLSL/Simplified.fsh \
+    Resources/GLSL/Simplified.vsh \
+    Resources/OBJ/Body.mtl \
+    Resources/OBJ/BoxRGB.mtl \
+    Resources/OBJ/Head.mtl \
+    Resources/Shaders/GLSL/BasicShader.fs \
+    Resources/Shaders/GLSL/BasicShader.vs \
+    Resources/Shaders/GLSL/StaticShader.fs \
+    Resources/Shaders/GLSL/StaticShader.vs \
+    Resources/Shaders/GLSL/TerrainShader.fs \
+    Resources/Shaders/GLSL/TerrainShader.vs \
+    Resources/Shaders/ServerColor.frag \
+    Resources/Shaders/ServerColor.vert \
+    Resources/Shaders/ServerTexture.frag \
+    Resources/Shaders/ServerTexture.vert \
+    Resources/Shaders/basic.frag \
+    Resources/Shaders/basic.vert \
+    Resources/Textures/Blue.png \
+    Resources/Textures/Gold.png \
+    Resources/Textures/Terrain.png
 
 
 
