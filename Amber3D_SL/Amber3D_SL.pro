@@ -24,6 +24,11 @@ CONFIG += staticlib
 CONFIG += c11 c++17
 
 TARGET = Amber3D_SL
+############################################################
+CONFIG += debug
+#CONFIG += release
+############################################################
+
 
 #####################################################
 
@@ -64,7 +69,7 @@ HEADERS += \
 
 # Default rules for deployment.
 #unix {
-    target.path = $$[QT_INSTALL_PLUGINS]/generic
+#    target.path = $$[QT_INSTALL_PLUGINS]/generic
 #}
 #!isEmpty(target.path): INSTALLS += target
 
