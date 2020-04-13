@@ -38,8 +38,11 @@ DISTFILES += \ \
     Resources/GLSL/Simplified.fsh \
     Resources/GLSL/Simplified.vsh \
     Resources/OBJ/Body.mtl \
+    Resources/OBJ/Body.obj \
     Resources/OBJ/BoxRGB.mtl \
+    Resources/OBJ/BoxRGB.obj \
     Resources/OBJ/Head.mtl \
+    Resources/OBJ/Head.obj \
     Resources/Shaders/GLSL/BasicShader.fs \
     Resources/Shaders/GLSL/BasicShader.vs \
     Resources/Shaders/GLSL/StaticShader.fs \
