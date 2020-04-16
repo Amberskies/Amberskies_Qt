@@ -61,6 +61,7 @@ void RenderOpenGL::initializeGL()
 
 void RenderOpenGL::paintGL()
 {
+    m_renderer->prepare();
     glClear(
         GL_COLOR_BUFFER_BIT |
         GL_DEPTH_BUFFER_BIT
@@ -76,13 +77,13 @@ void RenderOpenGL::paintGL()
                         m_textureShader->GetProgramID(),
                         m_projection
                         );
-        else
-            m_renderer->render(
-                        m_camera,
-                        m_entity,
-                        m_colorShader->GetProgramID(),
-                        m_projection
-                        );
+//        else
+//            m_renderer->render(
+//                        m_camera,
+//                        m_entity,
+//                        m_colorShader->GetProgramID(),
+//                        m_projection
+//                        );
     }
 
 }

@@ -46,7 +46,6 @@ namespace Amber3D
             QString GetTextureFileName(int textureNumber = 0);
 
             void SetTextureFileName(QString fileName);
-            NULL_COPY_AND_ASSIGN(RawModel)
         };
     }
 }

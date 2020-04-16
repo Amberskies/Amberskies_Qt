@@ -96,7 +96,8 @@ namespace Model
         if (line.startsWith("v ")) m_vertexData.push_back(new  Vertex(data.at(1).toFloat(),
                     data.at(2).toFloat(), data.at(3).toFloat()));
 
-        if (line.startsWith("vt")) m_textureData.push_back(new TextureCoordinate(data.at(1).toFloat(),
+        if (line.startsWith("vt"))
+            m_textureData.push_back(new TextureCoordinate(data.at(1).toFloat(),
                     data.at(2).toFloat(), 0.0f));
 
         if (line.startsWith("vn")) m_vertexNormals.push_back(new VertexNormals(
@@ -105,7 +106,7 @@ namespace Model
         if (line.startsWith("us"))
         {
             m_useMaterial.push_back(new UseMaterial(data.at(1)));
-            m_currentColor++;
+            if (data.at(1) != "None") m_currentColor++;
         }
         if (line.startsWith("f ")) storeFace(data);
 
@@ -138,26 +139,38 @@ namespace Model
                 positionsArray.push_back(m_vertexData[m_faceElement[count]->m_vertexIndex[iVertex]]->m_y);
                 positionsArray.push_back(m_vertexData[m_faceElement[count]->m_vertexIndex[iVertex]]->m_z);
 
-                colorArray.push_back(m_diffuseColor[m_faceElement[count]->m_currentColor]->m_red);
-                colorArray.push_back(m_diffuseColor[m_faceElement[count]->m_currentColor]->m_green);
-                colorArray.push_back(m_diffuseColor[m_faceElement[count]->m_currentColor]->m_blue);
-                colorArray.push_back(m_transparency[m_faceElement[count]->m_currentColor]->m_transparency);
 
                 if (m_faceElement[count]->m_hasTextures)
                 {
                     texArray.push_back(m_textureData[m_faceElement[count]->m_textureIndex[iVertex]]->m_u);
                     texArray.push_back(m_textureData[m_faceElement[count]->m_textureIndex[iVertex]]->m_v);
+                    colorArray.push_back(0.5f);
+                    colorArray.push_back(0.5f);
+                    colorArray.push_back(0.5f);
+                    colorArray.push_back(1.0f);
+
+                }
+                else
+                {
+                    colorArray.push_back(m_diffuseColor[m_faceElement[count]->m_currentColor]->m_red);
+                    colorArray.push_back(m_diffuseColor[m_faceElement[count]->m_currentColor]->m_green);
+                    colorArray.push_back(m_diffuseColor[m_faceElement[count]->m_currentColor]->m_blue);
+                    colorArray.push_back(m_transparency[m_faceElement[count]->m_currentColor]->m_transparency);
                 }
 
             }
         }
 
-        texArray.push_back(1.0f);
+        if (m_faceElement[0]->m_hasTextures)
+        texArray.push_back(1.0f); // this is probably a hack.
 
         uint is = indexArray.size();
         int ps = positionsArray.size();
         int cs = colorArray.size();
         int ts = texArray.size();
+
+        qDebug() << "Texture array size = " << ts;
+        qDebug() << "Index Array size = " << is;
 
         Amber3D::Models::RawModel *temp =
 
@@ -255,6 +268,9 @@ namespace Model
         ImportOBJ();
         ~ImportOBJ();
 
+        Amber3D::API::GfxLoader* GetGfxLoader() { return m_loader;}
+        Amber3D::API::ColorShader* GetColorShader() { return m_colorShader; }
+        Amber3D::API::TextureShader* GetTextureShader() { return m_textureShader; }
         Amber3D::Models::RawModel* loadOBJ(const QString &filename);
     };
 }
@@ -309,9 +325,10 @@ namespace Model
                     m_textureShader->GetProgramID()
         );
 
-        return m_storeOBJ->sendDataToAPI(
-                    m_loader
-        );
+        Amber3D::Models::RawModel *temp =
+                    m_storeOBJ->sendDataToAPI(m_loader);
+
+        return temp;
     }
 }
 
@@ -323,6 +340,7 @@ ConverterWindow::ConverterWindow(QWidget *parent)
     : QMainWindow(parent)
     , ui(new Ui::ConverterWindow)
     , m_model(nullptr)
+    , m_texture1(nullptr)
     , m_model_is_loaded(false)
 {
     ui->setupUi(this);
@@ -333,6 +351,7 @@ ConverterWindow::ConverterWindow(QWidget *parent)
 ConverterWindow::~ConverterWindow()
 {
     delete m_mainLoopTimer;
+    delete m_texture1;
     delete m_model;
     delete ui;
     qDebug("Converter Window Destroyed.");
@@ -370,7 +389,16 @@ void ConverterWindow::MainLoop()
 void ConverterWindow::Load3DModel()
 {
     Model::ImportOBJ* importer = new Model::ImportOBJ();
-    m_model = importer->loadOBJ("BoxRGB");
+    m_model = importer->loadOBJ("Body");
+
+    m_texture1 = new Amber3D::Textures::ModelTexture(
+                importer->GetGfxLoader()->loadTexture("Gold")
+                );
+
+    Amber3D::Models::TexturedModel *texModel =
+            new Amber3D::Models::TexturedModel(
+                m_model,
+                m_texture1);
 
     if (m_model == nullptr)
     {
@@ -381,11 +409,26 @@ void ConverterWindow::Load3DModel()
     {
         qDebug() << "Model Loaded.";
         m_model_is_loaded = true;
-//        this->ui->ViewPortGL->SetRendering(
-//                    entity,
-//                    textureShader,
-//                    colorShader
-//                    );
+        qDebug() << "Has texture = " << m_model->GetHasTexture();
+
+
+        Amber3D::Entities::TexturedEntity *entity =
+                new Amber3D::Entities::TexturedEntity(
+                    texModel,
+                    QVector3D(0.0f, -0.5f, -2.0f),
+                    0.0f,
+                    0.0f,
+                    0.0f,
+                    1.0f
+                    );
+
+
+
+        this->ui->ViewPortGL->SetRendering(
+                    entity,
+                    importer->GetTextureShader(),
+                    importer->GetColorShader()
+                    );
     }
 
 }

@@ -21,6 +21,12 @@
 #include <QMainWindow>
 #include <QTimer>
 #include <Amber3D/Models/RawModel.h>
+#include <Amber3D/Textures/ModelTexture.h>
+#include <Amber3D/Models/TexturedModel.h>
+#include <Amber3D/Entities/TexturedEntity.h>
+#include <Amber3D/API/Shaders/ColorShader.h>
+#include <Amber3D/API/Shaders/TextureShader.h>
+
 
 QT_BEGIN_NAMESPACE
 namespace Ui { class ConverterWindow; }
@@ -32,6 +38,7 @@ class ConverterWindow : public QMainWindow
 
     Ui::ConverterWindow *ui;
     Amber3D::Models::RawModel* m_model;
+    Amber3D::Textures::ModelTexture *m_texture1;
     QTimer *m_mainLoopTimer;
     bool m_model_is_loaded;
 
