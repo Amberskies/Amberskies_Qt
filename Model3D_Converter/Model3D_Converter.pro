@@ -10,10 +10,12 @@ CONFIG += debug
 
 SOURCES += \
     main.cpp \
-    ConverterWindow.cpp
+    ConverterWindow.cpp \
+    renderopengl.cpp
 
 HEADERS += \
-    ConverterWindow.h
+    ConverterWindow.h \
+    renderopengl.h
 
 FORMS += \
     ConverterWindow.ui

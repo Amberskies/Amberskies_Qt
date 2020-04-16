@@ -19,6 +19,8 @@
 #pragma once
 
 #include <QMainWindow>
+#include <QTimer>
+#include <Amber3D/Models/RawModel.h>
 
 QT_BEGIN_NAMESPACE
 namespace Ui { class ConverterWindow; }
@@ -28,10 +30,24 @@ class ConverterWindow : public QMainWindow
 {
     Q_OBJECT
 
+    Ui::ConverterWindow *ui;
+    Amber3D::Models::RawModel* m_model;
+    QTimer *m_mainLoopTimer;
+    bool m_model_is_loaded;
+
 public:
     ConverterWindow(QWidget *parent = nullptr);
     ~ConverterWindow();
 
+    void StartMainLoop();
+
+private slots:
+    void on_Load_OBJ_clicked();
+    void on_ExitButton_clicked();
+    void MainLoop();
+
 private:
-    Ui::ConverterWindow *ui;
+    void Load3DModel();
+
+
 };
