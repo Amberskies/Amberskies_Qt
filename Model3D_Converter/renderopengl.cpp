@@ -52,9 +52,9 @@ void RenderOpenGL::initializeGL()
 
     glClearColor(0.12f, 0.05f, 1.0f, 1.00f);
     glEnable(GL_DEPTH_TEST);
+    const unsigned char* version = glGetString(GL_VERSION);
+    qDebug() << "OpenGL : " << version;
 
-    qDebug() << "OpenGL : %s\n" <<
-                glGetString(GL_VERSION);
 
     m_renderer = new Amber3D::OpenGL::Renderer(this);
 }
