@@ -36,8 +36,11 @@ DISTFILES += \
     Resources/GLSL/Simplified.fsh \
     Resources/GLSL/Simplified.vsh \
     Resources/OBJ/Body.mtl \
+    Resources/OBJ/Body.obj \
     Resources/OBJ/BoxRGB.mtl \
+    Resources/OBJ/BoxRGB.obj \
     Resources/OBJ/Head.mtl \
+    Resources/OBJ/Head.obj \
     Resources/Shaders/GLSL/BasicShader.fs \
     Resources/Shaders/GLSL/BasicShader.vs \
     Resources/Shaders/GLSL/StaticShader.fs \
@@ -64,3 +67,6 @@ win32-g++:CONFIG(release, debug|release): PRE_TARGETDEPS += $$PWD/../Amber3D_SL/
 else:win32-g++:CONFIG(debug, debug|release): PRE_TARGETDEPS += $$PWD/../Amber3D_SL/build/debug/libAmber3D_SL.a
 else:win32:!win32-g++:CONFIG(release, debug|release): PRE_TARGETDEPS += $$PWD/../Amber3D_SL/build/release/Amber3D_SL.lib
 else:win32:!win32-g++:CONFIG(debug, debug|release): PRE_TARGETDEPS += $$PWD/../Amber3D_SL/build/debug/Amber3D_SL.lib
+
+HEADERS += \
+    objDataStructure.h
