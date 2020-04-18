@@ -90,6 +90,13 @@ namespace Dev
 #include <QVector>
 #include <QFile>
 
+#include <Amber3D/Models/RawModel.h>
+#include <Amber3D/Models/TexturedModel.h>
+
+#include <Amber3D/API/Loaders/GfxLoader.h>
+#include <Amber3D/API/Shaders/ColorShader.h>
+#include <Amber3D/API/Shaders/TextureShader.h>
+
 #include "objDataStructure.h"
 
 int main(int argc, char *argv[])
@@ -178,7 +185,7 @@ int main(int argc, char *argv[])
 
     } while (line.isNull() == false);
 
-    //file_in.close();
+    file_in.close();
 
     std::cout << "\nMaterial File Name = " << materialFileName[0]->m_fileName.toStdString() << std::endl;
     std::cout << "Total Number of Verticies           = " << vertexData.size() << std::endl;
@@ -188,36 +195,168 @@ int main(int argc, char *argv[])
     std::cout << "Total Number of Materials           = " << useMaterial.size() << std::endl;
     std::cout << "Toatal Number of Faces              = " << faceElement.size() << std::endl;
 
+    // we now have to load the corresponding MTL file (Material Library).
+
+    /////////////////////////// MTL file ///////////////////////////
+
+    filePath = "Resources/OBJ/" + materialFileName[0]->m_fileName;
+    std::cout << "\nMaterial File Path = " << filePath.toStdString() << std::endl;
+
+    QFile mtl_file_in(filePath);
+
+    file_is_open = mtl_file_in.open(QIODevice::ReadOnly | QIODevice::Text);
+    if (file_is_open == false)  return -1;
+
+    QTextStream mtl_in(&mtl_file_in);
+
+    //////////// MTL Vectors/////////////////////////////
+    QVector<Model::DiffuseTextureMap*> diffTextureMap;
+    QVector<Model::MaterialName*> materialName;
+    QVector<Model::DiffuseColor*> diffuseColor;
+    QVector<Model::Transparency*> transparency;
+
+
+    do
+    {
+        // read each line until end of file
+        line = mtl_in.readLine().trimmed();
+        // compare with possible lines as give in objDataStructure.h
+        QStringList data = line.split(" ");
+
     //////////// MTL /////////////////////////////
-//    QVector<Model::DiffuseTextureMap*> diffTextureMap;
-//    QVector<Model::MaterialName*> materialName;
-//    QVector<Model::DiffuseColor*> diffuseColor;
-//    QVector<Model::Transparency*> transparency;
+    // store each line - ready to construct the model data.
+    if (line.startsWith("map_Kd")) diffTextureMap.push_back(new Model::DiffuseTextureMap(data.at(1)));
+    if (line.startsWith("ne")) materialName.push_back(new Model::MaterialName(data.at(1)));
 
-        /////////////////////////// MTL file ///////////////////////////
+    if (line.startsWith("Kd")) diffuseColor.push_back(new Model::DiffuseColor(
+                data.at(1).toFloat(), data.at(2).toFloat(), data.at(3).toFloat()));
 
-//        if (line.startsWith("map_Kd")) m_diffTextureMap.push_back(new DiffuseTextureMap(data.at(1)));
-//        if (line.startsWith("ne")) m_materialName.push_back(new MaterialName(data.at(1)));
-//        if (line.startsWith("Kd")) m_diffuseColor.push_back(new DiffuseColor(
-//                    data.at(1).toFloat(), data.at(2).toFloat(), data.at(3).toFloat()));
-//        if (line.startsWith("d ")) m_transparency.push_back(new Transparency(data.at(1).toFloat()));
-
-        // store each line - ready to construct the model data.
+    if (line.startsWith("d ")) transparency.push_back(new Model::Transparency(data.at(1).toFloat()));
 
 
+    } while (line.isNull() == false);
+    mtl_file_in.close();
 
+    std::cout << " Num of Texture Maps   = " << diffTextureMap.size() << std::endl;
+    std::cout << " Num of Material Names = " << materialName.size() << std::endl;
+    std::cout << " Num of Colors         = " << diffuseColor.size() << std::endl;
+    std::cout << " Num of Color Alpha's  = " << transparency.size() << std::endl;
 
 
     // construct model data
+        // first convert all data to openGL
+        // NB Material Names from the mtl file are read in reverse order
+        // looks like we may need a search to assign the correct material
+    QVector<Model::DiffuseColor*> reversedColor;
 
-    // store data to the GFX card
+    for (int index = currentColor; index >= 0; index-- )
+    {
+        reversedColor.push_back(new Model::DiffuseColor(
+                                    diffuseColor[index]->m_red,
+                                    diffuseColor[index]->m_green,
+                                    diffuseColor[index]->m_blue));
 
-    // remove tem data and clean memory
+    }
+    // so what does OpenGL require
+        // it requires arrays NOT vectors
+        // we have an Amber3D function that will load our ARRAYS to the gfx card.
+    QVector<uint> indices;
+    QVector<float> positions;
+    QVector<float> normals;
+    QVector<float> texCoords;
+    QVector<float> colors;
 
-    // store the OpenGL handles given back to us by the GFX Card.
+    unsigned int verticesPerFace = 3;
+
+    for (int count = 0; count < faceElement.size(); count++) // for eg our box = 12
+    {
+//        faceElement.push_back(new Model::FaceElement(
+//                vertexIndex[1st], textureIndex[1st], normalIndex[1st],
+//                vertexIndex[2nd], textureIndex[2nd], normalIndex[2nd],
+//                vertexIndex[3rd], textureIndex[3rd], normalIndex[3rd],
+//                currentColor, hasTexture, hasNormals));
+
+        for (unsigned int iVertex = 0; iVertex < verticesPerFace; iVertex++)
+        {
+            indices.push_back(static_cast<unsigned int>(count) * verticesPerFace + iVertex);
+
+            positions.push_back( vertexData[faceElement[count]->m_vertexIndex[iVertex]]->m_x);
+            positions.push_back( vertexData[faceElement[count]->m_vertexIndex[iVertex]]->m_y);
+            positions.push_back( vertexData[faceElement[count]->m_vertexIndex[iVertex]]->m_z);
+
+            if (faceElement[count]->m_hasNormals)
+            {
+                normals.push_back(vertexNormals[faceElement[count]->m_normalIndex[iVertex]]->m_x);
+                normals.push_back(vertexNormals[faceElement[count]->m_normalIndex[iVertex]]->m_y);
+                normals.push_back(vertexNormals[faceElement[count]->m_normalIndex[iVertex]]->m_z);
+            }
+
+            if (faceElement[count]->m_hasTextures)
+            {
+                texCoords.push_back(textureData[faceElement[count]->m_textureIndex[iVertex]]->m_u);
+                texCoords.push_back(textureData[faceElement[count]->m_textureIndex[iVertex]]->m_v);
+            }
+            else
+            {
+                colors.push_back(reversedColor[faceElement[count]->m_currentColor]->m_red);
+                colors.push_back(reversedColor[faceElement[count]->m_currentColor]->m_green);
+                colors.push_back(reversedColor[faceElement[count]->m_currentColor]->m_blue);
+            }
+        }
+    }
+
+    // think about cleaning the original vectors up and releasing the memory
+
+    // we create an object from Amber3D::API::GfxLoader()
+    Amber3D::API::GfxLoader *loader = new Amber3D::API::GfxLoader();
+
+    // Create Shaders.
+    Amber3D::API::ColorShader *colorShader = new Amber3D::API::ColorShader();
+    Amber3D::API::TextureShader *textureShader = new Amber3D::API::TextureShader();
+
+    // we set the 2 shaders color and texture
+    loader->SetShader(colorShader->GetProgramID(), textureShader->GetProgramID());
+
+    // we send our arrays to the GfxLoader::LoadToVAO.
+    int numIndices = indices.size();
+    int numPositions =  positions.size();
+    int numNormals = normals.size();
+
+    if (colors.size() <= 0) colors.push_back(0.0f);
+    int numColors =  colors.size();
+    if (texCoords.size() <= 0) texCoords.push_back(0.0f);
+    int numTexCoords =  texCoords.size();
+
+    std::cout << "\nNum Indices   = " << numIndices << std::endl;   // these are converted inside
+    std::cout << "Num Positions = " << numPositions << std::endl;   // GfxLoader to the correct
+    std::cout << "Num Colors    = " << numColors << std::endl;      // buffer sizes for OpenGL.
+    std::cout << "Num texCoords = " << numTexCoords << std::endl;
+    std::cout << "Num Normals   = " << numNormals << std::endl;
+
+//    Models::RawModel* GfxLoader::LoadToVAO(
+//        uint *indices, int numIndices,
+//        float *positions, int numPositions,
+//        float *colors, int numColors,
+//        float *texCoords, int numTexCoords)
+
+    // store the OpenGL handles given back to us by the GFX Card,
+    // given as rawModel.
+    Amber3D::Models::RawModel *rawModel = loader->LoadToVAO(
+                &indices[0], numIndices,
+                &positions[0], numPositions,
+                &colors[0], numColors,
+                &texCoords[0], numTexCoords);
+
+    // remove temp data and clean memory
+
+
+
     // we will only need the Vertex Attribute Object and the number of indicies
-    // also think about if the model has a texture or not.
+    // it also holds a bool hasTextures.
 
+    // also think about if the model has a texture or not.
+    // add texture if needed.
 
     return app.exec();
-}
+
+} // this when in a main will restore all memory used back to OS

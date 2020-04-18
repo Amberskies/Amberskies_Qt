@@ -103,9 +103,9 @@ namespace Model
 
     struct FaceElement
     {
-        int m_vertexIndex[4];
-        int m_textureIndex[4];
-        int m_normalIndex[4];
+        int m_vertexIndex[4] = {0};
+        int m_textureIndex[4] = {0};
+        int m_normalIndex[4] = {0};
         int m_currentColor = -1;
         bool m_hasTextures, m_hasNormals;
 
