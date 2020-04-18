@@ -118,11 +118,7 @@ int main(int argc, char *argv[])
     QVector<Model::VertexNormals*> vertexNormals;
     QVector<Model::UseMaterial*> useMaterial;
     QVector<Model::FaceElement*> faceElement;
-    //////////// MTL /////////////////////////////
-    QVector<Model::DiffuseTextureMap*> diffTextureMap;
-    QVector<Model::MaterialName*> materialName;
-    QVector<Model::DiffuseColor*> diffuseColor;
-    QVector<Model::Transparency*> transparency;
+
     int currentColor = -1;
     do
     {
@@ -182,6 +178,8 @@ int main(int argc, char *argv[])
 
     } while (line.isNull() == false);
 
+    //file_in.close();
+
     std::cout << "\nMaterial File Name = " << materialFileName[0]->m_fileName.toStdString() << std::endl;
     std::cout << "Total Number of Verticies           = " << vertexData.size() << std::endl;
     std::cout << "Total Number of Texture Coordinates = " << textureData.size() << std::endl;
@@ -189,6 +187,12 @@ int main(int argc, char *argv[])
     std::cout << "Total Number of Colors              = " << currentColor << std::endl;
     std::cout << "Total Number of Materials           = " << useMaterial.size() << std::endl;
     std::cout << "Toatal Number of Faces              = " << faceElement.size() << std::endl;
+
+    //////////// MTL /////////////////////////////
+//    QVector<Model::DiffuseTextureMap*> diffTextureMap;
+//    QVector<Model::MaterialName*> materialName;
+//    QVector<Model::DiffuseColor*> diffuseColor;
+//    QVector<Model::Transparency*> transparency;
 
         /////////////////////////// MTL file ///////////////////////////
 
