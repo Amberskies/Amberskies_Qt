@@ -90,8 +90,8 @@ namespace Dev
 #include <QVector>
 #include <QFile>
 
-#include <Amber3D/Models/RawModel.h>
-#include <Amber3D/Models/TexturedModel.h>
+#include <Amber3D/Models/RawModel.h>        // handles Colored models
+#include <Amber3D/Models/TexturedModel.h>   // handles textured models
 
 #include <Amber3D/API/Loaders/GfxLoader.h>
 #include <Amber3D/API/Shaders/ColorShader.h>
@@ -347,7 +347,13 @@ int main(int argc, char *argv[])
                 &colors[0], numColors,
                 &texCoords[0], numTexCoords);
 
+    std::cout << "\n VAO      = " << rawModel->GetVao()->objectId() << std::endl;
+    std::cout << " Indices  = " << rawModel->GetIndexCount() << std::endl;
+    std::cout << " Textures = " << rawModel->GetHasTexture() << std::endl;  // 0 if false
+    std::cout << " true     = " << true << std::endl;                       // 1 if true
+
     // remove temp data and clean memory
+    // now we have the raw model do we still need the models Array data ?
 
 
 
@@ -356,6 +362,15 @@ int main(int argc, char *argv[])
 
     // also think about if the model has a texture or not.
     // add texture if needed.
+
+    if (rawModel->GetHasTexture())
+    {
+        // draw textured object using Amber3D::Models::TexturedModel
+    }
+    else
+    {
+        // draw the rawModel as a colored object.
+    }
 
     return app.exec();
 
