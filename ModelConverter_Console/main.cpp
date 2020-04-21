@@ -20,71 +20,9 @@
 
 
 #define MODEL3D_TO_LOAD "BoxRGB"    // name of our .obj file
-#define DISPLAY_WIDTH 800           // pixels
-#define DISPLAY_HEIGHT 400          // pixels
 
-#define FOV 90.0f                   // degrees
-#define NEAR_PLANE 0.1f             // meters
-#define FAR_PLANE 50.0f             // meters
-
-
-///////////////// Window 3D //////////////////////////
 #include <iostream>
 
-
-#include <QOpenGLWidget>
-#include <QOpenGLFunctions>
-#include <QMatrix4x4>
-
-namespace Dev
-{
-    class Window3D : public QOpenGLWidget, protected QOpenGLFunctions
-    {
-        //Q_OBJECT
-
-        QMatrix4x4 m_projection;
-
-    public:
-        Window3D(QWidget *parent = nullptr)
-            : QOpenGLWidget(parent)
-        {
-
-        }
-
-    protected:
-        void initializeGL() override
-        {
-            initializeOpenGLFunctions();
-            std::cout << "Open GL Functions :" << std::endl;
-            std::cout << glGetString(GL_VERSION) << std::endl;
-
-            glClearColor(0.05f, 0.05f, 1.0f, 1.00f);
-            glEnable(GL_DEPTH_TEST);
-
-        }
-
-        void paintGL() override
-        {
-            glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-
-        }
-
-        void resizeGL(int w, int h) override
-        {
-            float aspectRatio = static_cast<float>(w) / h;
-
-            m_projection.setToIdentity();
-            m_projection.perspective(FOV, aspectRatio, NEAR_PLANE, FAR_PLANE);
-        }
-
-    private:
-
-    };
-
-//////////////////////////////////////////////////////
-}
-
-///////////////// Main ///////////////////////////////
 #include <QApplication>
 #include <QString>
 #include <QVector>
@@ -98,6 +36,7 @@ namespace Dev
 #include <Amber3D/API/Shaders/TextureShader.h>
 
 #include "objDataStructure.h"
+#include "Window3D.h"
 
 int main(int argc, char *argv[])
 {    
@@ -366,12 +305,23 @@ int main(int argc, char *argv[])
     if (rawModel->GetHasTexture())
     {
         // draw textured object using Amber3D::Models::TexturedModel
+        std::cout << "Model has texture (Code TODO:)" << std::endl;
     }
     else
     {
         // draw the rawModel as a colored object.
+        std::cout << "Model is colour no texture detected." << std::endl;
+
+        // prepare model for rendering.
+        // raw model
+        // shader program
+        window.PrepareColorModel(
+            rawModel,
+            colorShader->GetProgramID()
+        );
     }
 
+    window.StartDisplay();
     return app.exec();
 
 } // this when in a main will restore all memory used back to OS
