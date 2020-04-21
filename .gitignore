@@ -70,3 +70,16 @@ Thumbs.db
 *.dll
 *.exe
 
+/Amber3D_SL/x64/Debug/qmake
+/Amber3D_SL/x64/Debug/Amber3D_SL.tlog
+/Amber3D_SL/x64/Debug
+/Amber3D_SL/debug
+/Amber3D_SL/release/moc_predefs.h.cbt
+/.vs
+/Amber3D_SL/x64/Release/qmake
+/ModelConverter_Console/.vs/ModelConverter_Console/v16
+/ModelConverter_Console/debug
+/ModelConverter_Console/release
+/ModelConverter_Console/x64/Debug
+/ModelConverter_Console/x64/Release/qmake
+/CppProperties.json

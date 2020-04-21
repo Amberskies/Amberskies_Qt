@@ -20,77 +20,23 @@
 
 
 #define MODEL3D_TO_LOAD "BoxRGB"    // name of our .obj file
-#define DISPLAY_WIDTH 800           // pixels
-#define DISPLAY_HEIGHT 400          // pixels
-
-#define FOV 90.0f                   // degrees
-#define NEAR_PLANE 0.1f             // meters
-#define FAR_PLANE 50.0f             // meters
 
 
 ///////////////// Window 3D //////////////////////////
 #include <iostream>
 
 
-#include <QOpenGLWidget>
-#include <QOpenGLFunctions>
-#include <QMatrix4x4>
 
-namespace Dev
-{
-    class Window3D : public QOpenGLWidget, protected QOpenGLFunctions
-    {
-        //Q_OBJECT
-
-        QMatrix4x4 m_projection;
-
-    public:
-        Window3D(QWidget *parent = nullptr)
-            : QOpenGLWidget(parent)
-        {
-
-        }
-
-    protected:
-        void initializeGL() override
-        {
-            initializeOpenGLFunctions();
-            std::cout << "Open GL Functions :" << std::endl;
-            std::cout << glGetString(GL_VERSION) << std::endl;
-
-            glClearColor(0.05f, 0.05f, 1.0f, 1.00f);
-            glEnable(GL_DEPTH_TEST);
-
-        }
-
-        void paintGL() override
-        {
-            glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-
-        }
-
-        void resizeGL(int w, int h) override
-        {
-            float aspectRatio = static_cast<float>(w) / h;
-
-            m_projection.setToIdentity();
-            m_projection.perspective(FOV, aspectRatio, NEAR_PLANE, FAR_PLANE);
-        }
-
-    private:
-
-    };
-
-//////////////////////////////////////////////////////
-}
 
 ///////////////// Main ///////////////////////////////
 #include <QApplication>
 #include <QString>
 #include <QVector>
 #include <QFile>
+#include <QVector3D>
 
-#include <Amber3D/Models/RawModel.h>        // handles Colored models
+#include <Amber3D/Models/RawModel.h>        // gives the base to create an entity
+#include <Amber3D/Entities/ColorEntity.h>   // stores position etc.
 #include <Amber3D/Models/TexturedModel.h>   // handles textured models
 
 #include <Amber3D/API/Loaders/GfxLoader.h>
@@ -98,6 +44,7 @@ namespace Dev
 #include <Amber3D/API/Shaders/TextureShader.h>
 
 #include "objDataStructure.h"
+#include "Window3D.h"
 
 int main(int argc, char *argv[])
 {    
@@ -347,6 +294,8 @@ int main(int argc, char *argv[])
                 &colors[0], numColors,
                 &texCoords[0], numTexCoords);
 
+    // We can save this data back to disk or ssd in this new format
+
     std::cout << "\n VAO      = " << rawModel->GetVao()->objectId() << std::endl;
     std::cout << " Indices  = " << rawModel->GetIndexCount() << std::endl;
     std::cout << " Textures = " << rawModel->GetHasTexture() << std::endl;  // 0 if false
@@ -366,11 +315,37 @@ int main(int argc, char *argv[])
     if (rawModel->GetHasTexture())
     {
         // draw textured object using Amber3D::Models::TexturedModel
+        std::cout << "Model has texture (Code TODO:)" << std::endl;
     }
     else
     {
         // draw the rawModel as a colored object.
+        std::cout << "Model is colour no texture detected." << std::endl;
+
+        // prepare model for rendering.
+        // raw model - create the entity
+        // shader program
+
+        Amber3D::Entities::ColorEntity* colorEntity =
+            new Amber3D::Entities::ColorEntity(
+                rawModel,
+                QVector3D(0.0f, 0.0f, -5.0f),
+                0.0f,
+                0.0f,
+                0.0f,
+                1.0f
+            );
+
+        window.PrepareColorModel(
+            colorEntity,
+            colorShader->GetProgramID()
+        );
+
+        // test "BoxRGB" uses 48.4 MB with no vector clean ups.
+        // gives a max at 60 MB on startup.
     }
+
+    window.StartDisplay();
 
     return app.exec();
 
