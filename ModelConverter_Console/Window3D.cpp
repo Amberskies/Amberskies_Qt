@@ -26,6 +26,7 @@ namespace Dev
     Window3D::Window3D(QWidget* parent)
         :   QOpenGLWidget(parent)
         ,   m_colorEntity(nullptr)
+        ,   m_texturedEntity(nullptr)
         ,   m_currentShader(nullptr)
         ,   m_isTextured(false)
         ,   m_loop(new QTimer(this))
@@ -66,6 +67,13 @@ namespace Dev
         m_colorEntity = currentEntity;
         m_currentShader = shader;
         m_isTextured = false;
+    }
+
+    void Window3D::PrepareTexturedModel(
+        Amber3D::Entities::TexturedEntity* currentEntity,
+        QOpenGLShaderProgram* shader)
+    {
+        std::cout << "Model has texture (Code TODO:)" << std::endl;
     }
 
     void Window3D::StartDisplay()

@@ -39,6 +39,7 @@
 #include <QOpenGLShaderProgram>
 
 #include <Amber3D/Entities/ColorEntity.h>
+#include <Amber3D/Entities/TexturedEntity.h>
 #include <Amber3D/Entities/Camera.h>
 #include <Amber3D/Maths/CreateViewMatrix.h>
 #include <Amber3D/Maths/CreateModelMatrix.h>
@@ -51,6 +52,8 @@ namespace Dev
 
         QMatrix4x4 m_projection;
         Amber3D::Entities::ColorEntity* m_colorEntity;
+        Amber3D::Entities::TexturedEntity* m_texturedEntity;
+
         QOpenGLShaderProgram* m_currentShader;
         bool m_isTextured;
         QTimer* m_loop;
@@ -65,6 +68,11 @@ namespace Dev
 
         void PrepareColorModel(
             Amber3D::Entities::ColorEntity* currentEntity,
+            QOpenGLShaderProgram* shader
+        );
+
+        void PrepareTexturedModel(
+            Amber3D::Entities::TexturedEntity* currentEntity,
             QOpenGLShaderProgram* shader
         );
 

@@ -19,7 +19,7 @@
 
 
 
-#define MODEL3D_TO_LOAD "BoxRGB"    // name of our .obj file
+#define MODEL3D_TO_LOAD "Head"    // name of our .obj file
 
 
 ///////////////// Window 3D //////////////////////////
@@ -37,7 +37,9 @@
 
 #include <Amber3D/Models/RawModel.h>        // gives the base to create an entity
 #include <Amber3D/Entities/ColorEntity.h>   // stores position etc.
+#include <Amber3D/Textures/ModelTexture.h>  // stores textures for openGL
 #include <Amber3D/Models/TexturedModel.h>   // handles textured models
+#include <Amber3D/Entities/TexturedEntity.h>// stores positions etc
 
 #include <Amber3D/API/Loaders/GfxLoader.h>
 #include <Amber3D/API/Shaders/ColorShader.h>
@@ -97,7 +99,8 @@ int main(int argc, char *argv[])
         if (line.startsWith("us"))
         {
             useMaterial.push_back(new Model::UseMaterial(data.at(1)));
-            if (data.at(1) != "None") currentColor++;
+            if (data.at(1) != "Material" &&
+                data.at(1) != "None")            currentColor++;
         }
         if (line.startsWith("f "))
         {
@@ -314,8 +317,36 @@ int main(int argc, char *argv[])
 
     if (rawModel->GetHasTexture())
     {
+        // load texture and store for use by any model
+        Amber3D::Textures::ModelTexture* texture =
+            new Amber3D::Textures::ModelTexture(
+                loader->loadTexture(diffTextureMap[0]->m_diffuseTextureMap)
+        );
+
         // draw textured object using Amber3D::Models::TexturedModel
-        std::cout << "Model has texture (Code TODO:)" << std::endl;
+        
+
+        // texture file name is held in diffTextureMap
+        Amber3D::Models::TexturedModel* texturedModel =
+            new Amber3D::Models::TexturedModel(
+                rawModel,
+                texture
+            );
+
+        Amber3D::Entities::TexturedEntity* texturedEntity =
+            new Amber3D::Entities::TexturedEntity(
+            texturedModel,
+            QVector3D(0.0f, 0.0f, -5.0f),
+            0.0f,
+            0.0f,
+            0.0f,
+            1.0f
+        );
+
+        window.PrepareTexturedModel(
+            texturedEntity,
+            textureShader->GetProgramID()
+        );
     }
     else
     {
