@@ -42,6 +42,7 @@
 
 #include "objDataStructure.h"
 #include "Window3D.h"
+#include "Model3D_Save.h"
 
 int main(int argc, char *argv[])
 {    
@@ -158,7 +159,7 @@ int main(int argc, char *argv[])
     file_in.close();
 
     // Give a read out to console to show how much data has been read.
-    std::cout << "\nMaterial File Name = " << materialFileName[0]->m_fileName.toStdString() << std::endl;
+    std::cout << "\nMaterial File Name                = " << materialFileName[0]->m_fileName.toStdString() << std::endl;
     std::cout << "Total Number of Verticies           = " << vertexData.size() << std::endl;
     std::cout << "Total Number of Texture Coordinates = " << textureData.size() << std::endl;
     std::cout << "Total Number of Normals             = " << vertexNormals.size() << std::endl;
@@ -261,6 +262,7 @@ int main(int argc, char *argv[])
     QVector<float> normals;
     QVector<float> texCoords;
     QVector<float> colors;
+    bool hasNormals = false;
 
     unsigned int verticesPerFace = 3;
 
@@ -283,6 +285,7 @@ int main(int argc, char *argv[])
 
             if (faceElement[count]->m_hasNormals)
             {
+                hasNormals = true;
                 normals.push_back(vertexNormals[faceElement[count]->m_normalIndex[iVertex]]->m_x);
                 normals.push_back(vertexNormals[faceElement[count]->m_normalIndex[iVertex]]->m_y);
                 normals.push_back(vertexNormals[faceElement[count]->m_normalIndex[iVertex]]->m_z);
@@ -352,12 +355,11 @@ int main(int argc, char *argv[])
     // given as rawModel.
     Amber3D::Models::RawModel *rawModel = loader->LoadToVAO(
                 &indices[0], numIndices,
-                &positions[0], numPositions,
+                &positions[0], numPositions, // normals will be added soon
                 &colors[0], numColors,
                 &texCoords[0], numTexCoords
     );
 
-    // We can save this data back to disk or ssd in this new format
     // Write to console what the raw Model contains.
     std::cout << "\n VAO      = " << rawModel->GetVao()->objectId() << std::endl;
     std::cout << " Indices  = " << rawModel->GetIndexCount() << std::endl;
@@ -427,7 +429,27 @@ int main(int argc, char *argv[])
             colorEntity,
             colorShader->GetProgramID()
         );
+
+        // this is a hack as there is no texture file
+        diffTextureMap.push_back(
+            new Model::DiffuseTextureMap(
+                "0"
+            )
+        );
     }
+
+    // We can save this data back to disk or ssd in this new format
+    Dev::SaveConvertedData(
+        fileName,
+        rawModel->GetHasTexture(),
+        diffTextureMap[0]->m_diffuseTextureMap,
+        rawModel->GetIndexCount(),
+        hasNormals,
+        &positions[0], numPositions,
+        &normals[0], numNormals,
+        &colors[0], numColors,
+        &texCoords[0], numTexCoords
+    );
 
     // we could try cleaning up the arrays to lower memory used.
 

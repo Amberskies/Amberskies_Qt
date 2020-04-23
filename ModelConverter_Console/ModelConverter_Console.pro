@@ -71,4 +71,5 @@ else:win32:!win32-g++:CONFIG(debug, debug|release): PRE_TARGETDEPS += $$PWD/../A
 
 HEADERS += \
     Window3D.h \
-    objDataStructure.h
+    objDataStructure.h \
+    Model3D_Save.h
