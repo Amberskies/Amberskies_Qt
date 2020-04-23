@@ -61,9 +61,13 @@ namespace Dev
         int numTexCoords)
     {
         system("dir");
+        std::cout << "\nSave attempt to : " <<
+            "/Resources/AmberObjects/" + saveFilename.toStdString() + ".amb" <<
+            std::endl;
+
         // open a file to write out to
         QFile data("/Resources/AmberObjects/" + saveFilename + ".amb");
-        if (data.open(QFile::WriteOnly | QFile::Truncate))
+        if (data.open(QFile::WriteOnly | QFile::Text))
         {
             QTextStream out(&data);
             
@@ -75,13 +79,13 @@ namespace Dev
             out.flush();
             data.close();
 
-            std::cout << "\n\n File Saved to : " << 
+            std::cout << "File Saved to : " << 
                 "/Resources/AmberObjects/" + saveFilename.toStdString() + ".amb" <<
                 std::endl;
         }
         else
         {
-            std::cout << "\n\n [ERROR] File did NOT Save !.\n\n";
+            std::cout << "[ERROR] File did NOT Save !.\n\n";
         }
     }
 
