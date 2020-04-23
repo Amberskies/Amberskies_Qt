@@ -21,12 +21,7 @@
 
 #define MODEL3D_TO_LOAD "Head"    // name of our .obj file
 
-
-///////////////// Window 3D //////////////////////////
 #include <iostream>
-
-
-
 
 ///////////////// Main ///////////////////////////////
 #include <QApplication>
@@ -82,26 +77,51 @@ int main(int argc, char *argv[])
         line = in.readLine().trimmed();
         // compare with possible lines as give in objDataStructure.h
         QStringList data = line.split(" ");
+
         /////////////////////////// OBJ File /////////////////////////////
 
         if (line.startsWith("# ")) continue;
-        if (line.startsWith("mt")) materialFileName.push_back(new Model::MaterialFileName(data.at(1)));
-        if (line.startsWith("v ")) vertexData.push_back(new  Model::Vertex(data.at(1).toFloat(),
-                    data.at(2).toFloat(), data.at(3).toFloat()));
 
-        if (line.startsWith("vt"))
-            textureData.push_back(new Model::TextureCoordinate(data.at(1).toFloat(),
-                    data.at(2).toFloat(), 0.0f));
+        if (line.startsWith("mt")) materialFileName.push_back(
+            new Model::MaterialFileName(data.at(1))
+        );
 
-        if (line.startsWith("vn")) vertexNormals.push_back(new Model::VertexNormals(
-                    data.at(1).toFloat(), data.at(2).toFloat(), data.at(3).toFloat()));
+        if (line.startsWith("v ")) vertexData.push_back(
+            new  Model::Vertex(
+                data.at(1).toFloat(),
+                data.at(2).toFloat(), 
+                data.at(3).toFloat()
+            )
+        );
+
+        if (line.startsWith("vt")) textureData.push_back(
+            new Model::TextureCoordinate(
+                data.at(1).toFloat(),
+                data.at(2).toFloat(), 
+                0.0f
+            )
+        );
+
+        if (line.startsWith("vn")) vertexNormals.push_back(
+            new Model::VertexNormals(
+                data.at(1).toFloat(), 
+                data.at(2).toFloat(), 
+                data.at(3).toFloat()
+            )
+        );
 
         if (line.startsWith("us"))
         {
-            useMaterial.push_back(new Model::UseMaterial(data.at(1)));
+            useMaterial.push_back(
+                new Model::UseMaterial(
+                    data.at(1)
+                )
+            );
+
             if (data.at(1) != "Material" &&
-                data.at(1) != "None")            currentColor++;
+                data.at(1) != "None") currentColor++;
         }
+
         if (line.startsWith("f "))
         {
             QString dataSplit;
@@ -129,14 +149,15 @@ int main(int argc, char *argv[])
                     vertexIndex[1], textureIndex[1], normalIndex[1],
                     vertexIndex[2], textureIndex[2], normalIndex[2],
                     vertexIndex[3], textureIndex[3], normalIndex[3],
-                    currentColor, hasTexture, hasNormals));
+                    currentColor, hasTexture, hasNormals
+                )
+            );
         }
-
-
     } while (line.isNull() == false);
 
     file_in.close();
 
+    // Give a read out to console to show how much data has been read.
     std::cout << "\nMaterial File Name = " << materialFileName[0]->m_fileName.toStdString() << std::endl;
     std::cout << "Total Number of Verticies           = " << vertexData.size() << std::endl;
     std::cout << "Total Number of Texture Coordinates = " << textureData.size() << std::endl;
@@ -170,23 +191,45 @@ int main(int argc, char *argv[])
     {
         // read each line until end of file
         line = mtl_in.readLine().trimmed();
+
         // compare with possible lines as give in objDataStructure.h
         QStringList data = line.split(" ");
 
-    //////////// MTL /////////////////////////////
+    ///////////////////// MTL /////////////////////////////
     // store each line - ready to construct the model data.
-    if (line.startsWith("map_Kd")) diffTextureMap.push_back(new Model::DiffuseTextureMap(data.at(1)));
-    if (line.startsWith("ne")) materialName.push_back(new Model::MaterialName(data.at(1)));
 
-    if (line.startsWith("Kd")) diffuseColor.push_back(new Model::DiffuseColor(
-                data.at(1).toFloat(), data.at(2).toFloat(), data.at(3).toFloat()));
+    if (line.startsWith("map_Kd")) diffTextureMap.push_back(
+        new Model::DiffuseTextureMap(
+            data.at(1)
+        )
+    );
+    
+    if (line.startsWith("ne")) materialName.push_back(
+        new Model::MaterialName(
+            data.at(1)
+        )
+    );
 
-    if (line.startsWith("d ")) transparency.push_back(new Model::Transparency(data.at(1).toFloat()));
+    if (line.startsWith("Kd")) diffuseColor.push_back(
+        new Model::DiffuseColor(
+            data.at(1).toFloat(),
+            data.at(2).toFloat(),
+            data.at(3).toFloat()
+        )
+    );
+
+    if (line.startsWith("d ")) transparency.push_back(
+        new Model::Transparency(
+            data.at(1).toFloat()
+        )
+    );
 
 
     } while (line.isNull() == false);
+    
     mtl_file_in.close();
 
+    // Give a console readout if how much data has been read in
     std::cout << " Num of Texture Maps   = " << diffTextureMap.size() << std::endl;
     std::cout << " Num of Material Names = " << materialName.size() << std::endl;
     std::cout << " Num of Colors         = " << diffuseColor.size() << std::endl;
@@ -201,12 +244,15 @@ int main(int argc, char *argv[])
 
     for (int index = currentColor; index >= 0; index-- )
     {
-        reversedColor.push_back(new Model::DiffuseColor(
-                                    diffuseColor[index]->m_red,
-                                    diffuseColor[index]->m_green,
-                                    diffuseColor[index]->m_blue));
-
+		reversedColor.push_back(
+			new Model::DiffuseColor(
+				diffuseColor[index]->m_red,
+				diffuseColor[index]->m_green,
+				diffuseColor[index]->m_blue
+			)
+		);
     }
+
     // so what does OpenGL require
         // it requires arrays NOT vectors
         // we have an Amber3D function that will load our ARRAYS to the gfx card.
@@ -220,6 +266,7 @@ int main(int argc, char *argv[])
 
     for (int count = 0; count < faceElement.size(); count++) // for eg our box = 12
     {
+//      Information on how we stored all the index numbers from the .obj file
 //        faceElement.push_back(new Model::FaceElement(
 //                vertexIndex[1st], textureIndex[1st], normalIndex[1st],
 //                vertexIndex[2nd], textureIndex[2nd], normalIndex[2nd],
@@ -265,13 +312,18 @@ int main(int argc, char *argv[])
     Amber3D::API::TextureShader *textureShader = new Amber3D::API::TextureShader();
 
     // we set the 2 shaders color and texture
-    loader->SetShader(colorShader->GetProgramID(), textureShader->GetProgramID());
+    loader->SetShader(
+        colorShader->GetProgramID(),
+        textureShader->GetProgramID()
+    );
 
     // we send our arrays to the GfxLoader::LoadToVAO.
     int numIndices = indices.size();
     int numPositions =  positions.size();
     int numNormals = normals.size();
 
+    // remember we can not have an Array with zero .size()
+    // as a hack we add an item of data to the unused array.
     if (colors.size() <= 0) colors.push_back(0.0f);
     int numColors =  colors.size();
     if (texCoords.size() <= 0) texCoords.push_back(0.0f);
@@ -283,22 +335,17 @@ int main(int argc, char *argv[])
     std::cout << "Num texCoords = " << numTexCoords << std::endl;
     std::cout << "Num Normals   = " << numNormals << std::endl;
 
-//    Models::RawModel* GfxLoader::LoadToVAO(
-//        uint *indices, int numIndices,
-//        float *positions, int numPositions,
-//        float *colors, int numColors,
-//        float *texCoords, int numTexCoords)
-
     // store the OpenGL handles given back to us by the GFX Card,
     // given as rawModel.
     Amber3D::Models::RawModel *rawModel = loader->LoadToVAO(
                 &indices[0], numIndices,
                 &positions[0], numPositions,
                 &colors[0], numColors,
-                &texCoords[0], numTexCoords);
+                &texCoords[0], numTexCoords
+    );
 
     // We can save this data back to disk or ssd in this new format
-
+    // Write to console what the raw Model contains.
     std::cout << "\n VAO      = " << rawModel->GetVao()->objectId() << std::endl;
     std::cout << " Indices  = " << rawModel->GetIndexCount() << std::endl;
     std::cout << " Textures = " << rawModel->GetHasTexture() << std::endl;  // 0 if false
@@ -306,8 +353,6 @@ int main(int argc, char *argv[])
 
     // remove temp data and clean memory
     // now we have the raw model do we still need the models Array data ?
-
-
 
     // we will only need the Vertex Attribute Object and the number of indicies
     // it also holds a bool hasTextures.
@@ -318,15 +363,15 @@ int main(int argc, char *argv[])
     if (rawModel->GetHasTexture())
     {
         // load texture and store for use by any model
+        // texture file name is held in diffTextureMap
         Amber3D::Textures::ModelTexture* texture =
             new Amber3D::Textures::ModelTexture(
-                loader->loadTexture(diffTextureMap[0]->m_diffuseTextureMap)
+                loader->loadTexture(
+                    diffTextureMap[0]->m_diffuseTextureMap
+                )
         );
 
         // draw textured object using Amber3D::Models::TexturedModel
-        
-
-        // texture file name is held in diffTextureMap
         Amber3D::Models::TexturedModel* texturedModel =
             new Amber3D::Models::TexturedModel(
                 rawModel,
@@ -355,8 +400,6 @@ int main(int argc, char *argv[])
 
         // prepare model for rendering.
         // raw model - create the entity
-        // shader program
-
         Amber3D::Entities::ColorEntity* colorEntity =
             new Amber3D::Entities::ColorEntity(
                 rawModel,
@@ -371,13 +414,20 @@ int main(int argc, char *argv[])
             colorEntity,
             colorShader->GetProgramID()
         );
-
-        // test "BoxRGB" uses 48.4 MB with no vector clean ups.
-        // gives a max at 60 MB on startup.
     }
 
-    window.StartDisplay();
+    // test "BoxRGB" uses 48.4 MB with no vector clean ups.
+    // gives a max of 60 MB on startup.
+    // test "Head" uses 48.7 MB with no vector clean ups.
+    // gives a max of 61 MB on startup.
 
+    // start our window event QTimer running.
+    window.StartDisplay();
+    
+    // the Qt QAppliction will run the program loop and deal with events
+    // because of this we use a QTimer to update the main Window 3D.
     return app.exec();
 
-} // this when in a main will restore all memory used back to OS
+    // Note : we do not delete any pointes here.
+}   // this is when the main function restores all memory used back to OS
+    // so all the pointers will be destroyed by the system.

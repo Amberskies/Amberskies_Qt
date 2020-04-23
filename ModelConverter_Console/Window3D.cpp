@@ -159,7 +159,13 @@ namespace Dev
         float aspectRatio = static_cast<float>(w) / h;
 
         m_projection.setToIdentity();
-        m_projection.perspective(FOV, aspectRatio, NEAR_PLANE, FAR_PLANE);
+        
+        m_projection.perspective(
+            FOV,
+            aspectRatio,
+            NEAR_PLANE,
+            FAR_PLANE
+        );
     }
 
     /////////////////// Private Slots ////////////////////////////////
