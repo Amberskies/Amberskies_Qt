@@ -73,7 +73,9 @@ namespace Dev
         Amber3D::Entities::TexturedEntity* currentEntity,
         QOpenGLShaderProgram* shader)
     {
-        std::cout << "Model has texture (Code TODO:)" << std::endl;
+        m_texturedEntity = currentEntity;
+        m_currentShader = shader;
+        m_isTextured = true;
     }
 
     void Window3D::StartDisplay()
@@ -113,7 +115,41 @@ namespace Dev
 
         if (m_isTextured)
         {
-            std::cout << "No code to draw Textures yet !" << std::endl;
+            m_offset += 0.1f;
+            if (m_offset >= 360) m_offset -= 360.0f;
+
+            modelMatrix = Amber3D::Maths::CreateModelMatrix(
+                m_texturedEntity->GetPosition(),
+                m_texturedEntity->GetRotationX() + m_offset,
+                m_texturedEntity->GetRotationY() + m_offset,
+                m_texturedEntity->GetRotationZ(),
+                m_texturedEntity->GetScale()
+            );
+
+            m_currentShader->bind();
+            m_texturedEntity->GetTexturedModel()->GetRawModel()->GetVao()->bind();
+
+            int locMVPmatrix =
+                m_currentShader->uniformLocation(
+                    "u_mvp"
+                );
+
+            m_currentShader->setUniformValue(
+                locMVPmatrix,
+                m_projection * viewMatrix * modelMatrix
+            );
+
+            m_texturedEntity->GetTexturedModel()->GetModelTexture()->GetTexture()->bind();
+
+            glDrawElements(
+                GL_TRIANGLES,
+                m_texturedEntity->GetTexturedModel()->GetRawModel()->GetIndexCount(),
+                GL_UNSIGNED_INT,
+                0
+            );
+
+            m_texturedEntity->GetTexturedModel()->GetRawModel()->GetVao()->release();
+            m_currentShader->release();
         }
         else if (m_colorEntity != nullptr)
         {
@@ -150,7 +186,6 @@ namespace Dev
 
             m_colorEntity->GetRawModel()->GetVao()->release();
             m_currentShader->release();
-
         }
     }
 

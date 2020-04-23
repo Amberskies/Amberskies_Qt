@@ -19,7 +19,7 @@
 
 
 
-#define MODEL3D_TO_LOAD "Head"    // name of our .obj file
+#define MODEL3D_TO_LOAD "Body"    // name of our .obj file
 
 #include <iostream>
 
@@ -420,6 +420,8 @@ int main(int argc, char *argv[])
     // gives a max of 60 MB on startup.
     // test "Head" uses 48.7 MB with no vector clean ups.
     // gives a max of 61 MB on startup.
+    // test "Body" uses 50.0 MB with no vector clean ups.
+    // gives a max of 62 MB on startup.
 
     // start our window event QTimer running.
     window.StartDisplay();
