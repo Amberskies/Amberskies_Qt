@@ -19,7 +19,7 @@
 
 
 
-#define MODEL3D_TO_LOAD "Body"    // name of our .obj file
+#define MODEL3D_TO_LOAD "BoxRGB"    // name of our .obj file
 
 #include <iostream>
 
@@ -303,6 +303,19 @@ int main(int argc, char *argv[])
     }
 
     // think about cleaning the original vectors up and releasing the memory
+    // delete OBJ vectors
+    for (int index = 0; index < materialFileName.size(); index++) delete materialFileName[index];
+    for (int index = 0; index < vertexData.size(); index++) delete vertexData[index];
+    for (int index = 0; index < textureData.size(); index++) delete textureData[index];
+    for (int index = 0; index < vertexNormals.size(); index++) delete vertexNormals[index];
+    for (int index = 0; index < useMaterial.size(); index++) delete useMaterial[index];
+    for (int index = 0; index < faceElement.size(); index++) delete faceElement[index];
+    // delete MTL vectors :
+    // diffuse texture Map still required so we can load up the texture.
+    // for (int index = 0; index < diffTextureMap.size(); index++) delete diffTextureMap[index];
+    for (int index = 0; index < materialName.size(); index++) delete materialName[index];
+    for (int index = 0; index < diffuseColor.size(); index++) delete diffuseColor[index];
+    for (int index = 0; index < transparency.size(); index++) delete transparency[index];
 
     // we create an object from Amber3D::API::GfxLoader()
     Amber3D::API::GfxLoader *loader = new Amber3D::API::GfxLoader();
@@ -416,11 +429,13 @@ int main(int argc, char *argv[])
         );
     }
 
-    // test "BoxRGB" uses 48.4 MB with no vector clean ups.
+    // we could try cleaning up the arrays to lower memory used.
+
+    // test "BoxRGB" uses 48.4 MB with no vector clean ups. too small a diff after clean up
     // gives a max of 60 MB on startup.
     // test "Head" uses 48.7 MB with no vector clean ups.
     // gives a max of 61 MB on startup.
-    // test "Body" uses 50.0 MB with no vector clean ups.
+    // test "Body" uses 50.0 MB with no vector clean ups. 49.9 MB with clean up.
     // gives a max of 62 MB on startup.
 
     // start our window event QTimer running.
