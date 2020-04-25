@@ -19,7 +19,7 @@
 
 
 
-#define MODEL3D_TO_LOAD "BoxRGB"    // name of our .obj file
+#define MODEL3D_TO_LOAD "Head"    // name of our .obj file
 
 #include <iostream>
 
@@ -439,7 +439,8 @@ int main(int argc, char *argv[])
     }
 
     // We can save this data back to disk or ssd in this new format
-    Dev::SaveConvertedData(
+    Dev::SaveModel3D* saveModel = new Dev::SaveModel3D();
+    saveModel->SaveConvertedData(
         fileName,
         rawModel->GetHasTexture(),
         diffTextureMap[0]->m_diffuseTextureMap,

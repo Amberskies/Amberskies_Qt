@@ -10,7 +10,8 @@ CONFIG += debug
 
 SOURCES += \
         Window3D.cpp \
-        main.cpp
+        main.cpp \
+        Model3D_Save.cpp 
 
 # Default rules for deployment.
 qnx: target.path = /tmp/$${TARGET}/bin

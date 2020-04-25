@@ -17,6 +17,8 @@
  *
  * ---------------------------------------------------*/
 #include "Window3D.h"
+#include <Amber3D/Maths/CreateViewMatrix.h>
+#include <Amber3D/Maths/CreateModelMatrix.h>
 
 namespace Dev
 {

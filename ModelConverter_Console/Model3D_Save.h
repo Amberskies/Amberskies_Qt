@@ -1,7 +1,7 @@
 
 /* ----------------------------------------------------/
  *
- * Project created by Frazor Sharp : 2020 Apr 21st
+ * Project created by Frazor Sharp : 2020 Apr 23rd
  *
  *      Amber3D 3D Model Converter - Qt C++
  *
@@ -20,7 +20,9 @@
 
 #include <iostream>
 
+#include <QObject>
 #include <QString>
+#include <QIODevice>
 #include <QFile>
 #include <QTextStream>
 
@@ -39,80 +41,50 @@ namespace Dev
     
     // diffrent array types uint int float QString
     // num Indices tells us how many items of data we have.
-
-    static inline void  ArrayDump(float* address, int size)
+    class SaveModel3D : public QObject
     {
+        Q_OBJECT
 
-    }
+    public:
+        SaveModel3D(QObject* parent = nullptr);
 
-    static inline void SaveConvertedData(
-        QString saveFilename,
-        bool hasTexture,
-        QString textureFilename,
-        int numIndices,
-        bool hasNormals,
-        float* positions,
-        int numPositions,
-        float* normals,
-        int numNormals,
-        float* colors,
-        int numColors,
-        float* texCoords,
-        int numTexCoords)
-    {
-        system("dir");
-        std::cout << "\nSave attempt to : " <<
-            "/Resources/AmberObjects/" + saveFilename.toStdString() + ".amb" <<
-            std::endl;
+        void  ArrayDump(
+            QTextStream &buffer,
+            float* data,
+            int numData,
+            int tupleSize
+        );
 
-        // open a file to write out to
-        QFile data("/Resources/AmberObjects/" + saveFilename + ".amb");
-        if (data.open(QFile::WriteOnly | QFile::Text))
-        {
-            QTextStream out(&data);
-            
-            // write data to file
-            out << "# " << saveFilename << "\n";
-            out << "#  .obj convertor file for Amberskies 3D";
+        void SaveConvertedData(
+            QString saveFilename,
+            bool hasTexture,
+            QString textureFilename,
+            int numIndices,
+            bool hasNormals,
+            float* positions,
+            int numPositions,
+            float* normals,
+            int numNormals,
+            float* colors,
+            int numColors,
+            float* texCoords,
+            int numTexCoords
+        );
 
-            // close file
-            out.flush();
-            data.close();
+        // data on disk reads :
 
-            std::cout << "File Saved to : " << 
-                "/Resources/AmberObjects/" + saveFilename.toStdString() + ".amb" <<
-                std::endl;
-        }
-        else
-        {
-            std::cout << "[ERROR] File did NOT Save !.\n\n";
-        }
-    }
+        // # comment
+        // hasTexture 0 = false 1 = true
+        // textureFileName = "0" or "Name.png"
 
-    // data on disk reads :
+        // no ArrayDump for indices as we do not try to compress our data
+        // ie serach for duplicated index data.
+        // numIndices = int
+        // hasNormals 0 = false 1 = true
 
-    // # comment
-    // hasTexture 0 = false 1 = true
-    // textureFileName = "0" or "Name.png"
-
-    // no ArrayDump for indices as we do not try to compress our data
-    // ie serach for duplicated index data.
-    // numIndices = int
-    // hasNormals 0 = false 1 = true
-
-    // ArrayDump float positions 3 
-    // ArrayDump float normals 3 (not in use)
-    // ArrayDump float colors 3 (RGB)
-    // ArrayDump float texture coords 2
-
-
-
-
-
-
-
-
-
-
-
+        // ArrayDump float positions 3 
+        // ArrayDump float normals 3 (not in use)
+        // ArrayDump float colors 3 (RGB)
+        // ArrayDump float texture coords 2
+    };
 }

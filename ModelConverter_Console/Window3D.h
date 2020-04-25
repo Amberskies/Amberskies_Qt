@@ -41,8 +41,6 @@
 #include <Amber3D/Entities/ColorEntity.h>
 #include <Amber3D/Entities/TexturedEntity.h>
 #include <Amber3D/Entities/Camera.h>
-#include <Amber3D/Maths/CreateViewMatrix.h>
-#include <Amber3D/Maths/CreateModelMatrix.h>
 
 namespace Dev
 {
