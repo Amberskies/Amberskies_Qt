@@ -1,11 +1,12 @@
 
 # Head
-#  .obj convertor file for Amberskies 3DData Start :
+#  .obj convertor file for Amberskies 3D 
+# Data Start :
 hasTexture: 1
 textureFilename: Blue.png
 numIndices: 36
 hasNormals: 1
-Array Start :
+# Array Start :
 0.591482 -0.591482 1 
 -1 -1 -1 
 1 -1 -1 
@@ -42,9 +43,8 @@ Array Start :
 1 -1 -1 
 -1 -1 -1 
 -1 1 -1 
--4.31602e+08 -4.31602e+08 -4.31602e+08 
 # Array End :
-Array Start :
+# Array Start :
 0 -0.9798 0.2001 
 0 -0.9798 0.2001 
 0 -0.9798 0.2001 
@@ -81,9 +81,8 @@ Array Start :
 0 0 -1 
 0 0 -1 
 0 0 -1 
--4.31602e+08 -4.31602e+08 -4.31602e+08 
 # Array End :
-Array Start :
+# Array Start :
 1 0 
 0 1 
 0 0 
@@ -120,6 +119,5 @@ Array Start :
 1 0 
 1 1 
 0 1 
--4.31602e+08 -4.31602e+08 
 # Array End :
-Data End :
+# Data End :

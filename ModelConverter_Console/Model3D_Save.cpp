@@ -32,8 +32,8 @@ namespace Dev
         int tupleSize)
     {
         int count = 0;
-        buffer << "Array Start :\n";
-        while (count <= numData)
+        buffer << "# Array Start :\n";
+        while (count < numData)
         {
             for (int i = 0; i < tupleSize; i++)
             {
@@ -78,9 +78,9 @@ namespace Dev
             // write data to file
             out << "\n";
             out << "# " << saveFilename << "\n";
-            out << "#  .obj convertor file for Amberskies 3D";
+            out << "#  .obj convertor file for Amberskies 3D \n";
 
-            out << "Data Start :\n";
+            out << "# Data Start :\n";
             out << "hasTexture: " << hasTexture << "\n";
             out << "textureFilename: " << textureFilename << "\n";
             out << "numIndices: " << numIndices << "\n";
@@ -122,7 +122,7 @@ namespace Dev
                 );
             }
 
-            out << "Data End :\n";
+            out << "# Data End :\n";
 
             // close file
             out.flush();
