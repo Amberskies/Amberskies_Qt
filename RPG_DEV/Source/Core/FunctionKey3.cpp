@@ -80,6 +80,19 @@ void FunctionKey3::F3_Initialize()
         1.0f, 0.0f      // 3
     };
 
+    /////////////////// Load a Converted 3D Model from HD ///////////////////////////
+    // eg 1 = textured model
+    // requirements :
+    // to place data into arrays
+    QString model_to_load = "Head";
+    // array indices;
+    // array vertices;
+    // array colors;
+    // array textureCoords;
+
+
+    /////////////////////////////////////////////////////////////////////////////////
+
     m_loader->SetShader(
         m_colorShader->GetProgramID(),
         m_textureShader->GetProgramID()
@@ -123,7 +136,7 @@ void FunctionKey3::F3_Initialize()
     );
 
     m_camera = new Amber3D::Entities::Camera(
-        QVector3D(0.0f, 0.0f, 0.0f),
+        QVector3D(0.75f, -0.25f, 0.0f),
         0.0f,                                   // pitch (x-axis)
         0.0f,                                   // yaw   (y-axis)      
         0.0f                                    // roll  (z-axis)
@@ -138,7 +151,7 @@ void FunctionKey3::Go(QMatrix4x4 projection)
     
     // Game Logic
 
-    m_camera->MoveCamera(0.03f);
+    m_camera->MoveCamera(0.03f); // sets camera move speed
 
     if (m_entity->GetTexturedModel()->GetRawModel()->GetHasTexture())
         m_renderer->render(

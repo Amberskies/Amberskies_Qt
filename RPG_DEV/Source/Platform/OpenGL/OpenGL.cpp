@@ -59,6 +59,8 @@ void OpenGL::initializeGL()
     printf("OpenGL : %s\n",
            glGetString(GL_VERSION)
     );
+    
+    resizeGL(this->width(), this->height());
 
     m_F3 = new FunctionKey3(this);
     m_F3->F3_Initialize(); // Amber3D
