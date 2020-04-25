@@ -83,3 +83,5 @@ Thumbs.db
 /ModelConverter_Console/x64/Debug
 /ModelConverter_Console/x64/Release/qmake
 /CppProperties.json
+/RPG_DEV/debug
+/RPG_DEV/x64

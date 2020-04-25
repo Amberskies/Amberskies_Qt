@@ -76,7 +76,7 @@ void FunctionKey3::F3_Initialize()
         //0
         0.0f, 0.0f,     // 0
         0.0f, 1.0f,     // 1
-        1.1f, 1.1f,     // 2
+        1.0f, 1.0f,     // 2
         1.0f, 0.0f      // 3
     };
 
@@ -104,7 +104,7 @@ void FunctionKey3::F3_Initialize()
         
         m_texture1 = new Amber3D::Textures::ModelTexture(
             m_loader->loadTexture(
-                "thing"
+                "Terrain"
             )
         );
 
@@ -115,7 +115,7 @@ void FunctionKey3::F3_Initialize()
     
     m_entity = new Amber3D::Entities::TexturedEntity(
         m_texturedModel,
-        QVector3D(-0.5f, 0.5f, -1.0f),          // Position
+        QVector3D(0.0f, 0.0f, -1.0f),          // Position
         0.0f,                                   // rotation X
         0.0f,                                   // rotation Y
         0.0f,                                   // rotation X

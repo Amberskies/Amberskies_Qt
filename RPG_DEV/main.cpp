@@ -25,6 +25,7 @@ int main(int argc, char *argv[])
 {
     QApplication mainLoop(argc, argv);
     TestWindow3D w;
+    //w.showFullScreen();
     w.show();
     return mainLoop.exec();
 }
