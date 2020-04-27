@@ -60,6 +60,7 @@ HEADERS += \
     Amber3D/Extras/Input.h \
     Amber3D/Maths/ClampRotation.h \
     Amber3D/Maths/CreateModelMatrix.h \
+    Amber3D/Maths/CreateViewMatrix.h \
     Amber3D/Models/RawModel.h \
     Amber3D/Models/TexturedModel.h \
     Amber3D/OpenGL/Renderer.h \
