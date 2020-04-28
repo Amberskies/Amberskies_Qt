@@ -47,48 +47,176 @@ FunctionKey3::~FunctionKey3()
 }
 void FunctionKey3::F3_Initialize()
 {
-    uint indices [] =
-    {
-        0, 1, 3,
-        3, 1, 2 
-    };
+    //uint indices [] =
+    //{
+    //    0, 1, 3,
+    //    3, 1, 2 
+    //};
 
-    float vertices [] =
-    {
-        // Left Bottom Triangle
-        -0.5f,  0.5f, 0.0f, // 0
-        -0.5f, -0.5f, 0.0f, // 1
-         0.5f, -0.5f, 0.0f, // 2
-         0.5f,  0.5f, 0.0f, // 3
-    };
+    //float vertices [] =
+    //{
+    //    // Left Bottom Triangle
+    //    -0.5f,  0.5f, 0.0f, // 0
+    //    -0.5f, -0.5f, 0.0f, // 1
+    //     0.5f, -0.5f, 0.0f, // 2
+    //     0.5f,  0.5f, 0.0f, // 3
+    //};
 
-    float colors [] =
-    {
-        0
-        // 1.0f, 0.0f, 0.0f,
-        // 0.0f, 1.0f, 0.0f,
-        // 0.0f, 0.0f, 1.0f,
-        // 1.0f, 1.0f, 1.0f,
-    };
+    //float colors [] =
+    //{
+    //    0
+    //    // 1.0f, 0.0f, 0.0f,
+    //    // 0.0f, 1.0f, 0.0f,
+    //    // 0.0f, 0.0f, 1.0f,
+    //    // 1.0f, 1.0f, 1.0f,
+    //};
 
-    float textureCoords [] =
-    {
-        //0
-        0.0f, 0.0f,     // 0
-        0.0f, 1.0f,     // 1
-        1.0f, 1.0f,     // 2
-        1.0f, 0.0f      // 3
-    };
+    //float textureCoords [] =
+    //{
+    //    //0
+    //    0.0f, 0.0f,     // 0
+    //    0.0f, 1.0f,     // 1
+    //    1.0f, 1.0f,     // 2
+    //    1.0f, 0.0f      // 3
+    //};
 
     /////////////////// Load a Converted 3D Model from HD ///////////////////////////
     // eg 1 = textured model
     // requirements :
     // to place data into arrays
-    QString model_to_load = "Head";
+    QString model_to_load = "Body";
+    int numIndices = 1;
+
+    QString filePath = "Resources/AmberModels/" + model_to_load + ".amb";
+    QString line;
+
+    QFile file_in(filePath);
+
+    bool file_is_open = file_in.open(QIODevice::ReadOnly | QIODevice::Text);
+    if (file_is_open == false)  qDebug("[Error] : unable to open 3D model file.");
+
+    QTextStream in(&file_in);
+   
+    bool hasTextures = false;
+    bool hasNormals = false;
+    QString texture_filename;
+
+    do
+    {
+        // read each line until end of file
+        line = in.readLine().trimmed();
+        // compare with possible lines as give in objDataStructure.h
+        QStringList data = line.split(" ");
+
+        /////////////////////////// AMB File /////////////////////////////
+
+        if(line.startsWith("hasTexture:")) hasTextures = data.at(1).toUInt();
+        if (line.startsWith("textureFilename:")) texture_filename = data.at(1);
+        if (line.startsWith("numIndices:")) numIndices = data.at(1).toInt();
+        if (line.startsWith("hasNormals:")) hasNormals = data.at(1).toUInt();
+
+
+    }while (line.startsWith("# Array Start :") == false);
+
     // array indices;
+    uint* indices = new uint[numIndices];
+    for (uint i = 0; i < numIndices; i++) indices[i] = i;
+
     // array vertices;
-    // array colors;
-    // array textureCoords;
+    int numVertices = numIndices * 3;
+    float* vertices = new float[numVertices];
+    int count = 0;
+    do
+    {
+        // read each line until end of file
+        line = in.readLine().trimmed();
+        // compare with possible lines as give in objDataStructure.h
+        QStringList data = line.split(" ");
+
+        /////////////////////////// AMB Verticies /////////////////////////////
+
+        if (line.startsWith("#")) continue;
+        vertices[count++] = data.at(0).toFloat();
+        vertices[count++] = data.at(1).toFloat();
+        vertices[count++] = data.at(2).toFloat();
+
+    } while (count < numVertices);
+
+    int numNormals = numIndices * 3;
+    float* normals = new float[numNormals];
+    count = 0;
+
+    if (hasNormals)
+    {
+        do
+        {
+            // read each line until end of file
+            line = in.readLine().trimmed();
+            // compare with possible lines as give in objDataStructure.h
+            QStringList data = line.split(" ");
+
+            /////////////////////////// AMB Normals /////////////////////////////
+
+            if (line.startsWith("#")) continue;
+            normals[count++] = data.at(0).toFloat();
+            normals[count++] = data.at(1).toFloat();
+            normals[count++] = data.at(2).toFloat();
+
+        } while (count < numNormals);
+    }
+    else
+    {
+        normals[0] = 0.0f;
+        numNormals = 1;
+    }
+
+    int numTexCoords = numIndices * 2;
+    float* textureCoords = new float[numTexCoords];
+    
+    int numColors = numIndices * 3;
+    float* colors = new float[numColors];
+    count = 0;
+    
+    if (hasTextures)
+    {
+        colors[0] = 0.0f;
+        numColors = 1;
+        do
+        {
+            // read each line until end of file
+            line = in.readLine().trimmed();
+            // compare with possible lines as give in objDataStructure.h
+            QStringList data = line.split(" ");
+
+            /////////////////////////// AMB TexCoords /////////////////////////////
+
+            if (line.startsWith("#")) continue;
+            textureCoords[count++] = data.at(0).toFloat();
+            textureCoords[count++] = data.at(1).toFloat();
+        } while (count < numTexCoords);
+
+    }
+    else
+    {
+        textureCoords[0] = 0.0f;
+        numTexCoords = 1;
+
+        do
+        {
+            // read each line until end of file
+            line = in.readLine().trimmed();
+            // compare with possible lines as give in objDataStructure.h
+            QStringList data = line.split(" ");
+
+            /////////////////////////// AMB Colors /////////////////////////////
+
+            if (line.startsWith("#")) continue;
+            colors[count++] = data.at(0).toFloat();
+            colors[count++] = data.at(1).toFloat();
+            colors[count++] = data.at(2).toFloat();
+
+        } while (count < numColors);
+    }
 
 
     /////////////////////////////////////////////////////////////////////////////////
@@ -100,14 +228,10 @@ void FunctionKey3::F3_Initialize()
 
     m_model = 
         m_loader->LoadToVAO(
-            indices,
-            sizeof(indices) /sizeof(uint),
-            vertices,
-            sizeof(vertices) / sizeof(float),
-            colors,
-            sizeof(colors) / sizeof(float),
-            textureCoords,
-            sizeof(textureCoords) / sizeof(float)
+            indices, numIndices,
+            vertices, numVertices,
+            colors, numColors,
+            textureCoords, numTexCoords
     );
     
     //if (m_model->GetHasTexture())
@@ -117,7 +241,7 @@ void FunctionKey3::F3_Initialize()
         
         m_texture1 = new Amber3D::Textures::ModelTexture(
             m_loader->loadTexture(
-                "Terrain"
+                texture_filename
             )
         );
 
@@ -128,7 +252,7 @@ void FunctionKey3::F3_Initialize()
     
     m_entity = new Amber3D::Entities::TexturedEntity(
         m_texturedModel,
-        QVector3D(0.0f, 0.0f, -1.0f),          // Position
+        QVector3D(0.0f, 0.0f, -3.0f),          // Position
         0.0f,                                   // rotation X
         0.0f,                                   // rotation Y
         0.0f,                                   // rotation X
@@ -136,7 +260,7 @@ void FunctionKey3::F3_Initialize()
     );
 
     m_camera = new Amber3D::Entities::Camera(
-        QVector3D(0.75f, -0.25f, 0.0f),
+        QVector3D(0.0f, 0.0f, 0.0f),
         0.0f,                                   // pitch (x-axis)
         0.0f,                                   // yaw   (y-axis)      
         0.0f                                    // roll  (z-axis)

@@ -21,6 +21,8 @@
 //#include <QOpenGLShaderProgram>
 #include <QOpenGLFunctions_3_3_Core>
 #include <QMatrix4x4>
+#include <QFile>
+
 #include <Amber3D/API/Loaders/GfxLoader.h>
 #include <Amber3D/API/Shaders/TextureShader.h>
 #include <Amber3D/API/Shaders/ColorShader.h>

@@ -12,7 +12,6 @@ TestWindow3D::TestWindow3D(QWidget *parent)
 
 {
     ui->setupUi(this);
-    
     m_loop->setTimerType(Qt::PreciseTimer);
     m_FPS->setTimerType(Qt::PreciseTimer);
 

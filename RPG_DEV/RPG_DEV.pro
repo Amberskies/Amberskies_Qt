@@ -50,13 +50,6 @@ FORMS += \
 #############################################################
 
 
-DISTFILES += \
-    Resources/Shaders/BasicColor.fsh \
-    Resources/Shaders/BasicColor.vsh \
-    Resources/Shaders/Simplified.fsh \
-    Resources/Shaders/Simplified.vsh
-
-
 win32:CONFIG(release, debug|release): LIBS += -L$$PWD/../Amber3D_SL/build/release/ -lAmber3D_SL
 else:win32:CONFIG(debug, debug|release): LIBS += -L$$PWD/../Amber3D_SL/build/debug/ -lAmber3D_SL
 
@@ -67,3 +60,17 @@ win32-g++:CONFIG(release, debug|release): PRE_TARGETDEPS += $$PWD/../Amber3D_SL/
 else:win32-g++:CONFIG(debug, debug|release): PRE_TARGETDEPS += $$PWD/../Amber3D_SL/build/debug/libAmber3D_SL.a
 else:win32:!win32-g++:CONFIG(release, debug|release): PRE_TARGETDEPS += $$PWD/../Amber3D_SL/build/release/Amber3D_SL.lib
 else:win32:!win32-g++:CONFIG(debug, debug|release): PRE_TARGETDEPS += $$PWD/../Amber3D_SL/build/debug/Amber3D_SL.lib
+
+DISTFILES += \
+    Resources/AmberObjects/Body.amb \
+    Resources/AmberObjects/BoxRGB.amb \
+    Resources/AmberObjects/Head.amb \
+    Resources/GLSL/BasicColor.frag \
+    Resources/GLSL/BasicColor.vert \
+    Resources/GLSL/BasicTexture.frag \
+    Resources/GLSL/BasicTexture.vert \
+    Resources/GLSL/Simplified.fsh \
+    Resources/GLSL/Simplified.vsh \
+    Resources/Textures/Blue.png \
+    Resources/Textures/Gold.png \
+    Resources/Textures/Terrain.png
