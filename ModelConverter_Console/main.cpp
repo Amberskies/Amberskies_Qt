@@ -19,7 +19,7 @@
 
 
 #include <QString>
-#define MODEL3D_TO_LOAD = "Body"    // name of our .obj file;
+#define MODEL3D_TO_LOAD "Body"    // name of our .obj file;
 
 #include <iostream>
 
