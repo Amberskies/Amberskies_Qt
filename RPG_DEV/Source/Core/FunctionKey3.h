@@ -18,19 +18,19 @@
 #pragma once
 #include "Source/Common.h"
 #include <Amber3D/Common.h>
-//#include <QOpenGLShaderProgram>
 #include <QOpenGLFunctions_3_3_Core>
 #include <QMatrix4x4>
-#include <QFile>
 
-#include <Amber3D/API/Loaders/GfxLoader.h>
 #include <Amber3D/API/Shaders/TextureShader.h>
 #include <Amber3D/API/Shaders/ColorShader.h>
 #include <Amber3D/Models/RawModel.h>
 #include <Amber3D/Models/TexturedModel.h>
 #include <Amber3D/OpenGL/Renderer.h>
-#include <Amber3D/Textures/ModelTexture.h>
+
+
+#include <Amber3D/API/Loaders/LoadAmberModel.h>
 #include <Amber3D/Entities/TexturedEntity.h>
+#include <Amber3D/Entities/ColorEntity.h>
 #include <Amber3D/Entities/Camera.h>
 
 
@@ -39,14 +39,14 @@ class FunctionKey3
     QOpenGLFunctions_3_3_Core *m_gl;
     Amber3D::Models::RawModel *m_model;
     Amber3D::Models::TexturedModel *m_texturedModel;
-    Amber3D::Textures::ModelTexture *m_texture1;
-    Amber3D::Entities::TexturedEntity *m_entity;
     
+    Amber3D::API::LoadAmberModel* m_loadAmberModel;
+    Amber3D::Entities::TexturedEntity *m_texturedEntity;
+    Amber3D::Entities::ColorEntity* m_colorEntity;
     Amber3D::Entities::Camera *m_camera;
 
     Amber3D::API::TextureShader *m_textureShader;
     Amber3D::API::ColorShader *m_colorShader;    
-    Amber3D::API::GfxLoader *m_loader;
     Amber3D::OpenGL::Renderer *m_renderer;
     
 

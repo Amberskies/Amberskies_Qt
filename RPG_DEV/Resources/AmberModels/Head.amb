@@ -3,7 +3,7 @@
 #  .obj convertor file for Amberskies 3D 
 # Data Start :
 hasTexture: 1
-textureFilename: Blue.png
+textureFilename: Gold.png
 numIndices: 36
 hasNormals: 1
 # Array Start :
