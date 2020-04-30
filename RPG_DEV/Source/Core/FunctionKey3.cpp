@@ -107,7 +107,7 @@ void FunctionKey3::Go(QMatrix4x4 projection)
         m_renderer->render(
             m_camera,
             m_texturedEntity,
-            m_textureShader->GetProgramID(),
+            m_textureShader,
             projection
         );
 
@@ -123,7 +123,7 @@ void FunctionKey3::Go(QMatrix4x4 projection)
         //m_renderer->render(
         //    m_camera,
         //    m_colorEntity,
-        //    m_colorShader->GetProgramID(),
+        //    m_colorShader,
         //    projection
         //);
 

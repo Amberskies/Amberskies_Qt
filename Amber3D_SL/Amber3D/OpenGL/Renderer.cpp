@@ -26,6 +26,7 @@ namespace Amber3D
     {        
         Renderer::Renderer(QOpenGLFunctions_3_3_Core *gl)
             : m_gl(gl)
+            , m_light(new Entities::Light(QVector3D(-5.0f, 5.0f, 5.0f), QVector3D(0.8f,0.8f,0.8f)))
         {
             // empty
         }
@@ -43,7 +44,7 @@ namespace Amber3D
         void Renderer::render(
             Entities::Camera *camera,
             Entities::TexturedEntity *texturedEntity,
-            QOpenGLShaderProgram *shader,
+            API::TextureShader *shader,
             QMatrix4x4 projectionMatrix)
         {
             Models::TexturedModel *texturedModel = 
@@ -52,7 +53,7 @@ namespace Amber3D
             Models::RawModel *model = 
                 texturedModel->GetRawModel();
 
-            shader->bind();
+            shader->GetProgramID()->bind();
             model->GetVao()->bind();
 
             QMatrix4x4 modelMatrix;
@@ -76,14 +77,23 @@ namespace Amber3D
             // shader->loadMVPmatrix(
             //     projectionMatrix * viewMatrix * modelMatrix
             // );
-            int locMVPmatrix =
-            shader->uniformLocation(
-                "u_mvp"
-            );
+            //int locMVPmatrix =
+            //shader->uniformLocation(
+              //  "u_mvp"
+            //);
             
-            shader->setUniformValue(
-                locMVPmatrix,
-                projectionMatrix * viewMatrix * modelMatrix
+            //shader->setUniformValue(
+              //  locMVPmatrix,
+                //projectionMatrix * viewMatrix * modelMatrix
+            //);
+            shader->loadUniformValues(
+                modelMatrix,
+                viewMatrix,
+                projectionMatrix,
+                *m_light,
+                0.1f,
+                0.5f,
+                QVector3D(0.7f, 0.8f, 0.75f)
             );
 
             texturedModel->GetModelTexture()->GetTexture()->bind();
@@ -96,7 +106,7 @@ namespace Amber3D
             );
 
             model->GetVao()->release();
-            shader->release();
+            shader->GetProgramID()->release();
         }
     }
 }

@@ -23,7 +23,7 @@ namespace Amber3D
     namespace API
     {
         TextureShader::TextureShader()
-            : ShaderProgram("BasicTexture")
+            : ShaderProgram("PhongTexture")
         {
             // empty
         }
@@ -33,14 +33,55 @@ namespace Amber3D
             // empty
         }
 
-        void TextureShader::loadMVPmatrix(
-            QMatrix4x4 mvp)
-        {
+		void TextureShader::loadUniformValues(QMatrix4x4 modelMatrix,
+            QMatrix4x4 viewMatrix,
+            QMatrix4x4 projectionMatrix,
+            Entities::Light& light,
+            float damper,
+            float reflectivity,
+            QVector3D skyColor)
+		{
             GetProgramID()->setUniformValue(
-                m_LocMVPmatrix,
-                mvp
+                m_modelMatLoc,
+                modelMatrix
             );
-        }
+
+            GetProgramID()->setUniformValue(
+                m_viewMatLoc,
+                viewMatrix
+            );
+
+            GetProgramID()->setUniformValue(
+                m_projectionMatLoc,
+                projectionMatrix
+            );
+
+            GetProgramID()->setUniformValue(
+                m_lightPositionLoc,
+                light.GetPosition()
+            );
+
+            GetProgramID()->setUniformValue(
+                m_lightColorLoc,
+                light.GetColor()
+            );
+
+            GetProgramID()->setUniformValue(
+                m_shineDamperLoc,
+                damper
+            );
+
+            GetProgramID()->setUniformValue(
+                m_reflectivityLoc,
+                reflectivity
+            );
+
+            GetProgramID()->setUniformValue(
+                m_skyColorLoc,
+                skyColor
+            );
+		}
+
         
         //////////////// Protected /////////////
 
@@ -59,10 +100,45 @@ namespace Amber3D
 
         void TextureShader::GetAllUniformLocations()
         {
-            m_LocMVPmatrix =
+            m_modelMatLoc =
                 GetProgramID()->uniformLocation(
-                    "u_mvp"
-            );
+                    "u_Model"
+                );
+
+            m_viewMatLoc =
+                GetProgramID()->uniformLocation(
+                    "u_View"
+                );
+
+            m_projectionMatLoc =
+                GetProgramID()->uniformLocation(
+                    "u_Projection"
+                );
+
+            m_lightPositionLoc =
+                GetProgramID()->uniformLocation(
+                    "u_LightPosition"
+                );
+
+            m_lightColorLoc =
+                GetProgramID()->uniformLocation(
+                    "u_LightColor"
+                );
+
+            m_shineDamperLoc =
+                GetProgramID()->uniformLocation(
+                    "u_ShineDamper"
+                );
+
+            m_reflectivityLoc =
+                GetProgramID()->uniformLocation(
+                    "u_Reflectivity"
+                );
+
+            m_skyColorLoc =
+                GetProgramID()->uniformLocation(
+                    "u_SkyColor"
+                );
         }
     }
 }

@@ -176,6 +176,7 @@ namespace Amber3D
                 m_loader->LoadToVAO(
                     indices, numIndices,
                     vertices, numVertices,
+                    normals, numNormals,
                     colors, numColors,
                     textureCoords, numTexCoords
                 );

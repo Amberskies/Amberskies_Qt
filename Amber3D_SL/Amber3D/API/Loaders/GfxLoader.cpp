@@ -64,6 +64,7 @@ namespace Amber3D
         Models::RawModel* GfxLoader::LoadToVAO(
             uint *indices, int numIndices,
             float *positions, int numPositions,
+            float* normals, int numNormals,
             float *colors, int numColors,
             float *texCoords, int numTexCoords)
         {
@@ -106,7 +107,13 @@ namespace Amber3D
                 positions,                      // data
                 numPositions * sizeof(float)    // size
             );
-            
+
+            StoreDataToAttribList(
+                2,                              // attrib location
+                3,                              // tuple size
+                normals,                      // data
+                numNormals * sizeof(float)    // size
+            );
                       
             vao->release();
             

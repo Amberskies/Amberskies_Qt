@@ -30,7 +30,7 @@ namespace Amber3D
             , m_indexCount(indexCount)
             , m_hasTexture(hasTexture)
         {
-            m_TextureFileName = {NULL}; // i dont think this is a good initialization.
+            m_TextureFileName = { nullptr }; 
         }
 
         QOpenGLVertexArrayObject* RawModel::GetVao()

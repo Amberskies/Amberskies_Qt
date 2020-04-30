@@ -56,6 +56,7 @@ namespace Amber3D
             Models::RawModel* LoadToVAO(            // Need to add normals
                 uint *indices, int numIndices,
                 float *positions, int numPositions,
+                float *normals, int numNormals,
                 float *color, int numColors,
                 float *texCoords, int numTexCoords
             );
