@@ -21,6 +21,7 @@
 
 #include <QOpenGLFunctions_3_3_Core>
 #include <QMatrix4x4>
+#include <QVector3D>
 
 #include "Amber3D/API/Shaders/TextureShader.h"
 #include "Amber3D/Models/TexturedModel.h"
@@ -37,7 +38,7 @@ namespace Amber3D
         class Renderer
         {
             QOpenGLFunctions_3_3_Core *m_gl;
-            Entities::Light* m_light;
+            Amber3D::Entities::Light* m_light;
 
         public:
             Renderer(

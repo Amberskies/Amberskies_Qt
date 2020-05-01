@@ -62,6 +62,9 @@ else:win32:!win32-g++:CONFIG(release, debug|release): PRE_TARGETDEPS += $$PWD/..
 else:win32:!win32-g++:CONFIG(debug, debug|release): PRE_TARGETDEPS += $$PWD/../Amber3D_SL/build/debug/Amber3D_SL.lib
 
 DISTFILES += \
+    Resources/AmberModels/Body.amb \
+    Resources/AmberModels/BoxRGB.amb \
+    Resources/AmberModels/Head.amb \
     Resources/AmberObjects/Body.amb \
     Resources/AmberObjects/BoxRGB.amb \
     Resources/AmberObjects/Head.amb \
@@ -69,6 +72,10 @@ DISTFILES += \
     Resources/GLSL/BasicColor.vert \
     Resources/GLSL/BasicTexture.frag \
     Resources/GLSL/BasicTexture.vert \
+    Resources/GLSL/PhongColor.frag \
+    Resources/GLSL/PhongColor.vert \
+    Resources/GLSL/PhongTexture.frag \
+    Resources/GLSL/PhongTexture.vert \
     Resources/GLSL/Simplified.fsh \
     Resources/GLSL/Simplified.vsh \
     Resources/Textures/Blue.png \

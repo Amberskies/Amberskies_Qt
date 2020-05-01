@@ -74,7 +74,7 @@ namespace Amber3D
             m_hasTextures = hasTextures;
             // array indices;
             uint* indices = new uint[numIndices];
-            for (uint i = 0; i < numIndices; i++) indices[i] = i;
+            for (int i = 0; i < numIndices; i++) indices[i] = i;
 
             // array vertices;
             int numVertices = numIndices * 3;
@@ -181,11 +181,12 @@ namespace Amber3D
                     textureCoords, numTexCoords
                 );
 
-            m_texture = new Amber3D::Textures::ModelTexture(
-                m_loader->loadTexture(
-                    texture_filename
-                )
-            );
+            if(rawModel->GetHasTexture())
+                m_texture = new Amber3D::Textures::ModelTexture(
+                    m_loader->loadTexture(
+                        texture_filename
+                    )
+                );
 
 			return rawModel;
 		}

@@ -33,6 +33,7 @@ CONFIG += debug
 #####################################################
 
 SOURCES += \
+    Amber3D/Entities/light.cpp \
     Amber3D_SL.cpp \
     Amber3D/API/Loaders/GfxLoader.cpp \
     Amber3D/API/Loaders/LoadAmberModel.cpp \
@@ -50,6 +51,7 @@ SOURCES += \
 
 HEADERS += \
     Amber3D/Common.h \
+    Amber3D/Entities/Light.h \
     Amber3D_SL.h \
     Amber3D/API/Loaders/GfxLoader.h \
     Amber3D/API/Loaders/LoadAmberModel.h \
