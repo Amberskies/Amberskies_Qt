@@ -26,7 +26,7 @@ namespace Amber3D
     {        
         Renderer::Renderer(QOpenGLFunctions_3_3_Core *gl)
             : m_gl(gl)
-            , m_light(new Entities::Light(QVector3D(-5.0f, 5.0f, 5.0f), QVector3D(0.8f,0.8f,0.8f)))
+            , m_light(new Entities::Light(QVector3D(0.0f, 0.0f, 10.0f), QVector3D(0.8f,0.8f,0.8f)))
         {
             // empty
         }
@@ -34,9 +34,9 @@ namespace Amber3D
         void Renderer::prepare()
         {
             m_gl->glClearColor(
-                0.1f,
-                0.2f,
-                0.5f,
+                0.01f,
+                0.02f,
+                0.05f,
                 1.0f
             );
         }
@@ -91,9 +91,9 @@ namespace Amber3D
                 viewMatrix,
                 projectionMatrix,
                 *m_light,
-                0.1f,
-                0.5f,
-                QVector3D(0.7f, 0.8f, 0.75f)
+                255.0f, // power of 2 roughness of surface 1 - 255
+                0.001f, // 1.0f = 100% how much is reflected
+                QVector3D(0.01f, 0.02f, 0.05f)
             );
 
             texturedModel->GetModelTexture()->GetTexture()->bind();

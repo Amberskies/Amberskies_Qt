@@ -356,6 +356,7 @@ int main(int argc, char *argv[])
     Amber3D::Models::RawModel *rawModel = loader->LoadToVAO(
                 &indices[0], numIndices,
                 &positions[0], numPositions, // normals will be added soon
+                &normals[0], numNormals,
                 &colors[0], numColors,
                 &texCoords[0], numTexCoords
     );

@@ -57,7 +57,7 @@ namespace Amber3D
 
         protected:
             void BindAttributes() override;
-            void GetAllUniformLocations() override;
+            void GetAllUniformLocations();
         };        
     }
 }

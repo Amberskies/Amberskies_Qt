@@ -25,7 +25,7 @@ namespace Amber3D
         TextureShader::TextureShader()
             : ShaderProgram("PhongTexture")
         {
-            // empty
+            GetAllUniformLocations();
         }
 
         TextureShader::~TextureShader()
@@ -95,6 +95,11 @@ namespace Amber3D
             BindAttrib(
                 1,
                 "textureCoords"
+            );
+
+            BindAttrib(
+                2,
+                "normal"
             );
         }
 

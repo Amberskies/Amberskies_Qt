@@ -93,11 +93,10 @@ namespace Amber3D
             );
 
             BindAttributes();
-            
+
             m_programID->link();
             m_programID->bind();
 
-            GetAllUniformLocations();
         }
     }
 }

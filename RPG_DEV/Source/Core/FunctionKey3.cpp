@@ -49,7 +49,7 @@ void FunctionKey3::F3_Initialize()
 {
 
     m_model = m_loadAmberModel->loadToGfx(
-        "Body",
+        "Head",
         m_colorShader->GetProgramID(),
         m_textureShader->GetProgramID()
     );

@@ -10,7 +10,7 @@ uniform mat4 u_Projection;
 
 uniform vec3 u_LightPosition;
 
-const float density = 0.007f;
+const float density = 0.05f;
 const float gradient = 1.5f;
 
 out vec4 v_Color;

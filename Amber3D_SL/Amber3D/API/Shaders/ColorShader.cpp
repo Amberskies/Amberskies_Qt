@@ -25,7 +25,7 @@ namespace Amber3D
         ColorShader::ColorShader()
             : ShaderProgram("PhongColor")
         {
-            // empty
+            GetAllUniformLocations();
         }
 
         ColorShader::~ColorShader()
@@ -97,6 +97,12 @@ namespace Amber3D
                 1,
                 "color"
             );
+
+            BindAttrib(
+                2,
+                "normal"
+            );
+
         }
 
         void ColorShader::GetAllUniformLocations()

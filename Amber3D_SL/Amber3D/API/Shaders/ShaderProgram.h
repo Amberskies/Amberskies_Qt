@@ -50,8 +50,6 @@ namespace Amber3D
                 QString name
             );
 
-            virtual void GetAllUniformLocations() {}
-
             int GetUniformLocation(
                 QString UniformName
             );
