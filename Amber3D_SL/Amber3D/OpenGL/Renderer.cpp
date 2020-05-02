@@ -91,8 +91,8 @@ namespace Amber3D
                 viewMatrix,
                 projectionMatrix,
                 *m_light,
-                255.0f, // power of 2 roughness of surface 1 - 255
-                0.001f, // 1.0f = 100% how much is reflected
+                16.0f, // power of 2 smoothness of surface 1 - 255
+                0.50f, // 1.0f = 100% how much is reflected
                 QVector3D(0.01f, 0.02f, 0.05f)
             );
 

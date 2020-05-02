@@ -7,7 +7,7 @@ in vec3 v_ToCameraVector;
 in float v_Visibility;
 
 uniform vec3 u_LightColor;
-uniform float u_ShineDamper; // roughness of surface low = smooth
+uniform float u_ShineDamper; // roughness of surface low = rough
 uniform float u_Reflectivity; // cloth = low// metalicness med to high // water glass high //
 uniform vec3 u_SkyColor;
 
