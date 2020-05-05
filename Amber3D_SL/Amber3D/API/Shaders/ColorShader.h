@@ -49,7 +49,7 @@ namespace Amber3D
                 QMatrix4x4 modelMatrix,
                 QMatrix4x4 viewMatrix,
                 QMatrix4x4 projectionMatrix,
-                Entities::Light &light,
+                Entities::Light* light,
                 float damper,
                 float reflectivity,
                 QVector3D skyColor

@@ -33,12 +33,6 @@ namespace Amber3D
         
         void Renderer::prepare()
         {
-            m_gl->glClearColor(
-                0.01f,
-                0.02f,
-                0.05f,
-                1.0f
-            );
         }
 
         void Renderer::render(
@@ -90,7 +84,7 @@ namespace Amber3D
                 modelMatrix,
                 viewMatrix,
                 projectionMatrix,
-                *m_light,
+                m_light,
                 16.0f, // power of 2 smoothness of surface 1 - 255
                 0.50f, // 1.0f = 100% how much is reflected
                 QVector3D(0.01f, 0.02f, 0.05f)

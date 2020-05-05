@@ -37,7 +37,7 @@ namespace Amber3D
             QMatrix4x4 modelMatrix,
             QMatrix4x4 viewMatrix,
             QMatrix4x4 projectionMatrix,
-            Entities::Light& light,
+            Entities::Light* light,
             float damper,
             float reflectivity,
             QVector3D skyColor)
@@ -59,12 +59,12 @@ namespace Amber3D
 
             GetProgramID()->setUniformValue(
                 m_lightPositionLoc,
-                light.GetPosition()
+                light->GetPosition()
             );
 
             GetProgramID()->setUniformValue(
                 m_lightColorLoc,
-                light.GetColor()
+                light->GetColor()
             );
 
             GetProgramID()->setUniformValue(

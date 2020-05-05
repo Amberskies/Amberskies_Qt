@@ -25,29 +25,32 @@
 #include <Amber3D/API/Shaders/ColorShader.h>
 #include <Amber3D/Models/RawModel.h>
 #include <Amber3D/Models/TexturedModel.h>
-#include <Amber3D/OpenGL/Renderer.h>
+#include <Amber3D/OpenGL/BatchRender.h>
 
 
 #include <Amber3D/API/Loaders/LoadAmberModel.h>
 #include <Amber3D/Entities/TexturedEntity.h>
 #include <Amber3D/Entities/ColorEntity.h>
 #include <Amber3D/Entities/Camera.h>
+#include <Amber3D/Entities/Light.h>
 
 
 class FunctionKey3
 {
     QOpenGLFunctions_3_3_Core *m_gl;
     Amber3D::Models::RawModel *m_model;
+    Amber3D::Models::RawModel* m_Cmodel;
     Amber3D::Models::TexturedModel *m_texturedModel;
     
     Amber3D::API::LoadAmberModel* m_loadAmberModel;
     Amber3D::Entities::TexturedEntity *m_texturedEntity;
     Amber3D::Entities::ColorEntity* m_colorEntity;
     Amber3D::Entities::Camera *m_camera;
+    Amber3D::Entities::Light* m_light;
 
     Amber3D::API::TextureShader *m_textureShader;
     Amber3D::API::ColorShader *m_colorShader;    
-    Amber3D::OpenGL::Renderer *m_renderer;
+    Amber3D::OpenGL::BatchRender *m_batchRender;
     
 
     public:

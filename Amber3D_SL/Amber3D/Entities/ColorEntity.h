@@ -35,6 +35,7 @@ namespace Amber3D
             float m_scale;
 
         public:
+  
             ColorEntity(
                 Models::RawModel *rawModel,
                 QVector3D position,
@@ -70,6 +71,8 @@ namespace Amber3D
             void SetRotationY(float rotationY) { m_rotationY = rotationY; }
             void SetRotationZ(float rotationZ) { m_rotationZ = rotationZ; }
             void SetScale(float scale) { m_scale = scale;}
+
+            NULL_COPY_AND_ASSIGN(ColorEntity)
         };
     }
 }

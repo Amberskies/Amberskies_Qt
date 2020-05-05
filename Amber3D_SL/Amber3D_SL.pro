@@ -34,6 +34,8 @@ CONFIG += debug
 
 SOURCES += \
     Amber3D/Entities/light.cpp \
+    Amber3D/OpenGL/DrawColor.cpp \
+    Amber3D/OpenGL/DrawTexture.cpp \
     Amber3D_SL.cpp \
     Amber3D/API/Loaders/GfxLoader.cpp \
     Amber3D/API/Loaders/LoadAmberModel.cpp \
@@ -47,11 +49,14 @@ SOURCES += \
     Amber3D/Models/RawModel.cpp \
     Amber3D/Models/TexturedModel.cpp \
     Amber3D/OpenGL/Renderer.cpp \
+    Amber3D/OpenGL/BatchRender.cpp \
     Amber3D/Textures/ModelTexture.cpp
 
 HEADERS += \
     Amber3D/Common.h \
     Amber3D/Entities/Light.h \
+    Amber3D/OpenGL/DrawColor.h \
+    Amber3D/OpenGL/DrawTexture.h \
     Amber3D_SL.h \
     Amber3D/API/Loaders/GfxLoader.h \
     Amber3D/API/Loaders/LoadAmberModel.h \
@@ -68,6 +73,7 @@ HEADERS += \
     Amber3D/Models/RawModel.h \
     Amber3D/Models/TexturedModel.h \
     Amber3D/OpenGL/Renderer.h \
+    Amber3D/OpenGL/BatchRender.h \
     Amber3D/Textures/ModelTexture.h
     
 ###################################################
