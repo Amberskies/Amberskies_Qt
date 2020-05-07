@@ -1,8 +1,2 @@
-﻿  Reading Qt configuration (C:\Qt\5.14.2\msvc2017_64\bin\qmake.exe)
-  Generate moc_predefs.h
-  Uic'ing worldwindow.ui...
-  Moc'ing worldwindow.h...
-  main.cpp
-  worldwindow.cpp
-  moc_worldwindow.cpp
+﻿  OpenGLView.cpp
   World_Builder.vcxproj -> C:\Users\Frazor Sharp\source\repos\Amberskies_Qt\World_Builder\debug\World_Builder.exe
