@@ -35,6 +35,7 @@ namespace Amber3D
             float m_scale;
 
         public:
+            TexturedEntity() {}
             TexturedEntity(
                 Models::TexturedModel *texturedModel,
                 QVector3D position,

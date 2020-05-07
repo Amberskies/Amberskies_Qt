@@ -45,6 +45,7 @@ namespace Amber3D
                                Entities::Camera* camera)
         {
             std::map<Models::RawModel*, std::vector<Entities::ColorEntity*>>::iterator it;
+            
             for (it = colorModels.begin(); it != colorModels.end(); ++it)
             {
                 Models::RawModel* model = it->first;
@@ -101,7 +102,7 @@ namespace Amber3D
                 m_light,
                 16.0f, // power of 2 smoothness of surface 1 - 255
                 0.50f, // 1.0f = 100% how much is reflected
-                QVector3D(0.01f, 0.02f, 0.05f)
+                QVector3D(0.01f, 0.02f, 0.05f) // Sky color
             );
         }
 
@@ -114,7 +115,7 @@ namespace Amber3D
         void DrawColor::CleanUp(Models::RawModel* model)
         {             
             model->GetVao()->release();
-            m_colorShader->GetProgramID()->release();
+            m_colorShader->Stop();
         }
     }
 }

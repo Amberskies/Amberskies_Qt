@@ -35,7 +35,7 @@ namespace Amber3D
             float m_scale;
 
         public:
-  
+            ColorEntity() {}
             ColorEntity(
                 Models::RawModel *rawModel,
                 QVector3D position,

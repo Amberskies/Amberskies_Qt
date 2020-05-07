@@ -48,7 +48,6 @@ SOURCES += \
     Amber3D/Extras/Input.cpp \
     Amber3D/Models/RawModel.cpp \
     Amber3D/Models/TexturedModel.cpp \
-    Amber3D/OpenGL/Renderer.cpp \
     Amber3D/OpenGL/BatchRender.cpp \
     Amber3D/Textures/ModelTexture.cpp
 
@@ -72,7 +71,6 @@ HEADERS += \
     Amber3D/Maths/CreateViewMatrix.h \
     Amber3D/Models/RawModel.h \
     Amber3D/Models/TexturedModel.h \
-    Amber3D/OpenGL/Renderer.h \
     Amber3D/OpenGL/BatchRender.h \
     Amber3D/Textures/ModelTexture.h
     

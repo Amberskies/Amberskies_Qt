@@ -20,6 +20,7 @@
 #include <Amber3D/Common.h>
 #include <QOpenGLFunctions_3_3_Core>
 #include <QMatrix4x4>
+#include <QVector>
 
 #include <Amber3D/API/Shaders/TextureShader.h>
 #include <Amber3D/API/Shaders/ColorShader.h>
@@ -38,13 +39,13 @@
 class FunctionKey3
 {
     QOpenGLFunctions_3_3_Core *m_gl;
-    Amber3D::Models::RawModel *m_model;
+    Amber3D::Models::RawModel *m_Tmodel;
     Amber3D::Models::RawModel* m_Cmodel;
     Amber3D::Models::TexturedModel *m_texturedModel;
     
     Amber3D::API::LoadAmberModel* m_loadAmberModel;
-    Amber3D::Entities::TexturedEntity *m_texturedEntity;
-    Amber3D::Entities::ColorEntity* m_colorEntity;
+    QVector<Amber3D::Entities::TexturedEntity*> m_texturedEntity;
+    QVector<Amber3D::Entities::ColorEntity*> m_colorEntity;
     Amber3D::Entities::Camera *m_camera;
     Amber3D::Entities::Light* m_light;
 

@@ -30,7 +30,7 @@ namespace Amber3D
             , m_gl(gl)
             , m_light(nullptr)
         {
-
+            m_perspective.setToIdentity();
         }
 
         void DrawTexture::Prepare(QMatrix4x4& perspective, Entities::Light* light)
@@ -45,6 +45,7 @@ namespace Amber3D
                                  Entities::Camera* camera)
         {
             std::map<Models::TexturedModel*, std::vector<Entities::TexturedEntity*>>::iterator it;
+            
             for (it = texturedModels.begin(); it != texturedModels.end(); ++it)
             {
                 Models::TexturedModel* model = it->first;
@@ -99,21 +100,23 @@ namespace Amber3D
                 m_light,
                 16.0f, // power of 2 smoothness of surface 1 - 255
                 0.50f, // 1.0f = 100% how much is reflected
-                QVector3D(0.01f, 0.02f, 0.05f)
+                QVector3D(0.01f, 0.02f, 0.05f) // sky color
             );
 
         }
 
         void DrawTexture::PrepareTexturedModel(Models::TexturedModel* model)
         {
-            m_textureShader->GetProgramID()->bind();
+            m_textureShader->Start();
             model->GetRawModel()->GetVao()->bind();
+            model->GetModelTexture()->GetTexture()->bind();
         }
 
         void DrawTexture::CleanUp(Models::TexturedModel* model)
         {
+            model->GetModelTexture()->GetTexture()->release();
             model->GetRawModel()->GetVao()->release();
-            m_textureShader->GetProgramID()->release();
+            m_textureShader->Stop();
         }
     }
 }
