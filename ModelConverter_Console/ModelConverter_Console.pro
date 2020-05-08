@@ -43,6 +43,8 @@ DISTFILES += \
     Resources/OBJ/BoxRGB.obj \
     Resources/OBJ/Head.mtl \
     Resources/OBJ/Head.obj \
+    Resources/OBJ/PlainMesh50x50.mtl \
+    Resources/OBJ/PlainMesh50x50.obj \
     Resources/Shaders/GLSL/BasicShader.fs \
     Resources/Shaders/GLSL/BasicShader.vs \
     Resources/Shaders/GLSL/StaticShader.fs \

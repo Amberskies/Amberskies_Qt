@@ -22,8 +22,8 @@ namespace Amber3D
 {
     namespace API
     {
-        TextureShader::TextureShader()
-            : ShaderProgram("PhongTexture")
+        TextureShader::TextureShader(QString shaderName)
+            : ShaderProgram(shaderName)
         {
             GetAllUniformLocations();
         }

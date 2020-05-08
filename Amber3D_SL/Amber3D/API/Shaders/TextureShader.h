@@ -21,6 +21,7 @@
 
 #include <QMatrix4x4>
 #include <QVector3D>
+#include <QString>
 
 #include "ShaderProgram.h"
 #include "Amber3D/Entities/Light.h"
@@ -42,7 +43,7 @@ namespace Amber3D
             int m_skyColorLoc = -1;
 
         public:
-            TextureShader();
+            TextureShader(QString shaderName);
             virtual ~TextureShader();
 
             void loadUniformValues(

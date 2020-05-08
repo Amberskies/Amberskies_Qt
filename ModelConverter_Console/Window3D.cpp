@@ -143,12 +143,12 @@ namespace Dev
 
             m_texturedEntity->GetTexturedModel()->GetModelTexture()->GetTexture()->bind();
 
-            glDrawElements(
-                GL_TRIANGLES,
-                m_texturedEntity->GetTexturedModel()->GetRawModel()->GetIndexCount(),
-                GL_UNSIGNED_INT,
-                0
-            );
+//            glDrawElements(
+//                GL_TRIANGLES,
+//                m_texturedEntity->GetTexturedModel()->GetRawModel()->GetIndexCount(),
+//                GL_UNSIGNED_INT,
+//                nullptr
+//            );
 
             m_texturedEntity->GetTexturedModel()->GetRawModel()->GetVao()->release();
             m_currentShader->release();
@@ -179,12 +179,12 @@ namespace Dev
                 m_projection * viewMatrix * modelMatrix
             );
 
-            glDrawElements(
-                GL_TRIANGLES,
-                m_colorEntity->GetRawModel()->GetIndexCount(),
-                GL_UNSIGNED_INT,
-                0
-            );
+//            glDrawElements(
+//                GL_TRIANGLES,
+//                m_colorEntity->GetRawModel()->GetIndexCount(),
+//                GL_UNSIGNED_INT,
+//                nullptr
+//            );
 
             m_colorEntity->GetRawModel()->GetVao()->release();
             m_currentShader->release();

@@ -85,3 +85,9 @@ Thumbs.db
 /CppProperties.json
 /RPG_DEV/debug
 /RPG_DEV/x64
+/Amber3D_SL/.vs/Amber3D_SL/v16/Browse.VC.db
+/Amber3D_SL/.vs/Amber3D_SL/v16/Browse.VC.opendb
+*.db
+*.db-shm
+/Amber3D_SL/.vs/Amber3D_SL/v16/Solution.VC.db-wal
+*.ipch

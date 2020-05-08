@@ -65,6 +65,7 @@ DISTFILES += \
     Resources/AmberModels/Body.amb \
     Resources/AmberModels/BoxRGB.amb \
     Resources/AmberModels/Head.amb \
+    Resources/AmberModels/PlainMesh50x50.amb \
     Resources/AmberObjects/Body.amb \
     Resources/AmberObjects/BoxRGB.amb \
     Resources/AmberObjects/Head.amb \

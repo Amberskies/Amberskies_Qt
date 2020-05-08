@@ -28,8 +28,8 @@ FunctionKey3::FunctionKey3(QOpenGLFunctions_3_3_Core *gl)
     //, m_colorEntity(nullptr)
     , m_camera(nullptr)
     , m_light(nullptr)
-    , m_textureShader(new Amber3D::API::TextureShader())
-    , m_colorShader(new Amber3D::API::ColorShader())
+    , m_textureShader(new Amber3D::API::TextureShader("PhongTexture"))
+    , m_colorShader(new Amber3D::API::ColorShader("PhongColor"))
     , m_batchRender(new Amber3D::OpenGL::BatchRender(m_colorShader, m_textureShader, m_gl))
     
 {
@@ -53,7 +53,7 @@ void FunctionKey3::F3_Initialize()
 {
 
     m_Tmodel = m_loadAmberModel->loadToGfx(
-        "Head",
+        "PlainMesh50x50",
         m_colorShader->GetProgramID(),
         m_textureShader->GetProgramID()
     );        
@@ -63,7 +63,7 @@ void FunctionKey3::F3_Initialize()
 		m_loadAmberModel->GetTexture()
 	);
 
-    for (int instance = 0; instance < 10; instance++)
+    for (int instance = 0; instance < 1; instance++)
     {
         m_texturedEntity.push_back(new Amber3D::Entities::TexturedEntity(
             m_texturedModel,
@@ -97,14 +97,14 @@ void FunctionKey3::F3_Initialize()
     }
 
     m_camera = new Amber3D::Entities::Camera(
-        QVector3D(0.0f, 0.0f, 0.0f),
+        QVector3D(0.0f, 1.0f, 10.0f),
         0.0f,                                   // pitch (x-axis)
         0.0f,                                   // yaw   (y-axis)      
         0.0f                                    // roll  (z-axis)
     );
 
     m_light = new Amber3D::Entities::Light(
-        QVector3D(0.0f, 0.0f, 10.0f),           // position
+        QVector3D(0.0f, 10.0f, 10.0f),           // position
         QVector3D(0.8f, 0.8f, 0.8f)             // color
     );
 
@@ -120,20 +120,19 @@ void FunctionKey3::Go(QMatrix4x4 projection)
 
     // add entities to our scene
 
-    for (int instance = 0; instance < 10; instance++)
-    {
-        
-        m_batchRender->AddTexturedEntity(
-            m_texturedEntity[instance]->GetTexturedModel(),
-            m_texturedEntity[instance]
-        );
-        // this is a test
-        m_texturedEntity[instance]->IncreaseRotation(
-            0.1f,                               // delta around X-axis
-            0.1f,                               // delta around Y-axis
-            0.0f
-        );                                      // delta around Z-axis -ve = cw +ve = ccw
+    m_batchRender->AddTexturedEntity(
+        m_texturedEntity[0]->GetTexturedModel(),
+        m_texturedEntity[0]
+    );
+    // this is a test
+//    m_texturedEntity[instance]->IncreaseRotation(
+//        0.1f,                               // delta around X-axis
+//        0.1f,                               // delta around Y-axis
+//        0.0f
+//    );                                      // delta around Z-axis -ve = cw +ve = ccw
 
+    for (int instance = 0; instance < 10; instance++)
+    {        
         m_batchRender->AddColorEntity(
             m_colorEntity[instance]->GetRawModel(),
             m_colorEntity[instance]

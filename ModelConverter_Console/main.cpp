@@ -19,7 +19,7 @@
 
 
 #include <QString>
-#define MODEL3D_TO_LOAD "Body"    // name of our .obj file;
+#define MODEL3D_TO_LOAD "PlainMesh50x50"    // name of our .obj file;
 
 #include <iostream>
 
@@ -324,8 +324,8 @@ int main(int argc, char *argv[])
     Amber3D::API::GfxLoader *loader = new Amber3D::API::GfxLoader();
 
     // Create Shaders.
-    Amber3D::API::ColorShader *colorShader = new Amber3D::API::ColorShader();
-    Amber3D::API::TextureShader *textureShader = new Amber3D::API::TextureShader();
+    Amber3D::API::ColorShader *colorShader = new Amber3D::API::ColorShader("BasicColor");
+    Amber3D::API::TextureShader *textureShader = new Amber3D::API::TextureShader("BasicTexture");
 
     // we set the 2 shaders color and texture
     loader->SetShader(

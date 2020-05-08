@@ -22,8 +22,8 @@ namespace Amber3D
 {
     namespace API
     {
-        ColorShader::ColorShader()
-            : ShaderProgram("PhongColor")
+        ColorShader::ColorShader(QString shaderName)
+            : ShaderProgram(shaderName)
         {
             GetAllUniformLocations();
         }
