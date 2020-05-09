@@ -27,6 +27,8 @@
 #include <QMatrix4x4>
 #include <QSurfaceFormat>
 
+#include "ModelWarehouse.h"
+
 
 class OpenGLView : public QOpenGLWidget, protected QOpenGLFunctions_3_3_Core
 {
@@ -36,10 +38,11 @@ class OpenGLView : public QOpenGLWidget, protected QOpenGLFunctions_3_3_Core
         QSurfaceFormat m_format;
         QOpenGLContext m_context;
 
+        ModelWarehouse* m_modelWarehouse;
 
     public:
         OpenGLView(QWidget *parent = nullptr);
-
+        ~OpenGLView();
 
     signals:
 

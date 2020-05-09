@@ -19,6 +19,7 @@
 
 OpenGLView::OpenGLView(QWidget* parent)
     : QOpenGLWidget(parent)
+    , m_modelWarehouse(nullptr)
 {
     // ** format used as I have no GFX card in this machine ** //
     m_format.setRedBufferSize(8);
@@ -29,6 +30,11 @@ OpenGLView::OpenGLView(QWidget* parent)
     m_format.setVersion(3, 3);
     m_format.setProfile(QSurfaceFormat::CoreProfile);
     this->setFormat(m_format);
+}
+
+OpenGLView::~OpenGLView()
+{
+    delete m_modelWarehouse;
 }
 
 /////////////// Protected //////////////////
@@ -45,13 +51,17 @@ void OpenGLView::initializeGL()
         printf("Unable to Initialize OpenGL 3.3 Core.\n");
         exit(99);
     }
-    glClearColor(0.12f, 0.05f, 0.01f, 1.00f);
+    glClearColor(1.0f, 0.0f, 0.0f, 1.0f); // will only take effect when renderer is not working.
     glEnable(GL_DEPTH_TEST);
 
     printf("OpenGL : %s\n",
         glGetString(GL_VERSION)
     );
 
+    /* ***** Init Amber **** */
+
+    m_modelWarehouse = new ModelWarehouse(this);
+    m_modelWarehouse->InitializeModelWarehouse();
 }
 
 void OpenGLView::paintGL()
@@ -61,6 +71,7 @@ void OpenGLView::paintGL()
         GL_DEPTH_BUFFER_BIT
     );
 
+    m_modelWarehouse->RenderAll(m_projection);
 }
 
 void OpenGLView::resizeGL(int width, int height)

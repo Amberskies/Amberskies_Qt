@@ -17,9 +17,15 @@
  * ---------------------------------------------------*/
 #pragma once
 
+#define LOOP_DELAY 10
+
 #include <QMainWindow>
 #include <QOpenGLWindow>
 #include <QOpenGLFunctions>
+#include <QTimer>
+#include <QMouseEvent>
+#include <QKeyEvent>
+
 
 QT_BEGIN_NAMESPACE
 namespace Ui { class WorldWindow; }
@@ -29,9 +35,21 @@ class WorldWindow : public QMainWindow
 {
     Q_OBJECT
 
+    QTimer* m_loop;
+
 public:
     WorldWindow(QWidget *parent = nullptr);
     ~WorldWindow();
+
+protected:
+    // inherited from QWindow.
+    void mousePressEvent(QMouseEvent* event) override;
+    void mouseReleaseEvent(QMouseEvent* event) override;
+    void keyPressEvent(QKeyEvent* event) override;
+    void keyReleaseEvent(QKeyEvent* event) override;
+
+public slots:
+    void Loop();
 
 private:
     Ui::WorldWindow *ui;
