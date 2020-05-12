@@ -32,7 +32,10 @@ namespace Amber3D
             setHeight(500);
         }
 
-
+        Window3D::~Window3D()
+        {
+            delete m_modelWarehouse;
+        }
 
         void Window3D::UpdateWindow3D()
         {

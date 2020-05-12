@@ -1,8 +1,1 @@
-﻿  Reading Qt configuration (C:\Qt\5.14.2\msvc2017_64\bin\qmake.exe)
-  Generate moc_predefs.h
-  Moc'ing WorldBuilder.h...
-  WorldBuilder.cpp
-  main.cpp
-  moc_WorldBuilder.cpp
-Amber3D_SL.lib(Window3D.obj) : error LNK2019: unresolved external symbol "public: virtual __cdecl Amber3D::OpenGL::Window3D::~Window3D(void)" (??1Window3D@OpenGL@Amber3D@@UEAA@XZ) referenced in function "public: virtual void * __cdecl Amber3D::OpenGL::Window3D::`scalar deleting destructor'(unsigned int)" (??_GWindow3D@OpenGL@Amber3D@@UEAAPEAXI@Z)
-debug\\World_Builder_Console.exe : fatal error LNK1120: 1 unresolved externals
+﻿

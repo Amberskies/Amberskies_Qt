@@ -1,11 +1,8 @@
-c:\qt_programming\amberskies\world_builder_console\x64\debug\worldbuilder.obj
-c:\qt_programming\amberskies\world_builder_console\x64\debug\main.obj
 c:\qt_programming\amberskies\world_builder_console\x64\debug\vc142.pdb
 c:\qt_programming\amberskies\world_builder_console\x64\debug\moc_worldbuilder.obj
+c:\qt_programming\amberskies\world_builder_console\x64\debug\main.obj
+c:\qt_programming\amberskies\world_builder_console\x64\debug\worldbuilder.obj
 c:\qt_programming\amberskies\world_builder_console\debug\moc_predefs.h
-c:\qt_programming\amberskies\world_builder_console\debug\world_builder_console.exe
-c:\qt_programming\amberskies\world_builder_console\debug\world_builder_console.ilk
-c:\qt_programming\amberskies\world_builder_console\debug\world_builder_console.pdb
 c:\qt_programming\amberskies\world_builder_console\debug\moc_worldbuilder.cpp
 c:\qt_programming\amberskies\world_builder_console\x64\debug\world_bu.608e55af.tlog\cl.command.1.tlog
 c:\qt_programming\amberskies\world_builder_console\x64\debug\world_bu.608e55af.tlog\cl.read.1.tlog
@@ -13,6 +10,10 @@ c:\qt_programming\amberskies\world_builder_console\x64\debug\world_bu.608e55af.t
 c:\qt_programming\amberskies\world_builder_console\x64\debug\world_bu.608e55af.tlog\custombuild.command.1.tlog
 c:\qt_programming\amberskies\world_builder_console\x64\debug\world_bu.608e55af.tlog\custombuild.read.1.tlog
 c:\qt_programming\amberskies\world_builder_console\x64\debug\world_bu.608e55af.tlog\custombuild.write.1.tlog
+c:\qt_programming\amberskies\world_builder_console\x64\debug\world_bu.608e55af.tlog\link-cvtres.read.1.tlog
+c:\qt_programming\amberskies\world_builder_console\x64\debug\world_bu.608e55af.tlog\link-cvtres.write.1.tlog
+c:\qt_programming\amberskies\world_builder_console\x64\debug\world_bu.608e55af.tlog\link-rc.read.1.tlog
+c:\qt_programming\amberskies\world_builder_console\x64\debug\world_bu.608e55af.tlog\link-rc.write.1.tlog
 c:\qt_programming\amberskies\world_builder_console\x64\debug\world_bu.608e55af.tlog\link.command.1.tlog
 c:\qt_programming\amberskies\world_builder_console\x64\debug\world_bu.608e55af.tlog\link.read.1.tlog
 c:\qt_programming\amberskies\world_builder_console\x64\debug\world_bu.608e55af.tlog\link.write.1.tlog

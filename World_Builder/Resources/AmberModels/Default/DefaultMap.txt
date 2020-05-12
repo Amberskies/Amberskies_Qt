@@ -1,4 +1,0 @@
-#
-# This file will contain models for the Default map
-#
-0 0

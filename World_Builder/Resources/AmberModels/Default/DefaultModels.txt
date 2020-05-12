@@ -1,4 +1,0 @@
-#
-# This is a list of the Default models to be loaded.
-#
-PlainMesh50x50
