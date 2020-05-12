@@ -27,15 +27,18 @@ namespace Amber3D
 {
     namespace OpenGL
     {
-        ModelWarehouse::ModelWarehouse(QOpenGLFunctions_3_3_Core* gl)
+        ModelWarehouse::ModelWarehouse(QString colorShader,
+            QString textureShader,
+            QOpenGLFunctions_3_3_Core* gl)
             : m_gl(gl)
-            , m_colorShader(new API::ColorShader("PhongColor"))
-            , m_textureShader(new API::TextureShader("PhongTexture"))
+            , m_colorShader(new API::ColorShader(colorShader))
+            , m_textureShader(new API::TextureShader(textureShader))
             , m_batchRender(new OpenGL::BatchRender(m_colorShader, m_textureShader, m_gl))
             , m_modelLoader(new API::LoadAmberModel())
             , m_model(nullptr)
             , m_light(nullptr)
             , m_camera(nullptr)
+            , m_mousePicker(new Gui_3D::MousePicker())
         {
             // Empty
         }
@@ -71,6 +74,7 @@ namespace Amber3D
             );
 
             LoadFiles();
+
         }
 
         void ModelWarehouse::RenderAll(QMatrix4x4 projection)
@@ -85,6 +89,9 @@ namespace Amber3D
                 );
             }
 
+            // (TODO:)(Bladez) move the model maps to this file.
+            //m_mousePicker->SetColorEntities(m_batchRender->GetColorEntities());
+
             for (int instance = 0; instance < m_textureEntities.size(); instance++)
             {
                 m_batchRender->AddTexturedEntity(
@@ -93,12 +100,32 @@ namespace Amber3D
                 );
             }
 
+            // m_mousePicker->SetTexture thingies
+
+            m_mousePicker->update(
+                m_windowSize.x(),
+                m_windowSize.y(),
+                m_camera,
+                projection
+            );
+
             m_batchRender->Render(
                 m_light,
                 m_camera,
                 projection
             );
 
+        }
+
+        void ModelWarehouse::SetShaders(QString colorShader, QString textureShader)
+        {
+            delete m_textureShader;
+            delete m_colorShader;
+
+            m_colorShader = new API::ColorShader(colorShader);
+            m_textureShader = new API::TextureShader(textureShader);
+            m_batchRender->SetColorShader(m_colorShader);
+            m_batchRender->SetTextureShader(m_textureShader);
         }
 
         //////////////////////// Private /////////////////////////////

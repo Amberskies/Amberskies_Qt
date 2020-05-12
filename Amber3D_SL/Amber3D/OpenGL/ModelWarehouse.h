@@ -36,6 +36,8 @@
 #include "Amber3D/Entities/TexturedEntity.h"
 #include "Amber3D/Entities/Light.h"
 #include "Amber3D/Entities/Camera.h"
+#include "Amber3D/Gui_3D/MousePicker.h"
+
 
 namespace Amber3D
 {
@@ -44,11 +46,12 @@ namespace Amber3D
         class ModelWarehouse : public QObject, protected QOpenGLFunctions_3_3_Core
         {
             Q_OBJECT
-                QOpenGLFunctions_3_3_Core* m_gl;
 
+
+            QOpenGLFunctions_3_3_Core* m_gl;
             API::ColorShader* m_colorShader;
             API::TextureShader* m_textureShader;
-            OpenGL::BatchRender* m_batchRender;
+            BatchRender* m_batchRender;
             API::LoadAmberModel* m_modelLoader;
 
             Models::RawModel* m_model;
@@ -56,14 +59,31 @@ namespace Amber3D
             QVector<Entities::TexturedEntity*> m_textureEntities;
             Entities::Light* m_light;
             Entities::Camera* m_camera;
+            Amber3D::Gui_3D::MousePicker* m_mousePicker;
+            QPoint m_windowSize;
 
         public:
-            ModelWarehouse(QOpenGLFunctions_3_3_Core* gl);
+            explicit ModelWarehouse(
+                QString colorShader,
+                QString textureShader,
+                QOpenGLFunctions_3_3_Core* gl
+            );
+
             ~ModelWarehouse();
 
             void InitializeModelWarehouse();
 
             void RenderAll(QMatrix4x4 projection);
+
+            void SetShaders(
+                QString colorShader,
+                QString textureShader
+            );
+
+            void setWindow(QPoint windowSize)
+            {
+                m_windowSize = windowSize;
+            }
 
         private:
             bool LoadFiles();

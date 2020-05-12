@@ -17,7 +17,7 @@
  *
  * ---------------------------------------------------*/
 #include "Window3D.h"
-#include "Amber3D/Extras/Input.h"
+#include "Amber3D/Gui_3D/Input.h"
 
 namespace Amber3D
 {
@@ -55,6 +55,14 @@ namespace Amber3D
             
         }
 
+        void Window3D::SetShaders(QString colorShader, QString textureShader)
+        {
+            m_modelWarehouse->SetShaders(
+                colorShader,
+                textureShader
+            );
+        }
+
         /////////////////// Protected ///////////////////
 
         void Window3D::initializeGL()
@@ -78,7 +86,12 @@ namespace Amber3D
                 GL_DEPTH_TEST   // gfx card buffer
             );
 
-            m_modelWarehouse = new ModelWarehouse(this);
+            m_modelWarehouse = new ModelWarehouse(
+                "PhongColor",
+                "PhongTexture",
+                this
+            );
+
             m_modelWarehouse->InitializeModelWarehouse();
         }
 
@@ -96,6 +109,7 @@ namespace Amber3D
 
             m_projection.setToIdentity();
             m_projection.perspective(FOV, aspectRatio, NEAR_PLANE, FAR_PLANE);
+            m_modelWarehouse->setWindow(QPoint(this->width(),this->height()));
 
         }
 

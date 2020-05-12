@@ -40,15 +40,20 @@ namespace Amber3D
             Q_OBJECT
 
             QMatrix4x4 m_projection;
-            ModelWarehouse* m_modelWarehouse;
             QSurfaceFormat m_format;
             QOpenGLContext m_context;
 
+            ModelWarehouse* m_modelWarehouse;
+         
         public:
             Window3D(QWindow* parent = nullptr);
             ~Window3D();
 
             void UpdateWindow3D();
+            void SetShaders(
+                QString colorShader,
+                QString textureShader
+            );
 
         protected:
             void initializeGL() override;

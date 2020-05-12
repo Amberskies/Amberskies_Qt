@@ -69,6 +69,16 @@ namespace Amber3D
             void AddTexturedEntity(Models::TexturedModel* model,
                                    Entities::TexturedEntity* texturedEntity);
 
+            std::map<Models::RawModel*, std::vector<Entities::ColorEntity*>> GetColorEntities()
+            {
+                return m_colorModels;
+            }
+
+            std::map<Models::TexturedModel*, std::vector<Entities::TexturedEntity*>> GetTextureEntities()
+            {
+                return m_texturedModels;
+            }
+
             void SetColorShader(API::ColorShader* colorShader) { m_colorShader = colorShader; }
             void SetTextureShader(API::TextureShader* textureShader) { m_textureShader = textureShader; }
         };

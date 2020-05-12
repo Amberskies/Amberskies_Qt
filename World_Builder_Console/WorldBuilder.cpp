@@ -32,6 +32,12 @@ WorldBuilder::~WorldBuilder()
 
 void WorldBuilder::Start()
 {
+    // set the shaders we would like to use.
+    m_window->SetShaders(
+        "BuilderColor",
+        "BuilderTexture"
+    );
+
     m_loop->setTimerType(Qt::PreciseTimer);
     connect(m_loop, SIGNAL(timeout()), this, SLOT(Loop()));
 

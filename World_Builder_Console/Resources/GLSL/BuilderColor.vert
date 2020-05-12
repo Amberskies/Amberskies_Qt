@@ -35,8 +35,5 @@ void main()
                 vec4(0.0f, 0.0f, 0.0f, 1.0f)
                 ) - worldPosition;
 
-    // Fog
-    float distanceToCamera = length(deltaCamera.xyz);
-    v_Visibility = exp(-pow((distanceToCamera * density), gradient));
-    v_Visibility = clamp(v_Visibility, 0.0f, 1.0f);
+    v_Visibility = 1.0f;
 }

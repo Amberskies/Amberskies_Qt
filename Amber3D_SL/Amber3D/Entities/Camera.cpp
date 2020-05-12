@@ -18,7 +18,7 @@
  * ---------------------------------------------------*/
 #include "Camera.h"
 #include "Amber3D/Maths/ClampRotation.h"
-#include "Amber3D/Extras/Input.h"
+#include "Amber3D/Gui_3D/Input.h"
 
 namespace Amber3D
 {
