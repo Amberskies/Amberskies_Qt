@@ -41,6 +41,8 @@ namespace Amber3D
 
             QMatrix4x4 m_projection;
             ModelWarehouse* m_modelWarehouse;
+            QSurfaceFormat m_format;
+            QOpenGLContext m_context;
 
         public:
             Window3D(QWindow* parent = nullptr);

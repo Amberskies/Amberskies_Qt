@@ -1,1 +1,7 @@
-﻿
+﻿  Reading Qt configuration (C:\Qt\5.14.2\msvc2017_64\bin\qmake.exe)
+  Generate moc_predefs.h
+  Moc'ing WorldBuilder.h...
+  WorldBuilder.cpp
+  main.cpp
+  moc_WorldBuilder.cpp
+  World_Builder_Console.vcxproj -> C:\Qt_Programming\Amberskies\World_Builder_Console\debug\World_Builder_Console.exe

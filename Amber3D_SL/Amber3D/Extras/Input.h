@@ -41,7 +41,7 @@ public:
   static void registerMousePress(Qt::MouseButton button);
   static void registerMouseRelease(Qt::MouseButton button);
   static void reset();
-  //friend class Window3D;
+  friend class Window3D;
 };
 
 inline bool Input::keyTriggered(Qt::Key key)

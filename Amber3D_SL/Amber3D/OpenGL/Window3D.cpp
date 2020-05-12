@@ -30,6 +30,16 @@ namespace Amber3D
             m_projection.setToIdentity();
             setWidth(900);
             setHeight(500);
+
+            // ** format used as I have no GFX card in this machine ** //
+            m_format.setRedBufferSize(8);
+            m_format.setGreenBufferSize(8);
+            m_format.setBlueBufferSize(8);
+            m_format.setAlphaBufferSize(8);
+            m_format.setDepthBufferSize(32);
+            m_format.setVersion(3, 3);
+            m_format.setProfile(QSurfaceFormat::CoreProfile);
+            this->setFormat(m_format);
         }
 
         Window3D::~Window3D()
@@ -40,7 +50,8 @@ namespace Amber3D
         void Window3D::UpdateWindow3D()
         {
             Input::update();
-            paintGL();
+            if (Input::keyPressed(Qt::Key_Escape)) this->close();
+            update();
             
         }
 
@@ -49,6 +60,8 @@ namespace Amber3D
         void Window3D::initializeGL()
         {
             QOpenGLFunctions_3_3_Core::initializeOpenGLFunctions();
+            m_context.create();
+            makeCurrent();
 
             printf("OpenGL : %s\n",
                 glGetString(GL_VERSION)
