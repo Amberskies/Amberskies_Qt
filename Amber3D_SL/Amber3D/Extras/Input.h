@@ -32,7 +32,7 @@ public:
   static QPoint mousePosition();
   static QPoint mouseDelta();
 
-private:
+//private:
 
   // State updating
   static void update();
@@ -41,7 +41,7 @@ private:
   static void registerMousePress(Qt::MouseButton button);
   static void registerMouseRelease(Qt::MouseButton button);
   static void reset();
-  friend class TestWindow3D;
+  //friend class Window3D;
 };
 
 inline bool Input::keyTriggered(Qt::Key key)

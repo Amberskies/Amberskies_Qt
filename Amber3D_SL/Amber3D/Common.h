@@ -18,6 +18,10 @@
  * ---------------------------------------------------*/
 #pragma once
 
+#define FOV 45.0f
+#define NEAR_PLANE 0.1f
+#define FAR_PLANE 75.0f
+
 #define NULL_COPY_AND_ASSIGN(T) \
 	T(const T& other) {(void)other;} \
 	void operator=(const T& other) { (void)other; }

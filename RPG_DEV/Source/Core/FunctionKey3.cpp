@@ -77,7 +77,7 @@ void FunctionKey3::F3_Initialize()
     }
     
     m_Cmodel = m_loadAmberModel->loadToGfx(
-        "BoxRGB",
+        "Dice",
         m_colorShader->GetProgramID(),
         m_textureShader->GetProgramID()
     );

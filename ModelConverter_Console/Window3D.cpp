@@ -1,3 +1,4 @@
+#include "..\Amber3D_SL\Amber3D\OpenGL\Window3D.h"
 
 /* ----------------------------------------------------/
  *
@@ -88,7 +89,8 @@ namespace Dev
 
     //////////////////////////// PROTECTED ////////////////////////////
 
-    void Window3D::initializeGL()
+
+	void Window3D::initializeGL()
     {
         QOpenGLFunctions_3_3_Core::initializeOpenGLFunctions();
         m_context.create();

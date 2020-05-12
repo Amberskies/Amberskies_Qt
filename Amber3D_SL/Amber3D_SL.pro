@@ -17,7 +17,7 @@
 #
 # ---------------------------------------------------*/
 
-QT += core widgets gui
+QT += core gui
 
 TEMPLATE = lib
 CONFIG += staticlib
@@ -36,6 +36,8 @@ SOURCES += \
     Amber3D/Entities/light.cpp \
     Amber3D/OpenGL/DrawColor.cpp \
     Amber3D/OpenGL/DrawTexture.cpp \
+    Amber3D/OpenGL/ModelWarehouse.cpp \
+    Amber3D/OpenGL/Window3D.cpp \
     Amber3D_SL.cpp \
     Amber3D/API/Loaders/GfxLoader.cpp \
     Amber3D/API/Loaders/LoadAmberModel.cpp \
@@ -56,6 +58,8 @@ HEADERS += \
     Amber3D/Entities/Light.h \
     Amber3D/OpenGL/DrawColor.h \
     Amber3D/OpenGL/DrawTexture.h \
+    Amber3D/OpenGL/ModelWarehouse.h \
+    Amber3D/OpenGL/Window3D.h \
     Amber3D_SL.h \
     Amber3D/API/Loaders/GfxLoader.h \
     Amber3D/API/Loaders/LoadAmberModel.h \
