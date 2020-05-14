@@ -23,8 +23,10 @@
 #include <QObject>
 #include <QMatrix4x4>
 #include <QVector3D>
+#include <QVector2D>
 #include <QVector4D>
 #include <QPoint>
+#include <QVector>
 
 #include <Amber3D/Entities/Camera.h>
 #include <Amber3D/Entities/ColorEntity.h>
@@ -43,16 +45,22 @@ namespace Amber3D
 
             QVector3D m_currentRay;
             QVector3D m_currentModelPoint;
+            QVector3D m_currentCursor;
 
             // models to check against
             QVector<Entities::ColorEntity*> m_colorEntities;
             QVector<Entities::TexturedEntity*> m_textureEntities;
+            Entities::TexturedEntity* m_terrain;
+            Entities::Camera* m_camera;
+            QPoint m_mousePosition;
 
 
         public:
             MousePicker();
 
-            void update(
+            QVector3D update(
+                QPoint mousePosition,
+                Entities::TexturedEntity *terrain, 
                     int width,
                     int height,
                 Entities::Camera* camera,
@@ -82,7 +90,7 @@ namespace Amber3D
             }
 
         private:
-            QPoint GetNormalizedWindowCoord(
+            QVector2D GetNormalizedWindowCoord(
                 float windowWidth,
                 float windowHeight
             );
@@ -93,19 +101,35 @@ namespace Amber3D
             );
 
             QVector3D ConvertToModelSpace(
-                QVector4D projectionSpace,
-                Entities::Camera* camera
+                QVector4D projectionSpace
             );
 
             QVector3D CalcMouseRay(
                     int width,
                     int height,
-                Entities::Camera* camera,
                 QMatrix4x4 projection
             );
 
             // next check the models against the ray for an intersection.
 
+            bool IntersectionInRange(
+                float start,
+                float finish
+            );
+
+            QVector3D PointOnRay(
+                float distance
+            );
+
+            bool CheckIfUnderGround(
+                QVector3D testPoint
+            );
+
+            QVector3D BinarySearch(
+                int count,
+                float start,
+                float finish
+            );
         };
     }
 }

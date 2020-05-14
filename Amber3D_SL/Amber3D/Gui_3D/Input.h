@@ -3,6 +3,7 @@
 
 
 #include <Qt>
+#include <QWindow>
 #include <QPoint>
 
 class Input

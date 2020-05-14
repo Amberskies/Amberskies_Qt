@@ -73,7 +73,9 @@ namespace Amber3D
 
             void InitializeModelWarehouse();
 
-            void RenderAll(QMatrix4x4 projection);
+            void RenderAll(
+                QPoint mousePosition,
+                QMatrix4x4 projection);
 
             void SetShaders(
                 QString colorShader,

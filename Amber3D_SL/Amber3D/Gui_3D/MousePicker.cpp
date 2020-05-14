@@ -26,39 +26,54 @@ namespace Amber3D
     namespace Gui_3D
     {
         MousePicker::MousePicker()
+            : m_camera(nullptr)
+            , m_terrain(nullptr)
         {
             // Empty
         }
 
-        void MousePicker::update(
+        QVector3D MousePicker::update(
+            QPoint mousePosition,
+            Entities::TexturedEntity* terrain,
                 int width,
                 int height,
             Entities::Camera* camera,
             QMatrix4x4 projection)
         {
+            m_terrain = terrain;
+            m_camera = camera;
+            m_mousePosition = mousePosition;
+
             m_currentRay = CalcMouseRay(
                 width,
                 height,
-                camera,
                 projection
             );
 
-            printf(
-                "Current Mouse Ray ( %f, %f, %f )\n",
-                m_currentRay.x(),
-                m_currentRay.y(),
-                m_currentRay.z()
-            );
+             m_currentCursor = QVector3D(0.0f, 0.0f, 0.0f);
+
+            if (IntersectionInRange(0, RAY_RANGE))
+            {
+                m_currentCursor = BinarySearch(
+                    0,
+                    0.0f,
+                    RAY_RANGE
+                );
+            }
+
+            return m_currentCursor;
         }
 
         /////////////////////// Private ////////////////////////
 
-        QPoint MousePicker::GetNormalizedWindowCoord(
+        QVector2D MousePicker::GetNormalizedWindowCoord(
             float windowWidth,
             float windowHeight)
         {
-            QPoint mouseLoc = Input::mousePosition();   // which coord did we get ? window or screen
-                                                        // may have to reflect the y direction from window to opengl
+            QVector2D mouseLoc;
+            mouseLoc.setX(m_mousePosition.x());
+            mouseLoc.setY(m_mousePosition.y());
+
             mouseLoc.setX(
                 ((2.0f * mouseLoc.x()) / windowWidth) - 1
             );
@@ -75,7 +90,7 @@ namespace Amber3D
             QVector4D mousePos)
         {
             QMatrix4x4 invertedProjection = projection.inverted();
-            QVector4D projectionSpace = invertedProjection * mousePos; 
+            QVector4D projectionSpace = invertedProjection * -mousePos; 
             
             return QVector4D(
                 projectionSpace.x(),
@@ -86,10 +101,9 @@ namespace Amber3D
         }
 
         QVector3D MousePicker::ConvertToModelSpace(
-            QVector4D projectionSpace,
-            Entities::Camera* camera)
+            QVector4D projectionSpace)
         {
-            QMatrix4x4 view = Maths::CreateViewMatrix(camera);
+            QMatrix4x4 view = Maths::CreateViewMatrix(m_camera);
             QMatrix4x4 invertedView = view.inverted();
             QVector4D rayView = invertedView * projectionSpace;
             rayView.normalize();
@@ -104,10 +118,9 @@ namespace Amber3D
         QVector3D MousePicker::CalcMouseRay(
             int width,
             int height,
-            Entities::Camera* camera,
             QMatrix4x4 projection)
         {
-            QPoint windowCoord = GetNormalizedWindowCoord(
+            QVector2D windowCoord = GetNormalizedWindowCoord(
                 width,
                 height
             );
@@ -125,12 +138,83 @@ namespace Amber3D
             );
 
             QVector3D modelCoord = ConvertToModelSpace(
-                viewCoord,
-                camera
+                viewCoord
             );
 
             return modelCoord;
         }
 
+        // next check the models against the ray for an intersection.
+
+        bool MousePicker::IntersectionInRange(float start, float finish)
+        {
+            QVector3D startPoint = PointOnRay(start);
+            QVector3D endPoint = PointOnRay(finish);
+
+            if (CheckIfUnderGround(startPoint) == false &&
+                CheckIfUnderGround(endPoint) == true)
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }
+
+        QVector3D MousePicker::PointOnRay(float distance)
+        {
+            QVector3D cameraPosition = m_camera->GetPosition();
+            
+            QVector3D scaledRay = QVector3D(
+                m_currentRay.x() * distance,
+                m_currentRay.y() * distance,
+                m_currentRay.z() * distance
+            );
+
+            return cameraPosition + scaledRay;
+        }
+
+        bool MousePicker::CheckIfUnderGround(QVector3D testPoint)
+        {
+            // we need to be able to get the height @ the terrain(testPoint(x,z))
+            // so far we can only test on a flat terrain @ y = 0
+            if (testPoint.y() < m_terrain->GetPosition().y())
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }
+
+        QVector3D MousePicker::BinarySearch(
+            int count,
+            float start,
+            float finish)
+        {
+            float half = start + ((finish - start) / 2.0f); // records the current distance
+            if (count >= RECURSION_COUNT)
+            {
+                QVector3D lastPoint = PointOnRay(half);
+                if (lastPoint.x() >= m_terrain->GetPosition().x() + 50.0f || 
+                    lastPoint.z() >= m_terrain->GetPosition().z() + 50.0f)
+                {
+                    return QVector3D(25.0f, 0.0f, 25.0f);
+                }
+                else
+                {
+                    return lastPoint;
+                }
+            }
+
+            if (IntersectionInRange(start, half))
+                return BinarySearch(count + 1, start, half);
+            else
+                return BinarySearch(count + 1, half, finish);
+
+            return QVector3D();
+        }
     }
 }

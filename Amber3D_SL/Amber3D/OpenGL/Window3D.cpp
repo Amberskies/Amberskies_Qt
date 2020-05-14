@@ -50,6 +50,7 @@ namespace Amber3D
         void Window3D::UpdateWindow3D()
         {
             Input::update();
+           
             if (Input::keyPressed(Qt::Key_Escape)) this->close();
             update();
             
@@ -100,7 +101,15 @@ namespace Amber3D
             glClear(GL_COLOR_BUFFER_BIT |
                     GL_DEPTH_BUFFER_BIT
                     );
-            m_modelWarehouse->RenderAll(m_projection);
+            
+            QPoint mousePos = this->mapFromGlobal(
+                Input::mousePosition()
+            );
+            
+            m_modelWarehouse->RenderAll(
+                mousePos,
+                m_projection
+            );
         }
 
         void Window3D::resizeGL(int width, int height)

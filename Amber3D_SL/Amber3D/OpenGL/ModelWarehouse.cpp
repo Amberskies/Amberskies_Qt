@@ -45,6 +45,7 @@ namespace Amber3D
 
         ModelWarehouse::~ModelWarehouse()
         {
+            delete m_mousePicker;
             delete m_camera;
             delete m_light;
             delete m_modelLoader;
@@ -67,8 +68,8 @@ namespace Amber3D
             );
 
             m_camera = new Entities::Camera(
-                QVector3D(65.0f, 25.0f, 65.0f),
-                45.0f,
+                QVector3D(65.0f, 20.0f, 65.0f),
+                40.0f,
                 -45.0f,
                 0.0f
             );
@@ -77,9 +78,22 @@ namespace Amber3D
 
         }
 
-        void ModelWarehouse::RenderAll(QMatrix4x4 projection)
+        void ModelWarehouse::RenderAll(
+            QPoint mousePosition, 
+            QMatrix4x4 projection)
         {
             m_camera->MoveCamera(0.06f); // sets camera move speed
+
+            QVector3D cursorPos = m_mousePicker->update(
+                mousePosition,
+                m_textureEntities[0],
+                m_windowSize.x(),
+                m_windowSize.y(),
+                m_camera,
+                projection
+            );
+
+            m_colorEntities[0]->SetPosition(cursorPos);
 
             for (int instance = 0; instance < m_colorEntities.size(); instance++)
             {
@@ -89,9 +103,6 @@ namespace Amber3D
                 );
             }
 
-            // (TODO:)(Bladez) move the model maps to this file.
-            //m_mousePicker->SetColorEntities(m_batchRender->GetColorEntities());
-
             for (int instance = 0; instance < m_textureEntities.size(); instance++)
             {
                 m_batchRender->AddTexturedEntity(
@@ -99,15 +110,6 @@ namespace Amber3D
                     m_textureEntities[instance]
                 );
             }
-
-            // m_mousePicker->SetTexture thingies
-
-            m_mousePicker->update(
-                m_windowSize.x(),
-                m_windowSize.y(),
-                m_camera,
-                projection
-            );
 
             m_batchRender->Render(
                 m_light,
@@ -139,7 +141,10 @@ namespace Amber3D
                 filePath + "DefaultModels.txt"
             );
 
-            bool file_is_open = file_in.open(QIODevice::ReadOnly | QIODevice::Text);
+            bool file_is_open = file_in.open(
+                QIODevice::ReadOnly | QIODevice::Text
+            );
+
             if (file_is_open == false)  return false;
 
             QTextStream in(&file_in);
@@ -159,7 +164,7 @@ namespace Amber3D
                     m_colorShader->GetProgramID(),
                     m_textureShader->GetProgramID()
                 );
-                // stop here
+                
                 if (m_model->GetHasTexture())
                 {
                     Textures::ModelTexture* texture =
