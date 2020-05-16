@@ -84,15 +84,15 @@ namespace Amber3D
             float yaw,
             float roll)
         {
-            m_pitch = Maths::ClampRotation(
+            m_pitch = Maths::ClampRotation( // x-axis
                 m_pitch += pitch
             );
 
-            m_yaw = Maths::ClampRotation(
+            m_yaw = Maths::ClampRotation( // y axis
                 m_yaw += yaw
             );
 
-            m_roll = Maths::ClampRotation(
+            m_roll = Maths::ClampRotation( // z axis
                 m_roll += roll
             );            
         }

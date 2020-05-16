@@ -3,3 +3,4 @@
 #
 PlainMesh50x50
 BoxRGB
+Dice

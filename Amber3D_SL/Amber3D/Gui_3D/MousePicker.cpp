@@ -64,11 +64,6 @@ namespace Amber3D
                 );
             }
 
-            // re position to the closest 1m square
-            m_currentCursor.setX(static_cast<int>(m_currentCursor.x()) + 0.5f);
-            m_currentCursor.setY(m_currentCursor.y() - 0.4f);
-            m_currentCursor.setZ(static_cast<int>(m_currentCursor.z()) + 0.5f);
-
             return m_currentCursor;
         }
 

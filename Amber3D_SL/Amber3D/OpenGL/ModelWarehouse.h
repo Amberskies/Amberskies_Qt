@@ -37,6 +37,7 @@
 #include "Amber3D/Entities/Light.h"
 #include "Amber3D/Entities/Camera.h"
 #include "Amber3D/Gui_3D/MousePicker.h"
+#include "Amber3D/Gui_3D/MenuSystem.h"
 
 
 namespace Amber3D
@@ -60,6 +61,7 @@ namespace Amber3D
             Entities::Light* m_light;
             Entities::Camera* m_camera;
             Amber3D::Gui_3D::MousePicker* m_mousePicker;
+            Gui_3D::MenuSystem* m_menuSystem;
             QPoint m_windowSize;
 
         public:

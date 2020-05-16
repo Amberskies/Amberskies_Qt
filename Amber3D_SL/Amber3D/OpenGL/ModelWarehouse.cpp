@@ -16,7 +16,7 @@
  *
  * ---------------------------------------------------*/
 #include "ModelWarehouse.h"
-
+#include "../Gui_3D/Input.h"
 
 // Resources/AmberModels/Default
 //  Files : DefaultMap.txt          : Where things are in the world
@@ -39,12 +39,14 @@ namespace Amber3D
             , m_light(nullptr)
             , m_camera(nullptr)
             , m_mousePicker(new Gui_3D::MousePicker())
+            , m_menuSystem(new Gui_3D::MenuSystem())
         {
             // Empty
         }
 
         ModelWarehouse::~ModelWarehouse()
         {
+            delete m_menuSystem;
             delete m_mousePicker;
             delete m_camera;
             delete m_light;
@@ -76,6 +78,8 @@ namespace Amber3D
 
             LoadFiles();
 
+            // initialize 3D menu System.
+
         }
 
         void ModelWarehouse::RenderAll(
@@ -95,9 +99,34 @@ namespace Amber3D
                 projection
             );
 
-            m_colorEntities[0]->SetPosition(cursorPos);
+            // re position to the closest 1m square
+            cursorPos.setX(static_cast<int>(cursorPos.x()) + 0.5f);
+            cursorPos.setY(cursorPos.y() - 0.4f);
+            cursorPos.setZ(static_cast<int>(cursorPos.z()) + 0.5f);
+
             m_colorEntities[0]->SetScale(0.5f);
 
+            if (Input::buttonPressed(Qt::LeftButton))
+            {
+                m_colorEntities[0]->SetPosition(        // switch 3D curssor off.
+                    QVector3D(cursorPos.x(),
+                        cursorPos.y() - 1.0f,
+                        cursorPos.z()
+                    )
+                );
+
+                // check menus here
+
+            }
+            else
+            {
+                m_colorEntities[0]->SetPosition(cursorPos);
+                
+            }
+
+            // alter these to place into menu positions.
+            // NB   (color)     id 0 = cursor
+            //      (texture)   id 0 = terrain
             for (int instance = 0; instance < m_colorEntities.size(); instance++)
             {
                 m_batchRender->AddColorEntity(
@@ -113,6 +142,9 @@ namespace Amber3D
                     m_textureEntities[instance]
                 );
             }
+
+            // add map Models here to the batch renderer.
+            // for this we need a way to store the map.
 
             m_batchRender->Render(
                 m_light,
