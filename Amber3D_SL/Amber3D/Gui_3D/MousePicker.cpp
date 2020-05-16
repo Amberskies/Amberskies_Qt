@@ -28,11 +28,13 @@ namespace Amber3D
         MousePicker::MousePicker()
             : m_camera(nullptr)
             , m_terrain(nullptr)
+            , m_windowHeight(500)
         {
             // Empty
         }
 
         QVector3D MousePicker::update(
+            int windowHeight,
             QPoint mousePosition,
             Entities::TexturedEntity* terrain,
                 int width,
@@ -43,6 +45,7 @@ namespace Amber3D
             m_terrain = terrain;
             m_camera = camera;
             m_mousePosition = mousePosition;
+            m_windowHeight = windowHeight;
 
             m_currentRay = CalcMouseRay(
                 width,
@@ -72,7 +75,8 @@ namespace Amber3D
         {
             QVector2D mouseLoc;
             mouseLoc.setX(m_mousePosition.x());
-            mouseLoc.setY(m_mousePosition.y());
+            mouseLoc.setY((m_windowHeight / 2) - m_mousePosition.y() + 25);
+            printf("mouse pos = (%d, %d\n", m_mousePosition.x(), m_mousePosition.y());
 
             mouseLoc.setX(
                 ((2.0f * mouseLoc.x()) / windowWidth) - 1
@@ -90,7 +94,7 @@ namespace Amber3D
             QVector4D mousePos)
         {
             QMatrix4x4 invertedProjection = projection.inverted();
-            QVector4D projectionSpace = invertedProjection * -mousePos; 
+            QVector4D projectionSpace = invertedProjection * mousePos; 
             
             return QVector4D(
                 projectionSpace.x(),
@@ -167,9 +171,9 @@ namespace Amber3D
             QVector3D cameraPosition = m_camera->GetPosition();
             
             QVector3D scaledRay = QVector3D(
-                m_currentRay.x() * distance,
+                m_currentRay.x() * (distance),
                 m_currentRay.y() * distance,
-                m_currentRay.z() * distance
+                m_currentRay.z() * (distance)
             );
 
             return cameraPosition + scaledRay;

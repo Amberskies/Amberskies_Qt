@@ -74,6 +74,7 @@ namespace Amber3D
             void InitializeModelWarehouse();
 
             void RenderAll(
+                int windowHeight,
                 QPoint mousePosition,
                 QMatrix4x4 projection);
 

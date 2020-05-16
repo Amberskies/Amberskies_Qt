@@ -107,6 +107,7 @@ namespace Amber3D
             );
             
             m_modelWarehouse->RenderAll(
+                this->width(),
                 mousePos,
                 m_projection
             );

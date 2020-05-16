@@ -79,12 +79,14 @@ namespace Amber3D
         }
 
         void ModelWarehouse::RenderAll(
+            int windowHeight,
             QPoint mousePosition, 
             QMatrix4x4 projection)
         {
             m_camera->MoveCamera(0.06f); // sets camera move speed
 
             QVector3D cursorPos = m_mousePicker->update(
+                windowHeight,
                 mousePosition,
                 m_textureEntities[0],
                 m_windowSize.x(),

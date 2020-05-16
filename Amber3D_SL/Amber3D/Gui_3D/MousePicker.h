@@ -53,12 +53,14 @@ namespace Amber3D
             Entities::TexturedEntity* m_terrain;
             Entities::Camera* m_camera;
             QPoint m_mousePosition;
+            int m_windowHeight;
 
 
         public:
             MousePicker();
 
             QVector3D update(
+                int windowHeight,
                 QPoint mousePosition,
                 Entities::TexturedEntity *terrain, 
                     int width,
