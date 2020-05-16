@@ -96,6 +96,7 @@ namespace Amber3D
             );
 
             m_colorEntities[0]->SetPosition(cursorPos);
+            m_colorEntities[0]->SetScale(0.5f);
 
             for (int instance = 0; instance < m_colorEntities.size(); instance++)
             {

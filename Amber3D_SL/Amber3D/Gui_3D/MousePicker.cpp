@@ -64,6 +64,11 @@ namespace Amber3D
                 );
             }
 
+            // re position to the closest 1m square
+            m_currentCursor.setX(static_cast<int>(m_currentCursor.x()) + 0.5f);
+            m_currentCursor.setY(m_currentCursor.y() - 0.4f);
+            m_currentCursor.setZ(static_cast<int>(m_currentCursor.z()) + 0.5f);
+
             return m_currentCursor;
         }
 
@@ -75,8 +80,7 @@ namespace Amber3D
         {
             QVector2D mouseLoc;
             mouseLoc.setX(m_mousePosition.x());
-            mouseLoc.setY((m_windowHeight / 2) - m_mousePosition.y() + 25);
-            printf("mouse pos = (%d, %d\n", m_mousePosition.x(), m_mousePosition.y());
+            mouseLoc.setY((m_windowHeight / 2) - m_mousePosition.y() + 32);
 
             mouseLoc.setX(
                 ((2.0f * mouseLoc.x()) / windowWidth) - 1
@@ -203,7 +207,9 @@ namespace Amber3D
             {
                 QVector3D lastPoint = PointOnRay(half);
                 if (lastPoint.x() >= m_terrain->GetPosition().x() + 50.0f || 
-                    lastPoint.z() >= m_terrain->GetPosition().z() + 50.0f)
+                    lastPoint.z() >= m_terrain->GetPosition().z() + 50.0f ||
+                    lastPoint.x() <= m_terrain->GetPosition().x() ||
+                    lastPoint.z() <= m_terrain->GetPosition().z())
                 {
                     return QVector3D(25.0f, 0.0f, 25.0f);
                 }
