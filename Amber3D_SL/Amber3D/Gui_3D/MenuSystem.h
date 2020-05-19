@@ -21,6 +21,12 @@
 #include "Menu1.h"
 
 #include <QVector3D>
+#include <QVector>
+
+#include "Amber3D/OpenGL/BatchRender.h"
+#include "Amber3D/Entities/ColorEntity.h"
+#include "Amber3D/Entities/TexturedEntity.h"
+
 
 namespace Amber3D
 {
@@ -46,13 +52,23 @@ namespace Amber3D
         struct MenuSystem
         {
             Menu1 m_menu[2];
-            int m_maxColorModels;
-            int m_maxTextureModels;
+
+            OpenGL::BatchRender* m_batchRender;
+            QVector<Entities::ColorEntity*> m_colorEntities;
+            QVector<Entities::TexturedEntity*> m_textureEntities;
 
             MenuSystem();
 
 
-            void Setup(int maxColorModels, int maxTextureModels);
+            void SetupMenu1(
+                OpenGL::BatchRender* batchRender,
+                QVector<Entities::ColorEntity*>& colorEntities,
+                QVector<Entities::TexturedEntity*>& textureEntities
+            );
+
+            void AddMenu1();
+
+            int CheckMenu1(QVector3D cursorPos);
         };
     }
 }

@@ -25,7 +25,7 @@ namespace Amber3D
     namespace Gui_3D
     {
 
-#define NUM_ITEMS 9
+#define NUM_ITEMS 10
 
         struct Menu1
         {
@@ -33,9 +33,11 @@ namespace Amber3D
             int m_maxItems;
 
             QVector3D m_menuLocation;
+            QVector3D m_itemLocation[NUM_ITEMS];
         
             Menu1();
 
+            QVector3D GetItemLocation(int i) { return m_itemLocation[i]; }
             void setMaxItems(int maxItems);
         };
     }

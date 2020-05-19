@@ -40,6 +40,7 @@ namespace Amber3D
             , m_camera(nullptr)
             , m_mousePicker(new Gui_3D::MousePicker())
             , m_menuSystem(new Gui_3D::MenuSystem())
+            , m_itemClicked(0)
         {
             // Empty
         }
@@ -70,7 +71,7 @@ namespace Amber3D
             );
 
             m_camera = new Entities::Camera(
-                QVector3D(65.0f, 20.0f, 65.0f),
+                QVector3D(35.0f, 20.0f, 35.0f),
                 40.0f,
                 -45.0f,
                 0.0f
@@ -79,7 +80,11 @@ namespace Amber3D
             LoadFiles();
 
             // initialize 3D menu System.
-
+            m_menuSystem->SetupMenu1(
+                m_batchRender,
+                m_colorEntities,
+                m_textureEntities
+            );
         }
 
         void ModelWarehouse::RenderAll(
@@ -88,6 +93,18 @@ namespace Amber3D
             QMatrix4x4 projection)
         {
             m_camera->MoveCamera(0.06f); // sets camera move speed
+
+            // add map Models here to the batch renderer.
+            // for this we need a way to store the map.
+            m_batchRender->AddTexturedEntity(
+                m_textureEntities[0]->GetTexturedModel(),
+                m_textureEntities[0]
+            );
+
+            m_menuSystem->AddMenu1();
+
+
+            //////////////// Mouse Picker /////////////////////////////
 
             QVector3D cursorPos = m_mousePicker->update(
                 windowHeight,
@@ -99,59 +116,71 @@ namespace Amber3D
                 projection
             );
 
-            // re position to the closest 1m square
-            cursorPos.setX(static_cast<int>(cursorPos.x()) + 0.5f);
-            cursorPos.setY(cursorPos.y() - 0.4f);
-            cursorPos.setZ(static_cast<int>(cursorPos.z()) + 0.5f);
-
             m_colorEntities[0]->SetScale(0.5f);
 
+            int itemSelected = 0;
             if (Input::buttonPressed(Qt::LeftButton))
             {
-                m_colorEntities[0]->SetPosition(        // switch 3D curssor off.
-                    QVector3D(cursorPos.x(),
-                        cursorPos.y() - 1.0f,
-                        cursorPos.z()
-                    )
-                );
+                // check menus here click///////////////////////////////////////////////
+                
+                itemSelected = m_menuSystem->CheckMenu1(cursorPos);
 
-                // check menus here
+                // re position to the closest 1m square
 
+                cursorPos = PositionTo1mSquare(cursorPos);
+                
+                if (itemSelected != 0)
+                {
+                    m_colorEntities[itemSelected]->SetPosition(        // switch 3D curssor off.
+                        QVector3D(cursorPos.x(),
+                            cursorPos.y() - 1.5f,
+                            cursorPos.z()
+                        )
+                    );
+
+                    m_itemClicked = itemSelected;
+                }
+                else
+                {
+                    m_itemClicked = 0;
+                }
             }
             else
             {
-                m_colorEntities[0]->SetPosition(cursorPos);
+                // check menus here hover///////////////////////////////////////////////
                 
+                itemSelected = m_menuSystem->CheckMenu1(cursorPos);
+
+                // re position to the closest 1m square
+
+                cursorPos = PositionTo1mSquare(cursorPos);
+
+
+                
+                if (m_itemClicked != 0 ||
+                    itemSelected != 0)
+                {
+                    m_colorEntities[m_itemClicked]->SetPosition(cursorPos);
+                    m_colorEntities[m_itemClicked]->IncreaseRotation(0.5f, 0.0f, 0.5f);
+                }
+                else
+                {
+                    m_colorEntities[0]->SetPosition(cursorPos);
+                }
             }
 
-            // alter these to place into menu positions.
-            // NB   (color)     id 0 = cursor
-            //      (texture)   id 0 = terrain
-            for (int instance = 0; instance < m_colorEntities.size(); instance++)
-            {
-                m_batchRender->AddColorEntity(
-                    m_colorEntities[instance]->GetRawModel(),
-                    m_colorEntities[instance]
-                );
-            }
+            // add cursor Entity to renderer ////////////////////////////////////////////
 
-            for (int instance = 0; instance < m_textureEntities.size(); instance++)
-            {
-                m_batchRender->AddTexturedEntity(
-                    m_textureEntities[instance]->GetTexturedModel(),
-                    m_textureEntities[instance]
-                );
-            }
-
-            // add map Models here to the batch renderer.
-            // for this we need a way to store the map.
+            m_batchRender->AddColorEntity(
+                m_colorEntities[itemSelected]->GetRawModel(),
+                m_colorEntities[itemSelected]
+            );
 
             m_batchRender->Render(
                 m_light,
                 m_camera,
                 projection
             );
-
         }
 
         void ModelWarehouse::SetShaders(QString colorShader, QString textureShader)
@@ -239,6 +268,14 @@ namespace Amber3D
             };
             file_in.close();
             return true;
+        }
+
+        QVector3D ModelWarehouse::PositionTo1mSquare(QVector3D position)
+        {
+            position.setX(static_cast<int>(position.x()) + 0.5f);
+            position.setY(position.y());
+            position.setZ(static_cast<int>(position.z()) + 0.5f);
+            return position;
         }
     }
 }

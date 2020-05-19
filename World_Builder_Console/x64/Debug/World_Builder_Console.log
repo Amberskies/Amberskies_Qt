@@ -1,6 +1,3 @@
 ﻿  Generate moc_predefs.h
 C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\MSBuild\Microsoft\VC\v160\Microsoft.CppCommon.targets(231,5): warning MSB8064: Custom build for item "debug\moc_predefs.h.cbt" succeeded, but specified dependency "c:\qt_programming\amberskies\world_builder_console\debug\moc_predefs.h.cbt" does not exist. This may cause incremental build to work incorrectly.
-  WorldBuilder.cpp
-  main.cpp
-  moc_WorldBuilder.cpp
   World_Builder_Console.vcxproj -> C:\Qt_Programming\Amberskies\World_Builder_Console\debug\World_Builder_Console.exe

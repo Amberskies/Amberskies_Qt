@@ -30,7 +30,6 @@
 #include "Amber3D/API/Shaders/ColorShader.h"
 #include "Amber3D/API/Shaders/TextureShader.h"
 #include "Amber3D/OpenGL/BatchRender.h"
-
 #include "Amber3D/API/Loaders/LoadAmberModel.h"
 #include "Amber3D/Entities/ColorEntity.h"
 #include "Amber3D/Entities/TexturedEntity.h"
@@ -63,6 +62,7 @@ namespace Amber3D
             Amber3D::Gui_3D::MousePicker* m_mousePicker;
             Gui_3D::MenuSystem* m_menuSystem;
             QPoint m_windowSize;
+            int m_itemClicked;
 
         public:
             explicit ModelWarehouse(
@@ -92,6 +92,7 @@ namespace Amber3D
 
         private:
             bool LoadFiles();
+            QVector3D PositionTo1mSquare(QVector3D position);
         };
     }
 }

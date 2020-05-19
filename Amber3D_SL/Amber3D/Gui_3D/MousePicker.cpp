@@ -204,7 +204,7 @@ namespace Amber3D
                 if (lastPoint.x() >= m_terrain->GetPosition().x() + 50.0f || 
                     lastPoint.z() >= m_terrain->GetPosition().z() + 50.0f ||
                     lastPoint.x() <= m_terrain->GetPosition().x() ||
-                    lastPoint.z() <= m_terrain->GetPosition().z())
+                    lastPoint.z() <= m_terrain->GetPosition().z() - 3.0f)
                 {
                     return QVector3D(25.0f, 0.0f, 25.0f);
                 }
