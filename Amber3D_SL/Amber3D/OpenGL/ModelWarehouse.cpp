@@ -103,77 +103,10 @@ namespace Amber3D
 
             m_menuSystem->AddMenu1();
 
-
-            //////////////// Mouse Picker /////////////////////////////
-
-            QVector3D cursorPos = m_mousePicker->update(
+            CheckMenu(
                 windowHeight,
                 mousePosition,
-                m_textureEntities[0],
-                m_windowSize.x(),
-                m_windowSize.y(),
-                m_camera,
                 projection
-            );
-
-            m_colorEntities[0]->SetScale(0.5f);
-
-            int itemSelected = 0;
-            if (Input::buttonPressed(Qt::LeftButton))
-            {
-                // check menus here click///////////////////////////////////////////////
-                
-                itemSelected = m_menuSystem->CheckMenu1(cursorPos);
-
-                // re position to the closest 1m square
-
-                cursorPos = PositionTo1mSquare(cursorPos);
-                
-                if (itemSelected != 0)
-                {
-                    m_colorEntities[itemSelected]->SetPosition(        // switch 3D curssor off.
-                        QVector3D(cursorPos.x(),
-                            cursorPos.y() - 1.5f,
-                            cursorPos.z()
-                        )
-                    );
-
-                    m_itemClicked = itemSelected;
-                }
-                else
-                {
-                    m_itemClicked = 0;
-                }
-            }
-            else
-            {
-                // check menus here hover///////////////////////////////////////////////
-                
-                itemSelected = m_menuSystem->CheckMenu1(cursorPos);
-
-                // re position to the closest 1m square
-
-                cursorPos = PositionTo1mSquare(cursorPos);
-
-
-                
-                if (m_itemClicked != 0 ||
-                    itemSelected != 0)
-                {
-                    m_colorEntities[m_itemClicked]->SetPosition(cursorPos);
-                    m_colorEntities[m_itemClicked]->IncreaseRotation(0.5f, 0.0f, 0.5f);
-                }
-                else
-                {
-                    m_colorEntities[0]->SetPosition(cursorPos);
-                }
-            }
-
-            // add cursor Entity to renderer ////////////////////////////////////////////
-
-            m_batchRender->AddColorEntity(
-                m_colorEntities[itemSelected]->GetRawModel(),
-                m_colorEntities[itemSelected]
             );
 
             m_batchRender->Render(
@@ -276,6 +209,99 @@ namespace Amber3D
             position.setY(position.y());
             position.setZ(static_cast<int>(position.z()) + 0.5f);
             return position;
+        }
+
+        void ModelWarehouse::CheckMenu(
+            int windowHeight,
+            QPoint mousePosition,
+            QMatrix4x4 projection)
+        {
+            //////////////// Mouse Picker /////////////////////////////
+
+            QVector3D cursorPos = m_mousePicker->update(
+                windowHeight,
+                mousePosition,
+                m_textureEntities[0],
+                m_windowSize.x(),
+                m_windowSize.y(),
+                m_camera,
+                projection
+            );
+
+            m_colorEntities[0]->SetScale(0.5f);
+
+            int itemSelected = 0;
+            if (Input::buttonPressed(Qt::LeftButton))
+            {
+                // check menus here click///////////////////////////////////////////////
+
+                itemSelected = m_menuSystem->CheckMenu1(cursorPos);
+
+                // re position to the closest 1m square
+
+                cursorPos = PositionTo1mSquare(cursorPos);
+
+                if (itemSelected == 0)
+                {
+                    m_colorEntities[itemSelected]->SetPosition(        // switch 3D curssor off.
+                        QVector3D(cursorPos.x(),
+                            cursorPos.y() - 1.5f,
+                            cursorPos.z()
+                        )
+                    );
+
+                    m_itemClicked = itemSelected;
+                }
+                else
+                {
+                    m_itemClicked = itemSelected;
+                }
+            }
+            else
+            {
+                // check menus here hover///////////////////////////////////////////////
+
+                itemSelected = m_menuSystem->CheckMenu1(
+                    cursorPos
+                );
+
+                // re position to the closest 1m square
+
+                cursorPos = PositionTo1mSquare(
+                    cursorPos
+                );
+
+                if (itemSelected != 0)
+                {
+                    m_colorEntities[itemSelected]->IncreaseRotation(
+                        0.5f,
+                        0.0f,
+                        0.5f
+                    );
+                }
+                else
+                {
+                    m_colorEntities[m_itemClicked]->SetPosition(
+                        cursorPos
+                    );
+                }
+            }
+
+            // add cursor Entity to renderer ////////////////////////////////////////////
+
+            m_colorEntities[m_itemClicked]->SetRotationX(
+                0.0f
+            );
+
+            m_colorEntities[m_itemClicked]->SetRotationZ(
+                0.0f
+            );
+
+            m_batchRender->AddColorEntity(
+                m_colorEntities[itemSelected]->GetRawModel(),
+                m_colorEntities[itemSelected]
+            );
+
         }
     }
 }

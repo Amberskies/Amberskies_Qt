@@ -74,8 +74,8 @@ namespace Amber3D
                 if (cursorPos.x() >= 2.0f * menuItem &&
                     cursorPos.x() < 2.0f * menuItem + 2.0f)
                 {
-                    if (cursorPos.z() >= -3.0f &&
-                        cursorPos.z() < -0.5f)
+                    if (cursorPos.z() >= -4.0f &&
+                        cursorPos.z() < -0.1f)
                         return menuItem;
                 }                   
             }

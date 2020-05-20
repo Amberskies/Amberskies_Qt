@@ -93,6 +93,12 @@ namespace Amber3D
         private:
             bool LoadFiles();
             QVector3D PositionTo1mSquare(QVector3D position);
+            
+            void CheckMenu(
+                int windowHeight,
+                QPoint mousePosition,
+                QMatrix4x4 projection
+            );
         };
     }
 }
