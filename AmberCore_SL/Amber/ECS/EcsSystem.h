@@ -4,13 +4,20 @@
 
 class BaseECSSystem
 {
+    float m_deltaTime;
+    BaseECSComponent** m_components;
 public:
 	enum
 	{
 		FLAG_OPTIONAL = 1,
 	};
+
 	BaseECSSystem() {}
-	virtual void updateComponents(float delta, BaseECSComponent** components) {}
+    virtual void updateComponents(float delta, BaseECSComponent** components)
+    {
+        m_deltaTime = delta;
+        m_components = components;
+    }
 	const Array<uint32>& getComponentTypes()
 	{
 		return componentTypes;

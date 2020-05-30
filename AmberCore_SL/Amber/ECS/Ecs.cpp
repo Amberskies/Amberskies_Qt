@@ -1,6 +1,6 @@
-#include "ecs.hpp"
-#include "core/memory.hpp"
-#include "math/math.hpp"
+#include "Ecs.h"
+//#include "core/memory.hpp"
+//#include "math/math.hpp"
 
 ECS::~ECS()
 {
@@ -126,7 +126,7 @@ void ECS::deleteComponent(uint32 componentID, uint32 index)
 		array.resize(srcIndex);
 		return;
 	}
-	Memory::memcpy(destComponent, srcComponent, typeSize);
+    std::memcpy(destComponent, srcComponent, typeSize);
 
 	Array<std::pair<uint32, uint32> >& srcComponents = handleToEntity(srcComponent->entity);
 	for(uint32 i = 0; i < srcComponents.size(); i++) {
@@ -209,8 +209,8 @@ void ECS::updateSystemWithMultipleComponents(uint32 index, ECSSystemList& system
 {
 	const Array<uint32>& componentFlags = systems[index]->getComponentFlags();
 
-	componentParam.resize(Math::max(componentParam.size(), componentTypes.size()));
-	componentArrays.resize(Math::max(componentArrays.size(), componentTypes.size()));
+    componentParam.resize(fmax(componentParam.size(), componentTypes.size()));
+    componentArrays.resize(fmax(componentArrays.size(), componentTypes.size()));
 	for(uint32 i = 0; i < componentTypes.size(); i++) {
 		componentArrays[i] = &components[componentTypes[i]];
 	}

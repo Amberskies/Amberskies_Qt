@@ -91,3 +91,9 @@ Thumbs.db
 *.db-shm
 /Amber3D_SL/.vs/Amber3D_SL/v16/Solution.VC.db-wal
 *.ipch
+*.db-wal
+*.stash
+/AmberCore_SL/build/debug/moc_predefs.h
+*.cbt
+*.log
+*.props

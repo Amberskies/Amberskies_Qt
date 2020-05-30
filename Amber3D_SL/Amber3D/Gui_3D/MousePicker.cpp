@@ -26,8 +26,8 @@ namespace Amber3D
     namespace Gui_3D
     {
         MousePicker::MousePicker()
-            : m_camera(nullptr)
-            , m_terrain(nullptr)
+            : m_terrain(nullptr)
+            , m_camera(nullptr)
             , m_windowHeight(500)
         {
             // Empty

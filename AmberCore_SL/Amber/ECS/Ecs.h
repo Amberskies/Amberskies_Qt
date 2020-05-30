@@ -1,16 +1,27 @@
 #pragma once
 
-#include "ecsComponent.hpp"
-#include "ecsSystem.hpp"
-#include "dataStructures/map.hpp"
+
+#include "EcsComponent.h"
+#include "EcsSystem.h"
+#include "Map.h"
 
 class ECSListener
 {
+    EntityHandle m_handle;
+    uint32 m_id;
 public:
-	virtual void onMakeEntity(EntityHandle handle) {}
-	virtual void onRemoveEntity(EntityHandle handle) {}
-	virtual void onAddComponent(EntityHandle handle, uint32 id) {}
-	virtual void onRemoveComponent(EntityHandle handle, uint32 id) {}
+    virtual void onMakeEntity(EntityHandle handle) { m_handle = handle; }
+    virtual void onRemoveEntity(EntityHandle handle) { m_handle = handle; }
+    virtual void onAddComponent(EntityHandle handle, uint32 id)
+    {
+        m_handle = handle;
+        m_id = id;
+    }
+    virtual void onRemoveComponent(EntityHandle handle, uint32 id)
+    {
+        m_handle = handle;
+        m_id = id;
+    }
 
 	const Array<uint32>& getComponentIDs() { 
 		return componentIDs;

@@ -1,5 +1,7 @@
-﻿  Generate moc_predefs.h
+﻿  Reading Qt configuration (C:\Qt\5.14.2\msvc2017_64\bin\qmake.exe)
+  Generate moc_predefs.h
 C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\MSBuild\Microsoft\VC\v160\Microsoft.CppCommon.targets(231,5): warning MSB8064: Custom build for item "debug\moc_predefs.h.cbt" succeeded, but specified dependency "c:\qt_programming\amberskies\world_builder_console\debug\moc_predefs.h.cbt" does not exist. This may cause incremental build to work incorrectly.
+  Moc'ing WorldBuilder.h...
   WorldBuilder.cpp
   main.cpp
   moc_WorldBuilder.cpp

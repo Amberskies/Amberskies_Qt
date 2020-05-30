@@ -38,11 +38,21 @@ DEFINES += QT_DEPRECATED_WARNINGS
 SOURCES += \
     Amber/Comms/Chat.cpp \
     Amber/Comms/ChatBox.cpp \
+    Amber/ECS/Ecs.cpp \
+    Amber/ECS/EcsComponent.cpp \
+    Amber/ECS/EcsSystem.cpp \
     AmberCore_SL.cpp
 
 HEADERS += \
+    Amber/Common.h \
     Amber/Comms/Chat.h \
     Amber/Comms/ChatBox.h \
+    Amber/ECS/Array.h \
+    Amber/ECS/Ecs.h \
+    Amber/ECS/EcsComponent.h \
+    Amber/ECS/EcsSystem.h \
+    Amber/ECS/Map.h \
+    Amber/Maths/dice.h \
     AmberCore_SL.h
 
 # Default rules for deployment.

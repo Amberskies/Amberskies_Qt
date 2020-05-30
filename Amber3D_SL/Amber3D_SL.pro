@@ -35,6 +35,8 @@ CONFIG += debug
 SOURCES += \
     Amber3D/Entities/light.cpp \
     Amber3D/Gui_3D/Input.cpp \
+    Amber3D/Gui_3D/Menu1.cpp \
+    Amber3D/Gui_3D/MenuSystem.cpp \
     Amber3D/Gui_3D/MousePicker.cpp \
     Amber3D/OpenGL/DrawColor.cpp \
     Amber3D/OpenGL/DrawTexture.cpp \
@@ -58,6 +60,8 @@ HEADERS += \
     Amber3D/Common.h \
     Amber3D/Entities/Light.h \
     Amber3D/Gui_3D/Input.h \
+    Amber3D/Gui_3D/Menu1.h \
+    Amber3D/Gui_3D/MenuSystem.h \
     Amber3D/Gui_3D/MousePicker.h \
     Amber3D/OpenGL/DrawColor.h \
     Amber3D/OpenGL/DrawTexture.h \

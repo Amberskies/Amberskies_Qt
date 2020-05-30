@@ -21,9 +21,9 @@
 #define DISPLAY_WIDTH 800           // pixels
 #define DISPLAY_HEIGHT 400          // pixels
 
-#define FOV 90.0f                   // degrees
-#define NEAR_PLANE 0.1f             // meters
-#define FAR_PLANE 50.0f             // meters
+//#define FOV 90.0f                   // degrees
+//#define NEAR_PLANE 0.1f             // meters
+//#define FAR_PLANE 50.0f             // meters
 
 
 #include <iostream>

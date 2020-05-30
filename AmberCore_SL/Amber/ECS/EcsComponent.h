@@ -1,6 +1,6 @@
 #pragma once
 
-#include "Amber3D/common.h"
+#include "Amber/common.h"
 #include "Array.h"
 #include <tuple>
 

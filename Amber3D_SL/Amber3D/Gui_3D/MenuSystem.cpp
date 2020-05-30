@@ -68,7 +68,7 @@ namespace Amber3D
 		{
             for (int menuItem = 1; menuItem < m_menu->m_maxItems; menuItem++)
             {
-                QVector3D itemLocation = m_menu->GetItemLocation(menuItem);
+                //QVector3D itemLocation = m_menu->GetItemLocation(menuItem);
 
                 // x = 2.0f * index : z = -2.0f
                 if (cursorPos.x() >= 2.0f * menuItem &&
