@@ -15,25 +15,33 @@
  * given by Qt    : doc.qt.io/qt-5/opensourcelicence.html
  *
  * ---------------------------------------------------*/
-#include <QGuiApplication>
+#pragma once
+
+#define LOOP_DELAY 10
+
+#include <QObject>
+#include <QTimer>
 
 #include <Amber3D/OpenGL/Window3D.h>
-#include "Game/Game.h"
+#include <Amber/ECS/Ecs.h>
 
-
-
-int main(int argc, char *argv[])
+class Game : public QObject
 {
-    QGuiApplication app(argc, argv);
+    Q_OBJECT
 
-    Amber3D::OpenGL::Window3D* view =
-        new Amber3D::OpenGL::Window3D();
+    Amber3D::OpenGL::Window3D* m_window;
+    QTimer* m_loop;
 
-    Game* game =
-        new Game(view);
+public:
+    Game(Amber3D::OpenGL::Window3D* window, QObject *parent = nullptr);
+     ~Game();
 
-    view->show();
-    game->Start();
+     void Start();
 
-    return app.exec();
-}
+signals:
+
+public slots:
+    void Loop();
+
+};
+
