@@ -12,6 +12,7 @@ uniform float u_ShineDamper; // roughness of surface low = rough
 uniform float u_Reflectivity; // cloth = low// metalicness med to high // water glass high //
 uniform vec3 u_SkyColor;
 
+out vec4 f_FinalColor;
 
 void main(void)
 {
@@ -42,7 +43,7 @@ void main(void)
     // maybe we should clamp the final lighting value ???
     // or leave to get a color saturasion ie Blinding light !
 
-    gl_FragColor = mix(
+    f_FinalColor = mix(
         vec4(u_SkyColor, 1.0f),
         lighting * texture(
                 textureSampler,

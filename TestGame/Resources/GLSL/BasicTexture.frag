@@ -4,9 +4,11 @@ in vec2 v_textureCoords;
 
 uniform sampler2D textureSampler;
 
+out vec4 f_FinalColor;
+
 void main(void)
 {
-    gl_FragColor = texture(
+    f_FinalColor = texture(
         textureSampler,
         v_textureCoords
     );

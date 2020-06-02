@@ -20,7 +20,7 @@
 
 #include <map>
 #include <vector>
-#include <QOpenGLFunctions_3_3_Core>
+#include <QOpenGLFunctions>
 #include <QMatrix4x4>
 
 #include "DrawColor.h"
@@ -46,7 +46,7 @@ namespace Amber3D
         {
             API::ColorShader* m_colorShader;
             API::TextureShader* m_textureShader;
-            QOpenGLFunctions_3_3_Core* m_gl;
+            QOpenGLFunctions* m_gl;
             DrawColor* m_drawColor;
             DrawTexture* m_drawTexture;
 
@@ -57,7 +57,7 @@ namespace Amber3D
         public:
             BatchRender(API::ColorShader* colorShader,
                         API::TextureShader* textureShader,
-                        QOpenGLFunctions_3_3_Core* gl);
+                        QOpenGLFunctions* gl);
 
             void Render(Entities::Light* light,
                         Entities::Camera* camera,

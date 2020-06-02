@@ -24,7 +24,7 @@ namespace Amber3D
     {
 		BatchRender::BatchRender(API::ColorShader* colorShader, 
                                  API::TextureShader* textureShader,
-                                 QOpenGLFunctions_3_3_Core* gl)
+                                 QOpenGLFunctions* gl)
             : m_colorShader(colorShader)
             , m_textureShader(textureShader)
             , m_gl(gl)

@@ -25,7 +25,7 @@ namespace Amber3D
 {
     namespace OpenGL
     {
-        DrawTexture::DrawTexture(API::TextureShader* textureShader, QOpenGLFunctions_3_3_Core* gl)
+        DrawTexture::DrawTexture(API::TextureShader* textureShader, QOpenGLFunctions* gl)
             : m_textureShader(textureShader)
             , m_gl(gl)
             , m_light(nullptr)

@@ -2,9 +2,11 @@
 
 in vec3 v_color;
 
+out vec4 f_FinalColor;
+
 void main(void)
 {
-    gl_FragColor = 
+    f_FinalColor = 
         vec4(
             v_color,
             1.00f

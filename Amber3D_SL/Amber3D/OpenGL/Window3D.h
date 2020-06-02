@@ -21,12 +21,12 @@
 #include "Amber3D/Common.h"
 #include <QObject>
 #include <QOpenGLWindow> 
-#include <QOpenGLFunctions_3_3_Core>
-#include <QOpenGLContext>
-#include <QSurfaceFormat>
+#include <QOpenGLFunctions>
+#include <QOpenglContext>
 #include <QMatrix4x4>
 #include <QMouseEvent>
 #include <QKeyEvent>
+#include <QString>
 
 #include "ModelWarehouse.h"
 
@@ -35,7 +35,7 @@ namespace Amber3D
 {
     namespace OpenGL 
     {
-        class Window3D : public QOpenGLWindow, protected QOpenGLFunctions_3_3_Core
+        class Window3D : public QOpenGLWindow, protected QOpenGLFunctions
         {
             Q_OBJECT
 
@@ -59,13 +59,14 @@ namespace Amber3D
             void initializeGL() override;
             void paintGL() override;
             void resizeGL(int width, int height) override;
+
             void mousePressEvent(QMouseEvent* event) override;
             void mouseReleaseEvent(QMouseEvent* event) override;
             void keyPressEvent(QKeyEvent* event) override;
             void keyReleaseEvent(QKeyEvent* event) override;
 
         private:
-
+            void PrintVersionInfo();
 
         };
     }

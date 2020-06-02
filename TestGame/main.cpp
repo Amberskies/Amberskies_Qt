@@ -26,8 +26,16 @@ int main(int argc, char *argv[])
 {
     QGuiApplication app(argc, argv);
 
+    QSurfaceFormat format;
+    format.setRenderableType(QSurfaceFormat::OpenGL);
+    format.setProfile(QSurfaceFormat::CoreProfile);
+    format.setVersion(3, 3);
+
     Amber3D::OpenGL::Window3D* view =
         new Amber3D::OpenGL::Window3D();
+
+    view->setFormat(format);
+    view->resize(900, 500);
 
     Game* game =
         new Game(view);

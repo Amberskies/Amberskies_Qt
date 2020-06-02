@@ -20,7 +20,7 @@
 
 #include <map>
 #include <vector>
-#include <QOpenGLFunctions_3_3_Core>
+#include <QOpenGLFunctions>
 #include <QMatrix4x4>
 
 #include "Amber3D/API/Shaders/ColorShader.h"
@@ -37,14 +37,14 @@ namespace Amber3D
         {
             const unsigned int NUM_ATTRIBS = 3;
             API::ColorShader* m_colorShader;
-            QOpenGLFunctions_3_3_Core* m_gl;
+            QOpenGLFunctions* m_gl;
             Entities::Light* m_light;
             QMatrix4x4 m_perspective;
 
 
         public:
             DrawColor(API::ColorShader *colorShader,
-                      QOpenGLFunctions_3_3_Core *gl);
+                      QOpenGLFunctions *gl);
 
             void Prepare(QMatrix4x4 &perspective,
                          Entities::Light* light);

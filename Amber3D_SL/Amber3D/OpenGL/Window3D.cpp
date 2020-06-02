@@ -18,6 +18,7 @@
  * ---------------------------------------------------*/
 #include "Window3D.h"
 #include "Amber3D/Gui_3D/Input.h"
+#include <QDebug>
 
 namespace Amber3D
 {
@@ -28,18 +29,16 @@ namespace Amber3D
             , m_modelWarehouse(nullptr)
         {
             m_projection.setToIdentity();
-            setWidth(900);
-            setHeight(500);
 
             // ** format used as I have no GFX card in this machine ** //
-            m_format.setRedBufferSize(8);
-            m_format.setGreenBufferSize(8);
-            m_format.setBlueBufferSize(8);
-            m_format.setAlphaBufferSize(8);
-            m_format.setDepthBufferSize(32);
-            m_format.setVersion(3, 3);
-            m_format.setProfile(QSurfaceFormat::CoreProfile);
-            this->setFormat(m_format);
+            //m_format.setRedBufferSize(8);
+            //m_format.setGreenBufferSize(8);
+            //m_format.setBlueBufferSize(8);
+            //m_format.setAlphaBufferSize(8);
+            //m_format.setDepthBufferSize(32);
+            //m_format.setVersion(3, 3);
+            //m_format.setProfile(QSurfaceFormat::CoreProfile);
+            //this->setFormat(m_format);
         }
 
         Window3D::~Window3D()
@@ -68,13 +67,11 @@ namespace Amber3D
 
         void Window3D::initializeGL()
         {
-            QOpenGLFunctions_3_3_Core::initializeOpenGLFunctions();
+            initializeOpenGLFunctions();
             m_context.create();
             makeCurrent();
 
-            printf("OpenGL : %s\n",
-                glGetString(GL_VERSION)
-            );
+            PrintVersionInfo();
 
             glClearColor(
                 0.12f,      // red
@@ -102,13 +99,13 @@ namespace Amber3D
                     GL_DEPTH_BUFFER_BIT
                     );
             
-            QPoint mousePos = this->mapFromGlobal(
-                Input::mousePosition()
-            );
+            //QPoint mousePos = this->mapFromGlobal(
+           //     Input::mousePosition()
+           // );
             
             m_modelWarehouse->RenderAll(
-                this->width(),
-                mousePos,
+                //this->height(),
+                //mousePos,
                 m_projection
             );
         }
@@ -157,5 +154,31 @@ namespace Amber3D
             }
         }
 
+        // /////////////////////// Private ////////////////////////////
+
+        void Window3D::PrintVersionInfo()
+        {
+            QString glType;
+            QString glVersion;
+            QString glProfile;
+
+            glType = (context()->isOpenGLES()) ? "OpenGL ES" : "OpenGL";
+            glVersion = reinterpret_cast<const char*>(glGetString(GL_VERSION));
+
+#define CASE(c) case QSurfaceFormat::c: glProfile = #c; break
+
+            switch (format().profile())
+            {
+                CASE(NoProfile);
+                CASE(CoreProfile);
+                CASE(CompatibilityProfile);
+            }
+#undef CASE
+            qDebug() << qPrintable(glType)
+                << qPrintable(glVersion)
+                << "("
+                << qPrintable(glVersion)
+                << ")";
+        }
     }
 }

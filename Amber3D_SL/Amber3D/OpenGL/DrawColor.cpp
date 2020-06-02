@@ -25,7 +25,7 @@ namespace Amber3D
     namespace OpenGL
     {
         DrawColor::DrawColor(API::ColorShader* colorShader,
-                             QOpenGLFunctions_3_3_Core* gl)
+                             QOpenGLFunctions* gl)
             : m_colorShader(colorShader)
             , m_gl(gl)
             , m_light(nullptr)

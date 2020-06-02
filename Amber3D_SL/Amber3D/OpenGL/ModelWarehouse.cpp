@@ -29,7 +29,7 @@ namespace Amber3D
     {
         ModelWarehouse::ModelWarehouse(QString colorShader,
             QString textureShader,
-            QOpenGLFunctions_3_3_Core* gl)
+            QOpenGLFunctions* gl)
             : m_gl(gl)
             , m_colorShader(new API::ColorShader(colorShader))
             , m_textureShader(new API::TextureShader(textureShader))
@@ -88,8 +88,8 @@ namespace Amber3D
         }
 
         void ModelWarehouse::RenderAll(
-            int windowHeight,
-            QPoint mousePosition, 
+            //int windowHeight,
+           // QPoint mousePosition, // used in world builder at mo
             QMatrix4x4 projection)
         {
             m_camera->MoveCamera(0.06f); // sets camera move speed
@@ -101,13 +101,13 @@ namespace Amber3D
                 m_textureEntities[0]
             );
 
-            m_menuSystem->AddMenu1();
+            //m_menuSystem->AddMenu1(); only used in world builder at mo
 
-            CheckMenu(
-                windowHeight,
-                mousePosition,
-                projection
-            );
+            //CheckMenu(                only used in world builder at mo
+            //    windowHeight,
+            //    mousePosition,
+            //    projection
+            //);
 
             m_batchRender->Render(
                 m_light,

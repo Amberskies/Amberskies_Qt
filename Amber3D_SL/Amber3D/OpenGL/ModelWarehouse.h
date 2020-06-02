@@ -18,7 +18,7 @@
 #pragma once
 
 #include <QObject>
-#include <QOpenGLFunctions_3_3_Core>
+#include <QOpenGLFunctions>
 #include <QVector>
 #include <QVector3D>
 #include <QMatrix4x4>
@@ -43,12 +43,12 @@ namespace Amber3D
 {
     namespace OpenGL
     {
-        class ModelWarehouse : public QObject, protected QOpenGLFunctions_3_3_Core
+        class ModelWarehouse : public QObject, protected QOpenGLFunctions
         {
             Q_OBJECT
 
 
-            QOpenGLFunctions_3_3_Core* m_gl;
+            QOpenGLFunctions* m_gl;
             API::ColorShader* m_colorShader;
             API::TextureShader* m_textureShader;
             BatchRender* m_batchRender;
@@ -68,7 +68,7 @@ namespace Amber3D
             explicit ModelWarehouse(
                 QString colorShader,
                 QString textureShader,
-                QOpenGLFunctions_3_3_Core* gl
+                QOpenGLFunctions* gl
             );
 
             ~ModelWarehouse();
@@ -76,8 +76,8 @@ namespace Amber3D
             void InitializeModelWarehouse();
 
             void RenderAll(
-                int windowHeight,
-                QPoint mousePosition,
+                //int windowHeight,
+                //QPoint mousePosition,
                 QMatrix4x4 projection);
 
             void SetShaders(
