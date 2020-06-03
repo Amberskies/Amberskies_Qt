@@ -49,7 +49,7 @@ namespace Amber3D
         {
             delete m_menuSystem;
             delete m_mousePicker;
-            delete m_camera;
+            
             delete m_light;
             delete m_modelLoader;
             delete m_batchRender;
@@ -70,13 +70,6 @@ namespace Amber3D
                 QVector3D(0.8f, 0.8f, 0.8f)
             );
 
-            m_camera = new Entities::Camera(
-                QVector3D(35.0f, 20.0f, 35.0f),
-                40.0f,
-                -45.0f,
-                0.0f
-            );
-
             LoadFiles();
 
             // initialize 3D menu System.
@@ -88,12 +81,11 @@ namespace Amber3D
         }
 
         void ModelWarehouse::RenderAll(
+            Entities::Camera3D* camera,
             //int windowHeight,
            // QPoint mousePosition, // used in world builder at mo
             QMatrix4x4 projection)
         {
-            m_camera->MoveCamera(0.06f); // sets camera move speed
-
             // add map Models here to the batch renderer.
             // for this we need a way to store the map.
             m_batchRender->AddTexturedEntity(
@@ -111,7 +103,7 @@ namespace Amber3D
 
             m_batchRender->Render(
                 m_light,
-                m_camera,
+                camera,
                 projection
             );
         }

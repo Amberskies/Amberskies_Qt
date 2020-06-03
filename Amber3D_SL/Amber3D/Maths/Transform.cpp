@@ -26,9 +26,10 @@ namespace Amber3D
         Transform::Transform()
             : m_hasChanged(false)
             , m_translation(QVector3D(0.0f, 0.0f, 0.0f))
+            , m_rotation(QQuaternion())
             , m_scale(QVector3D(1.0f, 1.0f, 1.0f))
+
         {
-            m_rotation = QQuaternion::QQuaternion();
             m_world.setToIdentity();
         }
 
@@ -71,19 +72,19 @@ namespace Amber3D
             return m_world;
         }
         // Setters
-        void Transform::setTranslation(const QVector3D& deltaTranslation)
+        void Transform::SetTranslation(const QVector3D& deltaTranslation)
         {
             m_hasChanged = true;
             m_translation = deltaTranslation;
         }
 
-        void Transform::setRotation(const QQuaternion deltaRotation)
+        void Transform::SetRotation(const QQuaternion deltaRotation)
         {
             m_hasChanged = true;
             m_rotation = deltaRotation;
         }
 
-        void Transform::setScale(const QVector3D& deltaScale)
+        void Transform::SetScale(const QVector3D& deltaScale)
         {
             m_hasChanged = true;
             m_scale = deltaScale;

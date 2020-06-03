@@ -26,7 +26,7 @@
 #include "Amber3D/API/Shaders/TextureShader.h"
 #include "Amber3D/Models/TexturedModel.h"
 #include "Amber3D/Entities/TexturedEntity.h"
-#include "Amber3D/Entities/Camera.h"
+#include "Amber3D/Entities/Camera3D.h"
 #include "Amber3D/Entities/Light.h"
 
 namespace Amber3D
@@ -50,12 +50,12 @@ namespace Amber3D
                 Entities::Light* light);
 
             void Render(std::map<Models::TexturedModel*, std::vector<Entities::TexturedEntity*>>& texturedModels,
-                Entities::Camera* camera);
+                Entities::Camera3D* camera);
 
             void SetTextureShader(API::TextureShader* textureShader) { m_textureShader = textureShader; }
 
         private:
-            void PrepareInstance(Entities::TexturedEntity* entity, Entities::Camera* camera);
+            void PrepareInstance(Entities::TexturedEntity* entity, Entities::Camera3D* camera);
             void PrepareTexturedModel(Models::TexturedModel* model);
             void CleanUp(Models::TexturedModel* model);
 

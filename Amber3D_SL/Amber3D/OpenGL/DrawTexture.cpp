@@ -18,7 +18,6 @@
  * ---------------------------------------------------*/
 #include "DrawTexture.h"
 #include "Amber3D/Maths/CreateModelMatrix.h"
-#include "Amber3D/Maths/CreateViewMatrix.h"
 
 
 namespace Amber3D
@@ -42,7 +41,7 @@ namespace Amber3D
         }
 
         void DrawTexture::Render(std::map<Models::TexturedModel*, std::vector<Entities::TexturedEntity*>>& texturedModels,
-                                 Entities::Camera* camera)
+                                 Entities::Camera3D* camera)
         {
             std::map<Models::TexturedModel*, std::vector<Entities::TexturedEntity*>>::iterator it;
             
@@ -70,7 +69,7 @@ namespace Amber3D
 
         /////////////////////// Private ////////////////////////////////
         
-        void DrawTexture::PrepareInstance(Entities::TexturedEntity* entity, Entities::Camera* camera)
+        void DrawTexture::PrepareInstance(Entities::TexturedEntity* entity, Entities::Camera3D* camera)
         {
             // Model Matrix
             QMatrix4x4 modelMatrix;
@@ -88,9 +87,7 @@ namespace Amber3D
             QMatrix4x4 viewMatrix;
             viewMatrix.setToIdentity();
 
-            viewMatrix = Maths::CreateViewMatrix(
-                camera
-            );
+            viewMatrix = camera->GetMatrix();
 
             // send to GFX Card
             m_textureShader->loadUniformValues(

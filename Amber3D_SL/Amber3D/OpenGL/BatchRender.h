@@ -32,7 +32,7 @@
 #include "Amber3D/Entities/ColorEntity.h"
 #include "Amber3D/Models/TexturedModel.h"
 #include "Amber3D/Entities/TexturedEntity.h"
-#include "Amber3D/Entities/Camera.h"
+#include "Amber3D/Entities/Camera3D.h"
 #include "Amber3D/Entities/Light.h"
 
 
@@ -60,7 +60,7 @@ namespace Amber3D
                         QOpenGLFunctions* gl);
 
             void Render(Entities::Light* light,
-                        Entities::Camera* camera,
+                        Entities::Camera3D* camera,
                         QMatrix4x4& perspective);
 
             void AddColorEntity(Models::RawModel* model, 

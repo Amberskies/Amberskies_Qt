@@ -28,6 +28,7 @@
 #include <QKeyEvent>
 #include <QString>
 
+#include "Amber3D/Entities/Camera3D.h"
 #include "ModelWarehouse.h"
 
 
@@ -43,6 +44,7 @@ namespace Amber3D
             QSurfaceFormat m_format;
             QOpenGLContext m_context;
 
+            Entities::Camera3D* m_camera;
             ModelWarehouse* m_modelWarehouse;
          
         public:
@@ -53,6 +55,16 @@ namespace Amber3D
             void SetShaders(
                 QString colorShader,
                 QString textureShader
+            );
+            void SetCameraTranslation(
+                float x,
+                float y,
+                float z
+            );
+
+            void SetCameraRotation(
+                float angleDegrees,
+                QVector3D axis
             );
 
         protected:

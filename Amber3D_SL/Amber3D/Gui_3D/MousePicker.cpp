@@ -18,7 +18,6 @@
  * ---------------------------------------------------*/
 #include "MousePicker.h"
 #include "Input.h"
-#include <Amber3D/Maths/CreateViewMatrix.h>
 
 
 namespace Amber3D
@@ -39,7 +38,7 @@ namespace Amber3D
             Entities::TexturedEntity* terrain,
                 int width,
                 int height,
-            Entities::Camera* camera,
+            Entities::Camera3D* camera,
             QMatrix4x4 projection)
         {
             m_terrain = terrain;
@@ -106,7 +105,7 @@ namespace Amber3D
         QVector3D MousePicker::ConvertToModelSpace(
             QVector4D projectionSpace)
         {
-            QMatrix4x4 view = Maths::CreateViewMatrix(m_camera);
+            QMatrix4x4 view = m_camera->GetMatrix();
             QMatrix4x4 invertedView = view.inverted();
             QVector4D rayView = invertedView * projectionSpace;
             rayView.normalize();
@@ -167,7 +166,7 @@ namespace Amber3D
 
         QVector3D MousePicker::PointOnRay(float distance)
         {
-            QVector3D cameraPosition = m_camera->GetPosition();
+            QVector3D cameraPosition = m_camera->GetTranslation();
             
             QVector3D scaledRay = QVector3D(
                 m_currentRay.x() * (distance),

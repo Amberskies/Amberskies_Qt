@@ -18,7 +18,6 @@
  * ---------------------------------------------------*/
 #include "DrawColor.h"
 #include "Amber3D/Maths/CreateModelMatrix.h"
-#include "Amber3D/Maths/CreateViewMatrix.h"
 
 namespace Amber3D
 {
@@ -42,7 +41,7 @@ namespace Amber3D
         }
 
         void DrawColor::Render(std::map<Models::RawModel*, std::vector<Entities::ColorEntity*>>& colorModels,
-                               Entities::Camera* camera)
+                               Entities::Camera3D* camera)
         {
             std::map<Models::RawModel*, std::vector<Entities::ColorEntity*>>::iterator it;
             
@@ -72,7 +71,7 @@ namespace Amber3D
         //////////////////// Private ///////////////////////////
 
         void DrawColor::PrepareInstance(Entities::ColorEntity* entity,
-                                        Entities::Camera* camera)
+                                        Entities::Camera3D* camera)
         {
             // Model Matrix
             QMatrix4x4 modelMatrix;
@@ -90,9 +89,7 @@ namespace Amber3D
             QMatrix4x4 viewMatrix;
             viewMatrix.setToIdentity();
 
-            viewMatrix = Maths::CreateViewMatrix(
-                camera
-            );
+            viewMatrix = camera->GetMatrix();
 
             // send to GFX Card
             m_colorShader->loadUniformValues(

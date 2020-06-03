@@ -33,11 +33,13 @@ CONFIG += debug
 #####################################################
 
 SOURCES += \
+    Amber3D/Entities/Camera3D.cpp \
     Amber3D/Entities/light.cpp \
     Amber3D/Gui_3D/Input.cpp \
     Amber3D/Gui_3D/Menu1.cpp \
     Amber3D/Gui_3D/MenuSystem.cpp \
     Amber3D/Gui_3D/MousePicker.cpp \
+    Amber3D/Maths/Transform.cpp \
     Amber3D/OpenGL/DrawColor.cpp \
     Amber3D/OpenGL/DrawTexture.cpp \
     Amber3D/OpenGL/ModelWarehouse.cpp \
@@ -48,7 +50,6 @@ SOURCES += \
     Amber3D/API/Shaders/ColorShader.cpp \
     Amber3D/API/Shaders/ShaderProgram.cpp \
     Amber3D/API/Shaders/TextureShader.cpp \
-    Amber3D/Entities/Camera.cpp \
     Amber3D/Entities/ColorEntity.cpp \
     Amber3D/Entities/TexturedEntity.cpp \
     Amber3D/Models/RawModel.cpp \
@@ -58,11 +59,13 @@ SOURCES += \
 
 HEADERS += \
     Amber3D/Common.h \
+    Amber3D/Entities/Camera3D.h \
     Amber3D/Entities/Light.h \
     Amber3D/Gui_3D/Input.h \
     Amber3D/Gui_3D/Menu1.h \
     Amber3D/Gui_3D/MenuSystem.h \
     Amber3D/Gui_3D/MousePicker.h \
+    Amber3D/Maths/Transform.h \
     Amber3D/OpenGL/DrawColor.h \
     Amber3D/OpenGL/DrawTexture.h \
     Amber3D/OpenGL/ModelWarehouse.h \
@@ -73,12 +76,9 @@ HEADERS += \
     Amber3D/API/Shaders/ColorShader.h \
     Amber3D/API/Shaders/ShaderProgram.h \
     Amber3D/API/Shaders/TextureShader.h \
-    Amber3D/Entities/Camera.h \
     Amber3D/Entities/ColorEntity.h \
     Amber3D/Entities/TexturedEntity.h \
     Amber3D/Maths/ClampRotation.h \
-    Amber3D/Maths/CreateModelMatrix.h \
-    Amber3D/Maths/CreateViewMatrix.h \
     Amber3D/Models/RawModel.h \
     Amber3D/Models/TexturedModel.h \
     Amber3D/OpenGL/BatchRender.h \

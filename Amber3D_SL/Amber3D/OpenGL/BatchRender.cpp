@@ -40,7 +40,7 @@ namespace Amber3D
 		}
 
         void BatchRender::Render(Entities::Light* light,
-                                 Entities::Camera* camera,
+                                 Entities::Camera3D* camera,
                                  QMatrix4x4& perspective)
         {
             m_drawColor->Prepare(perspective, light);

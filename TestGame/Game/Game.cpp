@@ -38,6 +38,8 @@ void Game::Start()
         "BuilderTexture"
     );
 
+     m_window->SetCameraTranslation(40.0f, 1.0f, 40.0f);
+
     m_loop->setTimerType(Qt::PreciseTimer);
     connect(m_loop, SIGNAL(timeout()), this, SLOT(Loop()));
 

@@ -34,7 +34,7 @@
 #include "Amber3D/Entities/ColorEntity.h"
 #include "Amber3D/Entities/TexturedEntity.h"
 #include "Amber3D/Entities/Light.h"
-#include "Amber3D/Entities/Camera.h"
+#include "Amber3D/Entities/Camera3D.h"
 #include "Amber3D/Gui_3D/MousePicker.h"
 #include "Amber3D/Gui_3D/MenuSystem.h"
 
@@ -58,7 +58,7 @@ namespace Amber3D
             QVector<Entities::ColorEntity*> m_colorEntities;
             QVector<Entities::TexturedEntity*> m_textureEntities;
             Entities::Light* m_light;
-            Entities::Camera* m_camera;
+            Entities::Camera3D* m_camera;
             Amber3D::Gui_3D::MousePicker* m_mousePicker;
             Gui_3D::MenuSystem* m_menuSystem;
             QPoint m_windowSize;
@@ -76,6 +76,7 @@ namespace Amber3D
             void InitializeModelWarehouse();
 
             void RenderAll(
+                Entities::Camera3D* camera,
                 //int windowHeight,
                 //QPoint mousePosition,
                 QMatrix4x4 projection);

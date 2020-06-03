@@ -28,7 +28,7 @@
 #include <QPoint>
 #include <QVector>
 
-#include <Amber3D/Entities/Camera.h>
+#include <Amber3D/Entities/Camera3D.h>
 #include <Amber3D/Entities/ColorEntity.h>
 #include <Amber3D/Entities/TexturedEntity.h>
 
@@ -51,7 +51,7 @@ namespace Amber3D
             QVector<Entities::ColorEntity*> m_colorEntities;
             QVector<Entities::TexturedEntity*> m_textureEntities;
             Entities::TexturedEntity* m_terrain;
-            Entities::Camera* m_camera;
+            Entities::Camera3D* m_camera;
             QPoint m_mousePosition;
             int m_windowHeight;
 
@@ -65,7 +65,7 @@ namespace Amber3D
                 Entities::TexturedEntity *terrain, 
                     int width,
                     int height,
-                Entities::Camera* camera,
+                Entities::Camera3D* camera,
                 QMatrix4x4 projection
             );
 

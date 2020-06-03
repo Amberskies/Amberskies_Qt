@@ -39,9 +39,15 @@ namespace Amber3D
         public:
             Transform();
             void Translate(const QVector3D& deltaTranslation);
+            void Translate(float deltaX, float deltaY, float deltaZ);
             void Rotate(const QQuaternion deltaRotation);
+            void Rotate(float angle, const QVector3D& axis);
+            void Rotate(float angle, float angleX, float angleY, float angleZ);
             void Scale(const QVector3D& deltaScale);
+            void Scale(float deltaX, float deltaY, float deltaZ);
             void Grow(const QVector3D& deltaScale);
+            void Grow(float deltaX, float deltaY, float deltaZ);
+
             // Getters
             const QMatrix4x4& GetMatrix();
             const QVector3D& GetTranslation() const { return m_translation; }
@@ -49,9 +55,13 @@ namespace Amber3D
             const QVector3D& GetScale() const { return m_scale; }
 
             // Setters
-            void setTranslation(const QVector3D& deltaTranslation);
-            void setRotation(const QQuaternion deltaRotation);
-            void setScale(const QVector3D& deltaScale);
+            void SetTranslation(const QVector3D& deltaTranslation);
+            void SetTranslate(float deltaX, float deltaY, float deltaZ);
+            void SetRotation(const QQuaternion deltaRotation);
+            void SetRotate(float angle, const QVector3D& axis);
+            void SetRotate(float angle, float angleX, float angleY, float angleZ);
+            void SetScale(const QVector3D& deltaScale);
+            void SetScale(float deltaX, float deltaY, float deltaZ);
         };
     }
 }

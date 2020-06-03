@@ -26,7 +26,7 @@
 #include "Amber3D/API/Shaders/ColorShader.h"
 #include "Amber3D/Models/RawModel.h"
 #include "Amber3D/Entities/ColorEntity.h"
-#include "Amber3D/Entities/Camera.h"
+#include "Amber3D/Entities/Camera3D.h"
 #include "Amber3D/Entities/Light.h"
 
 namespace Amber3D
@@ -50,12 +50,12 @@ namespace Amber3D
                          Entities::Light* light);
 
             void Render(std::map<Models::RawModel*, std::vector<Entities::ColorEntity*>> &colorModels,
-                        Entities::Camera *camera);
+                        Entities::Camera3D *camera);
 
             void SetColorShader(API::ColorShader *colorShader) { m_colorShader = colorShader; }
 
         private:
-            void PrepareInstance(Entities::ColorEntity *entity, Entities::Camera *camera);
+            void PrepareInstance(Entities::ColorEntity *entity, Entities::Camera3D *camera);
             void PrepareColoredModel(Models::RawModel *model);
             void CleanUp(Models::RawModel* model);
         };

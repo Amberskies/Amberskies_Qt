@@ -26,6 +26,7 @@ namespace Amber3D
     {
         Window3D::Window3D(QWindow* parent)
             : QOpenGLWindow(QOpenGLWindow::UpdateBehavior::NoPartialUpdate, parent)
+            , m_camera(new Entities::Camera3D())
             , m_modelWarehouse(nullptr)
         {
             m_projection.setToIdentity();
@@ -44,13 +45,55 @@ namespace Amber3D
         Window3D::~Window3D()
         {
             delete m_modelWarehouse;
+            delete m_camera;
         }
 
         void Window3D::UpdateWindow3D()
         {
             Input::update();
+
+            static const float translationSpeed = 0.3f;
+            static const float rotationSpeed = 0.3f;
+            
+            if (Input::buttonPressed(Qt::RightButton))
+            {
+                m_camera->Rotate(
+                    -rotationSpeed * Input::mouseDelta().x(), Entities::Camera3D::localUp
+                );
+
+                m_camera->Rotate(
+                    -rotationSpeed * Input::mouseDelta().y(), m_camera->Right()
+                );
+            }
+
+            QVector3D translation;
+
+            if (Input::keyPressed(Qt::Key_W)) // forward
+            {
+                translation += m_camera->Forward();
+            }
+
+            if (Input::keyPressed(Qt::Key_S)) // backward
+            {
+                translation -= m_camera->Forward();;
+            }
+
+            if (Input::keyPressed(Qt::Key_A)) // left strafe
+            {
+                translation -= m_camera->Right();
+            }
+
+            if (Input::keyPressed(Qt::Key_D)) // right strafe
+            {
+                translation += m_camera->Right();
+            }
+
+            m_camera->Translate(
+                translationSpeed * translation
+            );
            
             if (Input::keyPressed(Qt::Key_Escape)) this->close();
+            
             update();
             
         }
@@ -61,6 +104,16 @@ namespace Amber3D
                 colorShader,
                 textureShader
             );
+        }
+
+        void Window3D::SetCameraTranslation(float x, float y, float z)
+        {
+            m_camera->SetTranslation(x, y, z);
+        }
+
+        void Window3D::SetCameraRotation(float angleDegrees, QVector3D axis)
+        {
+            m_camera->SetRotation(angleDegrees, axis);
         }
 
         /////////////////// Protected ///////////////////
@@ -104,6 +157,7 @@ namespace Amber3D
            // );
             
             m_modelWarehouse->RenderAll(
+                m_camera,
                 //this->height(),
                 //mousePos,
                 m_projection
