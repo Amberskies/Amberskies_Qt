@@ -39,7 +39,7 @@ SOURCES += \
     Amber3D/Gui_3D/Menu1.cpp \
     Amber3D/Gui_3D/MenuSystem.cpp \
     Amber3D/Gui_3D/MousePicker.cpp \
-    Amber3D/Maths/Transform.cpp \
+    Amber3D/Maths/Transform3D.cpp \
     Amber3D/OpenGL/DrawColor.cpp \
     Amber3D/OpenGL/DrawTexture.cpp \
     Amber3D/OpenGL/ModelWarehouse.cpp \
@@ -65,7 +65,8 @@ HEADERS += \
     Amber3D/Gui_3D/Menu1.h \
     Amber3D/Gui_3D/MenuSystem.h \
     Amber3D/Gui_3D/MousePicker.h \
-    Amber3D/Maths/Transform.h \
+    Amber3D/Maths/CreateModelMatrix.h \
+    Amber3D/Maths/Transform3D.h \
     Amber3D/OpenGL/DrawColor.h \
     Amber3D/OpenGL/DrawTexture.h \
     Amber3D/OpenGL/ModelWarehouse.h \

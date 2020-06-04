@@ -87,7 +87,7 @@ namespace Amber3D
             QMatrix4x4 viewMatrix;
             viewMatrix.setToIdentity();
 
-            viewMatrix = camera->GetMatrix();
+            viewMatrix = camera->ToMatrix();
 
             // send to GFX Card
             m_textureShader->loadUniformValues(

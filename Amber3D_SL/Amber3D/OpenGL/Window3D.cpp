@@ -58,7 +58,7 @@ namespace Amber3D
             if (Input::buttonPressed(Qt::RightButton))
             {
                 m_camera->Rotate(
-                    -rotationSpeed * Input::mouseDelta().x(), Entities::Camera3D::localUp
+                    -rotationSpeed * Input::mouseDelta().x(), Entities::Camera3D::LocalUp
                 );
 
                 m_camera->Rotate(

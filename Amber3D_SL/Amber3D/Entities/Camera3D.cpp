@@ -23,43 +23,38 @@ namespace Amber3D
 {
     namespace Entities
     {
-        QVector3D Camera3D::localForward(0.0f, 0.0f, -1.0f);
-        QVector3D Camera3D::localUp(0.0f, 1.0f, 0.0f);
-        QVector3D Camera3D::localRight(1.0f, 0.0f, 0.0f);
+        const QVector3D Camera3D::LocalForward(0.0f, 0.0f, -1.0f);
+        const QVector3D Camera3D::LocalUp(0.0f, 1.0f, 0.0f);
+        const QVector3D Camera3D::LocalRight(1.0f, 0.0f, 0.0f);
 
-        Camera3D::Camera3D()
-            : m_hasChanged(false)
-            , m_translation(QVector3D(0.0f, 0.0f, 0.0f))
-            , m_rotation(QQuaternion())
-        {
-            m_world.setToIdentity();
-        }
-
-        void Camera3D::Translate(QVector3D& deltaTranslation)
+        // Add/Scale
+        void Camera3D::Translate(const QVector3D &dt)
         {
             m_hasChanged = true;
-            m_translation += deltaTranslation;
+            m_translation += dt;
         }
 
-        void Camera3D::Rotate(QQuaternion& deltaRotation)
+        void Camera3D::Rotate(const QQuaternion &dr)
         {
             m_hasChanged = true;
-            m_rotation = deltaRotation * m_rotation;
+            m_rotation = dr * m_rotation;
         }
 
-        void Camera3D::SetTranslation(QVector3D &translation)
+        // Transform To (Setters)
+        void Camera3D::SetTranslation(const QVector3D &t)
         {
             m_hasChanged = true;
-            m_translation = translation;
+            m_translation = t;
         }
 
-        void Camera3D::SetRotation(QQuaternion& rotation)
+        void Camera3D::SetRotation(const QQuaternion &r)
         {
             m_hasChanged = true;
-            m_rotation = rotation;
+            m_rotation = r;
         }
 
-        const QMatrix4x4& Camera3D::GetMatrix()
+        // Accessors
+        const QMatrix4x4 &Camera3D::ToMatrix()
         {
             if (m_hasChanged)
             {
@@ -71,21 +66,44 @@ namespace Amber3D
             return m_world;
         }
 
-        QVector3D Camera3D::Forward()
+        // Queries
+        QVector3D Camera3D::Forward() const
         {
-            return m_rotation.rotatedVector(localForward);
+            return m_rotation.rotatedVector(LocalForward);
         }
 
-        QVector3D Camera3D::Up()
+        QVector3D Camera3D::Up() const
         {
-            return m_rotation.rotatedVector(localUp);
+            return m_rotation.rotatedVector(LocalUp);
         }
 
-        QVector3D Camera3D::Right()
+        QVector3D Camera3D::Right() const
         {
-            return m_rotation.rotatedVector(localRight);
+            return m_rotation.rotatedVector(LocalRight);
         }
 
+        // Qt Streams
+        QDebug operator<<(QDebug dbg, const Camera3D &transform)
+        {
+            dbg << "Camera3D\n{\n";
+            dbg << "Position: <" << transform.Translation().x() << ", " << transform.Translation().y() << ", " << transform.Translation().z() << ">\n";
+            dbg << "Rotation: <" << transform.Rotation().x() << ", " << transform.Rotation().y() << ", " << transform.Rotation().z() << " | " << transform.Rotation().scalar() << ">\n}";
+            return dbg;
+        }
 
+        QDataStream &operator<<(QDataStream &out, const Camera3D &transform)
+        {
+            out << transform.m_translation;
+            out << transform.m_rotation;
+            return out;
+        }
+
+        QDataStream &operator>>(QDataStream &in, Camera3D &transform)
+        {
+            in >> transform.m_translation;
+            in >> transform.m_rotation;
+            transform.m_hasChanged = true;
+            return in;
+        }
     }
 }
