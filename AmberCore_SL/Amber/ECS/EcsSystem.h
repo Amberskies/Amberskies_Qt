@@ -13,7 +13,7 @@ public:
 	};
 
 	BaseECSSystem() {}
-    virtual void updateComponents(float delta, BaseECSComponent** components)
+    virtual void UpdateComponents(float delta, BaseECSComponent** components)
     {
         m_deltaTime = delta;
         m_components = components;
@@ -28,7 +28,7 @@ public:
 	}
 	bool isValid();
 protected:
-	void addComponentType(uint32 componentType, uint32 componentFlag = 0)
+	void AddComponentType(uint32 componentType, uint32 componentFlag = 0)
 	{
 		componentTypes.push_back(componentType);
 		componentFlags.push_back(componentFlag);

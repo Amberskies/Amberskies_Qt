@@ -48,6 +48,16 @@ namespace Amber3D
             delete m_camera;
         }
 
+        void Window3D::RenderColorEntity(Entities::ColorEntity* colorEntity)
+        {
+            m_modelWarehouse->AddColorEntity(colorEntity);
+        }
+
+        void Window3D::RenderTexturedEntity(Entities::TexturedEntity* texturedEntity)
+        {
+            m_modelWarehouse->AddTexturedEntity(texturedEntity);
+        }
+
         void Window3D::UpdateWindow3D()
         {
             Input::update();

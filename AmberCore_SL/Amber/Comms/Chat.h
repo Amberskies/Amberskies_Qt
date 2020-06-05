@@ -14,7 +14,8 @@
  * Please be aware of the Open Source Licence
  * given by Qt    : doc.qt.io/qt-5/opensourcelicence.html
  *
- * ---------------------------------------------------*/#pragma once
+ * ---------------------------------------------------*/
+#pragma once
 
 #include <QObject>
 #include <QProcess>

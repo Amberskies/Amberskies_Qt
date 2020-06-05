@@ -75,6 +75,9 @@ namespace Amber3D
 
             void InitializeModelWarehouse();
 
+            void AddColorEntity(Entities::ColorEntity* colorEntity);
+            void AddTexturedEntity(Entities::TexturedEntity* texturedEntity);
+
             void RenderAll(
                 Entities::Camera3D* camera,
                 //int windowHeight,

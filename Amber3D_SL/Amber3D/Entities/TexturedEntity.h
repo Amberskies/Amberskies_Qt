@@ -45,6 +45,7 @@ namespace Amber3D
                 float scale
             );
 
+
             void IncreasePosition(
                 float deltaX,
                 float deltaY,

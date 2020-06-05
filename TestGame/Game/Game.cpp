@@ -33,10 +33,10 @@ Game::~Game()
 void Game::Start()
 {
      //set the shaders we would like to use.
-     m_window->SetShaders(
-        "BuilderColor",
-        "BuilderTexture"
-    );
+     //m_window->SetShaders(
+     //   "BuilderColor",
+     //   "BuilderTexture"
+     //);
 
      m_window->SetCameraTranslation(40.0f, 1.0f, 40.0f);
 

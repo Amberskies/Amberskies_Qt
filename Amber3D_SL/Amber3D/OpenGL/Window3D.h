@@ -29,6 +29,9 @@
 #include <QString>
 
 #include "Amber3D/Entities/Camera3D.h"
+#include "Amber3D/Entities/ColorEntity.h"
+#include "Amber3D/Entities/TexturedEntity.h"
+
 #include "ModelWarehouse.h"
 
 
@@ -50,6 +53,9 @@ namespace Amber3D
         public:
             Window3D(QWindow* parent = nullptr);
             ~Window3D();
+
+            void RenderColorEntity(Entities::ColorEntity* colorEntity);
+            void RenderTexturedEntity(Entities::TexturedEntity* texturedEntity);
 
             void UpdateWindow3D();
             void SetShaders(

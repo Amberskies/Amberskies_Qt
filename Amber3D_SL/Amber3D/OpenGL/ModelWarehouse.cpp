@@ -80,6 +80,26 @@ namespace Amber3D
             );
         }
 
+        void ModelWarehouse::AddColorEntity(Entities::ColorEntity* colorEntity)
+        {
+            int id = colorEntity->GetRawModel()->GetID();
+            
+            m_batchRender->AddColorEntity(
+                m_colorEntities[id]->GetRawModel(),
+                m_colorEntities[id]
+            );
+        }
+
+        void ModelWarehouse::AddTexturedEntity(Entities::TexturedEntity* texturedEntity)
+        {
+            int id = texturedEntity->GetTexturedModel()->GetRawModel()->GetID();
+
+            m_batchRender->AddTexturedEntity(
+                m_textureEntities[id]->GetTexturedModel(),
+                m_textureEntities[id]
+            );
+        }
+
         void ModelWarehouse::RenderAll(
             Entities::Camera3D* camera,
             //int windowHeight,
@@ -159,6 +179,8 @@ namespace Amber3D
                     Textures::ModelTexture* texture =
                         m_modelLoader->GetTexture();
 
+                    m_model->SetID(m_textureEntities.size());
+
                     Models::TexturedModel* texturedModel =
                         new Models::TexturedModel(
                             m_model,
@@ -178,6 +200,8 @@ namespace Amber3D
                 }
                 else
                 {
+                    m_model->SetID(m_colorEntities.size());
+
                     m_colorEntities.push_back(
                         new Entities::ColorEntity(
                             m_model,

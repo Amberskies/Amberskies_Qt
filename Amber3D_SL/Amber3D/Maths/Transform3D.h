@@ -24,6 +24,7 @@
 #include <QQuaternion>
 #include <QMatrix4x4>
 #include <QDataStream>
+#include <QDebug>
 
 namespace Amber3D
 {

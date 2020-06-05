@@ -30,6 +30,7 @@ namespace Amber3D
             QOpenGLVertexArrayObject *m_vao;
             GLuint m_indexCount;
             bool m_hasTexture;
+            int m_id;
             QVector<QString> m_TextureFileName;
 
         public:
@@ -42,10 +43,12 @@ namespace Amber3D
             QOpenGLVertexArrayObject* GetVao();
             GLuint GetIndexCount();
             bool GetHasTexture();
+            int GetID();
 
             QString GetTextureFileName(int textureNumber = 0);
 
             void SetTextureFileName(QString fileName);
+            void SetID(int id);
         };
     }
 }

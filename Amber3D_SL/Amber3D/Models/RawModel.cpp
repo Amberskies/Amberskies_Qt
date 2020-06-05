@@ -29,6 +29,7 @@ namespace Amber3D
             : m_vao(vao)
             , m_indexCount(indexCount)
             , m_hasTexture(hasTexture)
+            , m_id(-1)
         {
             m_TextureFileName = { nullptr }; 
         }
@@ -48,6 +49,11 @@ namespace Amber3D
             return m_hasTexture;
         }
 
+        int RawModel::GetID()
+        {
+            return m_id;
+        }
+
         QString RawModel::GetTextureFileName(int textureNumber)
         {
             return m_TextureFileName.at(textureNumber); 
@@ -56,6 +62,11 @@ namespace Amber3D
         void RawModel::SetTextureFileName(QString fileName)
         {
             m_TextureFileName.push_back(fileName);
+        }
+
+        void RawModel::SetID(int id)
+        {
+            m_id = id;
         }
     }
 }

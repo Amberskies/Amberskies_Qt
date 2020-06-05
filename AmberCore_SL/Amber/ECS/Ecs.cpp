@@ -176,7 +176,7 @@ void ECS::updateSystems(ECSSystemList& systems, float delta)
 			Array<uint8>& array = components[componentTypes[0]];
 			for(uint32 j = 0; j < array.size(); j += typeSize) {
 				BaseECSComponent* component = (BaseECSComponent*)&array[j];
-				systems[i]->updateComponents(delta, &component);
+				systems[i]->UpdateComponents(delta, &component);
 			}
 		} else {
 			updateSystemWithMultipleComponents(i, systems, delta, componentTypes, componentParam, componentArrays);
@@ -238,7 +238,7 @@ void ECS::updateSystemWithMultipleComponents(uint32 index, ECSSystemList& system
 		}
 
 		if(isValid) {
-			systems[index]->updateComponents(delta, &componentParam[0]);
+			systems[index]->UpdateComponents(delta, &componentParam[0]);
 		}
 	}
 }
